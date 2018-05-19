@@ -3,8 +3,16 @@
 	<persistence-unit name="Biblioteka">
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	<jta-data-source>jdbc/paibibliotekaDS</jta-data-source>
-	<class>entity.Book</class>
-	<class>entity.User</class>
+	<class>entity.Biblioteka</class>
+	<class>entity.KontoBankowe</class>
+	<class>entity.Uzytkownik</class>
+	<class>entity.Pracownik</class>
+	<class>entity.Czytelnik</class>
+	<class>entity.Wypozyczenie</class>
+	<class>entity.Autor</class>
+	<class>entity.Ksiazka</class>
+	<class>entity.Dostawca</class>
+	<class>entity.Zamowienie</class>
 
 	</persistence-unit>
 </persistence>

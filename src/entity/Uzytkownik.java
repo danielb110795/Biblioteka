@@ -5,19 +5,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import dao.Domain;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
-public class Book{
+public class Uzytkownik implements Domain{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String login;
-	private String password; 
-	private boolean active;
-	private String role;
+	private String haslo; 
+	private boolean czy_aktywne;
+	private String rola;
 }
