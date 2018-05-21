@@ -19,7 +19,7 @@ public class Ksiazka implements Domain {
 
 	private String tytul;
 	private String ISBN;
-	private String rok_wydania;
+	private String rokWydania;
 	private String opis;
 	private String stan; //oki, do naprawy, do wyrzucenia
 	

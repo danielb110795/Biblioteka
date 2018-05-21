@@ -17,8 +17,8 @@ public class KontoBankowe implements Domain {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String numer_konta;
-	private String nazwa_banku;
+	private String numerKonta;
+	private String nazwaBanku; 
 	private String adres;
 	
 	@ManyToOne
