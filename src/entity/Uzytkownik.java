@@ -25,6 +25,7 @@ public class Uzytkownik implements Domain{
 
 	private String login;
 	private String haslo; 
-	private boolean czy_aktywne;
 	private String rola;
+	private boolean czy_aktywne;
+
 }

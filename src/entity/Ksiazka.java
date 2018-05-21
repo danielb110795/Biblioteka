@@ -18,11 +18,20 @@ public class Ksiazka implements Domain {
 	private Long id;
 
 	private String tytul;
-	private String wydawca;
 	private String ISBN;
 	private String rok_wydania;
+	private String opis;
 	private String stan; //oki, do naprawy, do wyrzucenia
 	
 	@ManyToOne
 	private Autor autor; 
+	
+	@ManyToOne
+	private Zdjecie zdjecie;
+	
+	@ManyToOne
+	private Kategoria kategoria;
+	
+	@ManyToOne
+	private Wydawnictwo wydawnictwo;
 }

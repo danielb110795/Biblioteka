@@ -8,10 +8,12 @@
 	<class>entity.Uzytkownik</class>
 	<class>entity.Pracownik</class>
 	<class>entity.Czytelnik</class>
-	<class>entity.Wypozyczenie</class>
 	<class>entity.Autor</class>
+	<class>entity.Zdjecie</class>
+	<class>entity.Kategoria</class>
+	<class>entity.Wydawnictwo</class>
 	<class>entity.Ksiazka</class>
-	<class>entity.Dostawca</class>
+	<class>entity.Wypozyczenie</class>
 	<class>entity.Zamowienie</class>
 
 	</persistence-unit>
