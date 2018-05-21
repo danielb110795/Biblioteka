@@ -1,0 +1,193 @@
+body 
+{
+	background-image: url("tlo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+	background-attachment: fixed;
+}
+
+#gornemenu
+{
+	background-color: silver; 
+	height: 50px; 
+	width: 80%;
+	
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 5%;
+	overflow: auto;
+}
+
+#bocznemenu
+{
+	background-color: #FF9966; 
+	width: 15%;
+	height: 820px;
+	float: left; 
+	margin-left: 10%;
+	margin-bottom: 5%;
+	margin-top: 5%;
+	overflow: auto;
+}
+
+#srodek
+{
+	background-color: white;
+	width: 60%;
+	height: 820px;
+	float: left;
+	margin-right: 10%;
+	margin-bottom: 5%;
+	margin-top: 5%;
+	margin-left: 5%;
+	overflow: auto;
+	opacity: 0.95;
+}
+
+#przycisk
+{
+	height: 100%;
+	width: 19%;
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: left;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
+
+}
+
+#przycisk:hover {
+	background: blue;
+	color: white;
+}
+
+#przycisk2
+{
+	height: 100%;
+	width: 40%;
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: left;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
+
+}
+
+#przycisk2:hover {
+	background: blue;
+	color: white;
+}
+#przycisk3
+{
+	height: 100%;
+	width: 100%;
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: bottom;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
+	margin-top: 2%;
+
+}
+
+#przycisk3:hover {
+	background: blue;
+	color: white;
+}
+#tekstplacowek
+{
+	margin-left: 30px;
+	margin-top: 30px;
+	line-height: 30px;
+}
+
+#srodekcaly
+{
+	background-color: white;
+	width: 80%;
+	height: 820px;
+	float: left;
+	margin-right: 10%;
+	margin-bottom: 5%;
+	margin-top: 5%;
+	margin-left: 10%;
+	overflow: auto;
+	opacity: 0.95;
+}
+
+#mapa 
+{
+	padding-top: 25px;
+	text-align: center;
+}
+
+#tekst
+{
+	text-align: center;
+}
+
+#tekst2
+{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#profil
+{
+	padding-left: 50px;
+	padding-top: 50px;
+	overflow: auto;
+	float: left;
+}
+
+#profil2
+{
+	font-size: 20px;
+	text-indent: 100px;
+	font-weight: bold; 
+}
+
+#profil3
+{
+	text-indent: 100px; 
+}
+
+#formularz 
+{
+	padding-left: 25px;
+}
+
+#zegar
+{
+	padding-top: 30px;
+	/*font-size - ustawienie rozmiaru czcionki*/
+	font-size: 20px; 
+	text-align: center;
+}
+
+hr.a
+{
+    height: 5px;
+    color: #FF9966;
+    background: #FF9966;
+    font-size: 0;
+    border: 0;
+}
