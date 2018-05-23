@@ -19,9 +19,10 @@ public class Czytelnik implements Domain {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+ 
 	private String imie;
 	private String nazwisko;
+	private String email;
 	private String pesel;
 	private String adres;
 	private Integer kara;
@@ -30,6 +31,4 @@ public class Czytelnik implements Domain {
 	@JoinColumn(name = "uzytownik")
 	private Uzytkownik uzytkownk;
 	
-	@ManyToOne  //wiele czytelnikow w jednej bibliotece
-	private Biblioteka biblioteka; 
 }

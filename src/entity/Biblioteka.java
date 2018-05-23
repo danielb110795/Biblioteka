@@ -9,7 +9,7 @@ import dao.Domain;
 import lombok.Data;
 
 @Entity
-@Data
+@Data 
 public class Biblioteka implements Domain {
 	
 	@Id

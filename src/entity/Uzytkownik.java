@@ -19,13 +19,14 @@ import dao.Domain;
 @AllArgsConstructor
 
 public class Uzytkownik implements Domain{
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String login;
 	private String haslo; 
 	private String rola;
-	private boolean czy_aktywne;
+	private boolean czyZalogowany;
+	private boolean czyAktywowane;
 
 }

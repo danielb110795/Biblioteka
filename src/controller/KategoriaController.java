@@ -28,4 +28,9 @@ public class KategoriaController {
 		
 		return "kategoria";
 	}
+	public String showKategoria() {
+		Kategoria kategoria = kategoriaDAO.findOne((long) 1);
+		String nazwaKat = kategoria.getNazwa();
+		return nazwaKat;
+	}
 }
