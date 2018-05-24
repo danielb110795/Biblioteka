@@ -20,6 +20,7 @@ public class KategoriaController {
 	private String nazwa;
 	
 	public String saveKategoria() {
+		System.out.println("JESTEM TUTAJ!!");
 		Kategoria kategoria = new Kategoria();
 		
 		kategoria.setNazwa(nazwa);

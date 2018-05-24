@@ -56,10 +56,12 @@ public class AutoryzacjaController {
 	}
 
 	public String zaloguj() {
+		//tutaj usunalem czyCzyzalogowany(true). U nas kazdy mia³ false i nie znajdowa³o dobrego uzytkownika
 		Uzytkownik uzytkownik = uzytkownikDAO.findByQuery(Uzytkownik.builder().login(autoryzacja.getLogin())
-				.haslo(autoryzacja.getHaslo()).czyZalogowany(true).build()).iterator().next();
+				.haslo(autoryzacja.getHaslo()).build()).iterator().next();
 		if (uzytkownik == null) {
 			errorMessage = "Bledny login lub haslo";
+			return null;
 		}
 
 		if (!uzytkownik.isCzyZalogowany()) {
