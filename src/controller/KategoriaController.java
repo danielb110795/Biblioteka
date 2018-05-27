@@ -31,7 +31,17 @@ public class KategoriaController {
 	}
 	public String showKategoria() {
 		Kategoria kategoria = kategoriaDAO.findOne((long) 1);
-		String nazwaKat = kategoria.getNazwa();
+		String nazwaKat = null;
+		if(kategoria == null)
+		{
+			nazwaKat="jakis tekst";
+		}
+		else
+		{
+			nazwaKat = kategoria.getNazwa();
+		}
+		
+		
 		return nazwaKat;
 	}
 }

@@ -38,15 +38,18 @@ public class RejestracjaController {
 		uzytkownik.setLogin(login);
 		uzytkownik.setHaslo(haslo);
 		uzytkownik.setRola("czytelnik");
+		uzytkownik.setAktywowane(true);
+		uzytkownik.setZalogowany(true);
 		czytelnik.setImie(imie);
 		czytelnik.setNazwisko(nazwisko);
 		czytelnik.setEmail(email);
 		czytelnik.setPesel(pesel);
 		czytelnik.setAdres(adres);
+		czytelnik.setKara(0);
 		czytelnik.setUzytkownk(uzytkownik);
 		
 		uzytkownikDAO.save(uzytkownik);
-		czytelnikDAO.save(czytelnik);
+		czytelnikDAO.save(czytelnik); 
 		
 		return "strona_glowna";
 	}

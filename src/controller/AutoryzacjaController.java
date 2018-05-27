@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.NoSuchElementException;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -24,7 +26,11 @@ public class AutoryzacjaController {
 
 	@Getter
 	@Setter
-	private String errorMessage;
+	private String errorMessage = "";
+	
+	@Getter
+	@Setter
+	private String url = "moje_konto.xhtml";
 
 	@Getter
 	@Setter
@@ -44,7 +50,7 @@ public class AutoryzacjaController {
 	}
 
 	public String addNewUser() {
-		nowyUzytkownik.setCzyZalogowany(true);
+		nowyUzytkownik.setZalogowany(true);
 		uzytkownikDAO.save(nowyUzytkownik);
 		return "Dodano";
 	}
@@ -56,30 +62,63 @@ public class AutoryzacjaController {
 	}
 
 	public String zaloguj() {
-		//tutaj usunalem czyCzyzalogowany(true). U nas kazdy mia³ false i nie znajdowa³o dobrego uzytkownika
-		Uzytkownik uzytkownik = uzytkownikDAO.findByQuery(Uzytkownik.builder().login(autoryzacja.getLogin())
-				.haslo(autoryzacja.getHaslo()).build()).iterator().next();
+		if(autoryzacja.getLogin().isEmpty() || autoryzacja.getHaslo().isEmpty())
+		{
+			errorMessage = "Wype³nij wszystkie pola";
+			return "moje_konto";
+		}
+		Uzytkownik uzytkownik;
+		try {
+		uzytkownik = uzytkownikDAO.findByQuery(Uzytkownik.builder().login(autoryzacja.getLogin())
+				.haslo(autoryzacja.getHaslo()).rola("").zalogowany(true).aktywowane(true).build()).iterator().next();
+		}catch(NoSuchElementException e)
+		{
+			errorMessage = "Bledny login lub haslo";
+			return "moje_konto";
+		}
 		if (uzytkownik == null) {
 			errorMessage = "Bledny login lub haslo";
-			return null;
+			return "moje_konto";
+		}
+		else
+		{
+			url = "profil_czytelnika.xhtml";
 		}
 
-		if (!uzytkownik.isCzyZalogowany()) {
+		if (!uzytkownik.isZalogowany()) {
 			errorMessage = "User o login " + uzytkownik.getLogin() + " jest nieaktywny";
-			return null; // TODO
+			return "moje_konto"; // TODO
 		}
-
+		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		session.setAttribute("uzytkownik", uzytkownik);
 
-		return null; // TODO udalo sie
+		return "profil_czytelnika"; // TODO udalo sie
 	}
 
+	public String sprawdzCzyZalogowany()
+	{
+		String login;
+		if(czyZalogowany()==true)
+		{
+			
+			login = getUzytkownik().getLogin();
+			return login;	
+		}
+		login = "Moje konto";
+		return login;
+	}
+	public String getWyloguj()
+	{
+		return "wyloguj.xhtml";
+	}
 	public String wyloguj() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		session.removeAttribute("user");
-		return null; // TODO strona logowania
+		session.removeAttribute("uzytkownik");
+		url = "moje_konto.xhtml";
+		errorMessage = "";
+		return "moje_konto.xhtml"; 
 	}
 
 }

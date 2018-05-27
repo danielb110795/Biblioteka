@@ -61,7 +61,30 @@ body
 	overflow: auto;
 
 }
+#przycisk4
+{
+	height: 20%;
+	width: 19%;
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: left;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
 
+}
+.error{
+	color: red;
+}
+#przycisk4:hover {
+	background: blue;
+	color: white;
+}
 #przycisk:hover {
 	background: blue;
 	color: white;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<ui:include src="#{componentController.getHead()}" />
+
+<body> 
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+		<center><h2>MENU</h2></center>
+		<ul id="tekstplacowek">
+		<li><a href="nowe_konto.xhtml">Załóż konto</a></li>
+		<li><a href="odzyskaj_haslo.html">Odzyskaj hasło</a></li>
+		</ul>
+	</div>
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/>
+		<hr color='#FF9966' size='5'/>
+		<div id="profil">
+		<table><tr><td>
+		
+		<img src="avatar.png" alt="Nie udalo sie zaladowac obrazka avatar" width="150px" height="165px" border="2px"/> <br/><br/>
+		<b>Imie:</b> <h:outputLabel value=" #{profilController.przeanalizujProfil()}"></h:outputLabel> <br/>
+		<b>Nazwisko:</b> <h:outputLabel value=" #{profilController.nazwisko}"></h:outputLabel> <br/>
+		<b>Nr Karty:</b> <h:outputLabel value=" #{profilController.nrKarty}"></h:outputLabel><br/>
+		<b>Adres:</b> <h:outputLabel value=" #{profilController.adres}"></h:outputLabel><br/>
+		</td>
+		<td>
+		<p id="profil2">Płatności:</p>
+		<p id="profil3"><h:outputLabel value=" #{profilController.kara}"></h:outputLabel></p>
+		<p id="profil2">Ilość wypożyczonych książek:</p>
+		<p id="profil3"><h:outputLabel value=" #{profilController.sumWypozyczen}"></h:outputLabel></p>
+		<p id="profil2">Aktualnie wypożyczeń:</p>
+		<p id="profil3"><h:outputLabel value=" #{profilController.aktWypozyczen}"></h:outputLabel></p>
+		</td>
+		</tr></table>
+		</div>
+	</div>
+	</div>		
+	
+</body> 
+</html> 
