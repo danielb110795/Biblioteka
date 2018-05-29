@@ -1,10 +1,12 @@
 package entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 import dao.Domain;
 import lombok.Data;
@@ -14,24 +16,18 @@ import lombok.Data;
 public class Ksiazka implements Domain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String tytul;
-	private String ISBN;
-	private String rokWydania;
 	private String opis;
 	private String stan; //oki, do naprawy, do wyrzucenia
+	private String zdjecie;
 	
-	@ManyToOne
-	private Autor autor; 
+	@ManyToMany
+	private List <Autor> autor; 
 	
-	@ManyToOne
-	private Zdjecie zdjecie;
+	@ManyToMany
+	private List <Kategoria> kategoria; //lita kategorii do jakich nale¿y ksi¹¿ka
 	
-	@ManyToOne
-	private Kategoria kategoria;
-	
-	@ManyToOne
-	private Wydawnictwo wydawnictwo;
 }

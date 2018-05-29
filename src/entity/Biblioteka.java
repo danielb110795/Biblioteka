@@ -13,7 +13,7 @@ import lombok.Data;
 public class Biblioteka implements Domain {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;	
 	 
 	private String nazwa;

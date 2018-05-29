@@ -16,17 +16,17 @@ import lombok.Data;
 public class Czytelnik implements Domain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
  
 	private String imie;
 	private String nazwisko;
-	private String email;
 	private String pesel;
+	private String email;
 	private String adres;
 	private Integer kara;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "uzytownik")
 	private Uzytkownik uzytkownk;
 	

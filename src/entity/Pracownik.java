@@ -17,19 +17,19 @@ import lombok.Data;
 public class Pracownik implements Domain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String imie;
 	private String nazwisko;
 	private String pesel;
-	private String wynagrodzenie;
 	private String email;
-
+	private String adres;
+	
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "uzytownik")
 	private Uzytkownik uzytkownk;
 	
-	@ManyToOne  //wiele pracownikow w jednej bibliotece
+	@ManyToOne
 	private Biblioteka biblioteka; 
 }

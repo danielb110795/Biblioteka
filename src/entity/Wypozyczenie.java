@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import dao.Domain;
 import lombok.Data;
@@ -16,15 +18,18 @@ import lombok.Data;
 public class Wypozyczenie implements Domain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Date data_wypozyczenia;
-	private Date data_oddania; 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataWypozyczenia;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataOddania; 
 	
 	@ManyToOne
 	private Czytelnik czytelnik; 
 	
 	@ManyToOne
-	private Ksiazka ksiazka; 
+	private Egzemplarz egzemplarz; 
 }

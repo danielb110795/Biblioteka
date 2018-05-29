@@ -14,12 +14,11 @@ import lombok.Data;
 public class KontoBankowe implements Domain {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String numerKonta;
 	private String nazwaBanku; 
-	private String adres;
 	
 	@ManyToOne
 	private Biblioteka biblioteka; 
