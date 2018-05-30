@@ -37,7 +37,7 @@ public class RejestracjaController {
 		
 		uzytkownik.setLogin(login);
 		uzytkownik.setHaslo(haslo);
-		uzytkownik.setRola("czytelnik");
+		uzytkownik.setRola("CZYTELNIK");
 		uzytkownik.setAktywowane(true);
 		uzytkownik.setZalogowany(true);
 		czytelnik.setImie(imie);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+<ui:include src="#{componentController.getHead()}" />
+
+<body> 
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+		<center><h2>MENU</h2></center>
+		<ul id="tekstplacowek">
+			<li><a href="dodaj_placowke.xhtml">Dodaj placówkę</a></li>
+		</ul>
+	</div>
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/>
+
+	</div>		
+	</div>
+	
+</body> 
+</html> 

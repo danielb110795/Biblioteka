@@ -11,28 +11,20 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
 	<div id="srodekcaly">
-		<h3>Dodawanie kategorii:</h3>
-		<h:form>
-				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{kategoriaController.nazwa}"/>
-				<br /> 		
-			<h:commandButton value="Dodaj" action="#{kategoriaController.saveKategoria()}"/>
-		</h:form>
-		
-		<br />
-		<h:outputLabel value="#{kategoriaController.showKategoria()} - Witamy!"></h:outputLabel>
-		
-		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'CZYTELNIK'}">CZYTELNIK JEST ZALOGOWANY</ui:fragment>
-		
-		<h3>Dodawanie biblioteki:</h3>
+
+	<div id="tekst2">
+		<h3>Dodawanie nowej placówki:</h3>
 		<h:form>
 				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>
-				<br /> 		
+				<br /> 	
+				<br /> 	
 				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
+				<br /> 	
+				<br /> 		
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
 		</h:form>
-		 
 		
 	</div>
-	
+	</div>
 </h:body>
 </html>

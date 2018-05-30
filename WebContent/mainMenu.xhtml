@@ -5,10 +5,23 @@
 
 	<div id="gornemenu"> 
 		<a href="strona_glowna.xhtml" id="przycisk"> Strona główna </a>
-		<a href="o_nas.html" id="przycisk"> O Nas </a>
-		<a href="spis_ksiazek.html" id="przycisk"> Spis książek </a>
-		<a href="kontakt.html" id="przycisk"> Kontakt </a>
-		<a href="#{autoryzacjaController.url}" id="przycisk"> <h:outputLabel value="#{autoryzacjaController.sprawdzCzyZalogowany()}"></h:outputLabel> </a>
+		<a href="o_nas.xhtml" id="przycisk"> O Nas </a>
+		<a href="spis_ksiazek.xhtml" id="przycisk"> Spis książek </a>
+		<a href="kontakt.xhtml" id="przycisk"> Kontakt </a>
+		
+		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'NIEZALOGOWANY'}">
+			<a href="moje_konto.xhtml" id="przycisk"> Moje konto</a>
+		</ui:fragment>
+		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'CZYTELNIK'}">
+			<a href="profil_czytelnika.xhtml" id="przycisk"> <h:outputLabel value="#{autoryzacjaController.getUzytkownik().getLogin()}"></h:outputLabel> </a>
+		</ui:fragment>
+		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+			<a href="profil_administratora.xhtml" id="przycisk"> <h:outputLabel value="#{autoryzacjaController.getUzytkownik().getLogin()}"></h:outputLabel> </a>
+		</ui:fragment>
+		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+			<a href="profil_pracownika.xhtml" id="przycisk"> <h:outputLabel value="#{autoryzacjaController.getUzytkownik().getLogin()}"></h:outputLabel> </a>
+		</ui:fragment>
+	
 	</div>
 
 </ui:fragment>

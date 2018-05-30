@@ -94,7 +94,10 @@ public class AutoryzacjaController {
 
 		session.setAttribute("uzytkownik", uzytkownik);
 
-		return "profil_czytelnika"; // TODO udalo sie
+		if(uzytkownik.getRola().equals("CZYTELNIK"))
+			return "profil_czytelnika"; // TODO udalo sie
+		else
+			return "profil_administratora";
 	}
 
 	public String sprawdzCzyZalogowany()
@@ -121,4 +124,23 @@ public class AutoryzacjaController {
 		return "moje_konto.xhtml"; 
 	}
 
+	
+	public String sprawdzKtoZalogowany() {
+		Uzytkownik uzytkownik = getUzytkownik();
+		if (uzytkownik == null)
+			return "NIEZALOGOWANY";
+		
+		if (uzytkownik.getRola().equals("ADMINISTRATOR"))
+			return "ADMINISTRATOR";
+		
+		if (uzytkownik.getRola().equals("PRACOWNIK"))
+			return "PRACOWNIK";
+		
+		if (uzytkownik.getRola().equals("CZYTELNIK"))
+			return "CZYTELNIK";
+		
+		return "BLAD";
+	}
+	
+	
 }
