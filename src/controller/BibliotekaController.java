@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -34,4 +36,22 @@ public class BibliotekaController {
 		return "strona_glowna";
 	}
 	
+	
+	public List<Biblioteka> znajdzWszystkieBiblioteki() {
+		return bibliotekaDAO.findAll();
+	}
+	
+	/*public String wyswietlBiblioteki() {
+		Collection <Biblioteka> biblioteki = bibliotekaDAO.findAll();
+		
+		String nazwa;
+		
+		if(biblioteki.isEmpty()) {
+			nazwa="Brak bibiotek";
+		}
+
+		
+		
+		return nazwaKat;
+	}*/
 }

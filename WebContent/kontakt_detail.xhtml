@@ -10,18 +10,8 @@
 <body> 
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-    	
-        <ui:repeat value="#{bibliotekaController.znajdzWszystkieBiblioteki()}" var="biblioteka">
-            <ul id="tekstplacowek">
-				<li><a href="kontakt_detail.xhtml" > #{biblioteka.nazwa} </a></li>
-			</ul>
-        </ui:repeat>   
-    
-	</div>
 	
-	<div id="srodek">
+	<div id="srodekcaly">
 
 		
 	</div>		
