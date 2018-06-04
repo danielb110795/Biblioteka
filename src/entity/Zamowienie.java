@@ -1,12 +1,9 @@
 package entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import dao.Domain;
@@ -19,12 +16,13 @@ public class Zamowienie implements Domain {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Integer cena;
-	
-	@ManyToMany
-	private List <Egzemplarz> egzemplarz; 
-
+	 
+	private String tytul; 
+	private String wydanie;
+	private Integer ilosc;
+	private String opis;
+	private String status;
+	 
 	@ManyToOne
 	private Biblioteka biblioteka; 
 }

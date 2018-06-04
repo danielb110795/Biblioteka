@@ -57,11 +57,11 @@ public class UzytkownikController {
 		return "uzytkownicy";
 	}
 	
-	public List<Uzytkownik> pokazUzytkownikow()
+	public List<Czytelnik> pokazUzytkownikow()
 	{
-		List<Uzytkownik> uzytkownicy = new LinkedList<>();
-		uzytkownicy = uzytkownikDAO.findAll();
+		List<Czytelnik> czytelnicy = new LinkedList<>();
+		czytelnicy = czytelnikDAO.findAll();
 		
-		return uzytkownicy;
+		return czytelnicy;
 	}
 }

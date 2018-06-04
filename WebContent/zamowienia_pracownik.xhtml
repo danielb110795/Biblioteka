@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+		<center><h2>MENU</h2></center>
+		<ul id="tekstplacowek">
+		<li><a href="czas_pracy.xhtml">Czas pracy</a></li>
+		<li><a href="uzytkownicy_pracownik.xhtml">Użytkownicy</a></li>
+		<li><a href="zamowienia_pracownik.xhtml">Zamówienia</a></li>
+		</ul>
+	</div>
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Zamówienia</h2>
+		<hr color='#FF9966' size='5'/>
+		<div>
+		
+		<a href="dodaj_uzytkownika.xhtml" id="przycisk2"> Złóż zamówienie </a><br/><br/><br/>
+		<ui:repeat var="zamowienie" value="#{zamowienieController.pokazZamowienia()}">
+		<table><tr><td>
+		<h2>#{zamowienie.tytul}:</h2>
+		<hr color='grey' size='3' width='100%' align='left' />
+		<p>Ilość: #{zamowienie.ilosc}</p>
+		<p>Wydanie: #{zamowienie.wydanie}</p>
+		<p>Opis: #{zamowienie.opis}</p>
+		<p color='red'>#{zamowienie.status}</p>
+		</td>
+		<td>
+		<br/><br/><br/><br/>
+		<c:if test="#{zamowienie.status == 'ZAAKCEPTOWANY'}">
+             <a href="#" id="przycisk3"> Zakończ </a><br/>
+        </c:if>
+
+        <c:if test="#{pracownik.biblioteka.nazwa != 'ZAAKCEPTOWANY' }">
+                <a id="przycisk3"> Zakończ </a><br/>
+        </c:if>
+		
+		</td></tr></table>
+		</ui:repeat>
+		</div>
+	</div>
+	</div>		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 
