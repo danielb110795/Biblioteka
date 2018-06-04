@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import dao.Domain;
@@ -25,9 +26,11 @@ public class Ksiazka implements Domain {
 	private String zdjecie;
 	
 	@ManyToMany
+	@JoinColumn(name = "autor_id")
 	private List <Autor> autor; 
 	
 	@ManyToMany
+	@JoinColumn(name = "kategoria_id")
 	private List <Kategoria> kategoria; //lita kategorii do jakich nale¿y ksi¹¿ka
 	
 }

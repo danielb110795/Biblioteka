@@ -23,6 +23,8 @@ public class BibliotekaController {
 	
 	private String nazwa;
 	private String adres;
+	private String numerTel;
+	private String urlDoMapyGoogle;
 	
 	private Biblioteka placowka;;
 	private Long id;
@@ -33,6 +35,8 @@ public class BibliotekaController {
 		
 		biblioteka.setNazwa(nazwa);
 		biblioteka.setAdres(adres);
+		biblioteka.setNumerTel(numerTel);
+		biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
 		
 		bibliotekaDAO.save(biblioteka);
 		
@@ -43,18 +47,22 @@ public class BibliotekaController {
 	public List<Biblioteka> pokazPlacowki()
 	{
 		List<Biblioteka> placowki = new LinkedList<>();
-		
-		placowki = bibliotekaDAO.findAll();
-		
+		placowki = bibliotekaDAO.findAll();	
 		return placowki;
 	}
 	
-	public String pokazKontakt()
+	public String getNumer(String idBiblioteki)
 	{
-		
-		placowka = bibliotekaDAO.findOne(id);
-		
-		return placowka.getNazwa();
+		int id = Integer.parseInt(idBiblioteki);
+		placowka = bibliotekaDAO.findOne((long)id);	
+		return placowka.getNumerTel();                
+	}
+	
+	public String getUrlDoMapyGoogle(String idBiblioteki)
+	{
+		int id = Integer.parseInt(idBiblioteki);
+		placowka = bibliotekaDAO.findOne((long)id);	
+		return placowka.getUrlDoMapyGoogle();                
 	}
 	
 }

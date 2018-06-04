@@ -1,5 +1,6 @@
 package entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,5 +18,9 @@ public class Biblioteka implements Domain {
 	private Long id;	
 	 
 	private String nazwa;
-	private String adres; 
+	private String adres;
+	private String numerTel;
+	
+	@Column(length = 1337)
+	private String urlDoMapyGoogle;
 }

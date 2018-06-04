@@ -12,11 +12,35 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
 	
-	<div id="srodekcaly">
-	 <f:param name = "id" value="#{id}" /> 
-		#{bibliotekaController.pokazKontakt(id)}
+	<div id="bocznemenu"> 
+		<center><h2>MENU</h2></center>
+    	<ul id="tekstplacowek">
+        <ui:repeat value="#{bibliotekaController.pokazPlacowki()}" var="biblioteka">
+			<li>
+			<h:outputLink value="kontakt_detail.xhtml">
+				<h:outputText value="#{biblioteka.nazwa}"/>
+				<f:param name="idBiblioteka" value="#{biblioteka.id}"/>
+			</h:outputLink>
+			</li>
+			
+		</ui:repeat>  
+    </ul>
+ 
+	</div>
+	
+	<div id="srodek">
 		
-	</div>		
+		<div id="tekst">
+			<h4>Zadzwoń do nas, a nasz pracownik z przyjemnością odpowie na Twoje pytania.</h4>
+			<h1><b>#{bibliotekaController.getNumer(param.idBiblioteka)}</b></h1>
+			<h4>Jak do nas dojechać?</h4>
+		</div>
+		
+		<div id="mapa">
+			<iframe src="#{bibliotekaController.getUrlDoMapyGoogle(param.idBiblioteka)}" width="600" height="450" frameborder="0"></iframe>
+		</div>
+
+	</div>		 
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	
 </body> 

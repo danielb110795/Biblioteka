@@ -15,12 +15,23 @@
 	<div id="tekst2">
 		<h3>Dodawanie nowej placówki:</h3>
 		<h:form>
-				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>
+				Nazwa: 
+				<br /> 
+				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>	
+				<br />
+				Adres: 
 				<br /> 	
+				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
+				<br />
+				Numer telefonu: 
 				<br /> 	
-				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
+				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.numerTel}"/>
+				<br />
+				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
 				<br /> 	
+				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.urlDoMapyGoogle}"/>
 				<br /> 		
+				<br /> 	
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
 		</h:form>
 		
