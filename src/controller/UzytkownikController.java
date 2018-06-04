@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -15,9 +18,10 @@ import lombok.Data;
 @Named
 @Data
 @LocalBean
-public class RejestracjaController {
+public class UzytkownikController {
 	@EJB
 	private UzytkownikDAO uzytkownikDAO;
+	
 	@EJB
 	private CzytelnikDAO czytelnikDAO;
 	
@@ -29,8 +33,7 @@ public class RejestracjaController {
 	private String imie;
 	private String nazwisko;
 	
-	
-	public String zarejestruj()
+	public String dodajUzytkownika()
 	{
 		Czytelnik czytelnik = new Czytelnik();
 		Uzytkownik uzytkownik = new Uzytkownik();
@@ -51,7 +54,14 @@ public class RejestracjaController {
 		uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
-		return "strona_glowna";
+		return "uzytkownicy";
 	}
 	
+	public List<Uzytkownik> pokazUzytkownikow()
+	{
+		List<Uzytkownik> uzytkownicy = new LinkedList<>();
+		uzytkownicy = uzytkownikDAO.findAll();
+		
+		return uzytkownicy;
+	}
 }

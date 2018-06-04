@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -23,6 +24,8 @@ public class BibliotekaController {
 	private String nazwa;
 	private String adres;
 	
+	private Biblioteka placowka;;
+	private Long id;
 	
 	public String saveBiblioteka()
 	{
@@ -33,25 +36,25 @@ public class BibliotekaController {
 		
 		bibliotekaDAO.save(biblioteka);
 		
-		return "strona_glowna";
+		return "placowki";
 	}
 	
 	
-	public List<Biblioteka> znajdzWszystkieBiblioteki() {
-		return bibliotekaDAO.findAll();
+	public List<Biblioteka> pokazPlacowki()
+	{
+		List<Biblioteka> placowki = new LinkedList<>();
+		
+		placowki = bibliotekaDAO.findAll();
+		
+		return placowki;
 	}
 	
-	/*public String wyswietlBiblioteki() {
-		Collection <Biblioteka> biblioteki = bibliotekaDAO.findAll();
+	public String pokazKontakt()
+	{
 		
-		String nazwa;
+		placowka = bibliotekaDAO.findOne(id);
 		
-		if(biblioteki.isEmpty()) {
-			nazwa="Brak bibiotek";
-		}
-
-		
-		
-		return nazwaKat;
-	}*/
+		return placowka.getNazwa();
+	}
+	
 }

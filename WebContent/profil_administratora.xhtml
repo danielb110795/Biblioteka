@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	
+
 <ui:include src="#{componentController.getHead()}" />
 
 <body> 
@@ -13,16 +13,40 @@
 	<div id="bocznemenu"> 
 		<center><h2>MENU</h2></center>
 		<ul id="tekstplacowek">
-			<li><a href="dodaj_placowke.xhtml">Dodaj placówkę</a></li>
+		<li><a href="placowki.xhtml">Placówki</a></li>
+		<li><a href="pracownicy.xhtml">Pracownicy</a></li>
+		<li><a href="uzytkownicy.html">Użytkownicy</a></li>
+		<li><a href="zamowienia.html">Zamówienia</a></li>
 		</ul>
 	</div>
 	
 	<div id="srodek">
 	<div id="tekst2">
 		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/>
-
-	</div>		
+		<hr color='#FF9966' size='5'/>
+		<div id="profil">
+		<table><tr><td>
+		<img src="avatar.png" alt="Nie udalo sie zaladowac obrazka avatar" width="150px" height="165px" border="2px"/> <br/><br/>
+		<b>Imie:</b> Piotr <br/>
+		<b>Nazwisko:</b> Barchan <br/>
+		<b>Nr Karty:</b> Administrator<br/>
+		</td>
+		<td>
+		<p id="profil2">Zaległe płatności użytkowników:</p>
+		<p id="profil3">Brak płatności do uregulowania</p>
+		<p id="profil2">Ilość wszystkich wypożyczonych książek:</p>
+		<p id="profil3">30000</p>
+		<p id="profil2">Aktualnie wypożyczeń:</p>
+		<p id="profil3">410</p>
+		<p id="profil2">Zarejestrowanych użytkowników:</p>
+		<p id="profil3">500</p>
+		</td>
+		
+		</tr></table>
+		</div>
 	</div>
-	
+	</div>		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
 </body> 
 </html> 

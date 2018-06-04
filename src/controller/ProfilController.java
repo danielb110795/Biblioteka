@@ -46,13 +46,13 @@ public class ProfilController {
 		if(czytelnicy.isEmpty() == true)
 			return "brak czytelnikow";
 		for (Czytelnik element : czytelnicy) {
-			if ((element.getUzytkownk().getId().equals(uzytkownik.getId())))
+			if ((element.getUzytkownik().getId().equals(uzytkownik.getId())))
 			{
 				nazwisko = element.getNazwisko();
 				pesel = ""+element.getPesel()+"";
 				adres = element.getAdres();
 				kara = ""+element.getKara()+"";
-				if(element.getKara()==null)
+				if(element.getKara()==null || element.getKara() == 0)
 					kara = "Brak";
 				nrKarty = ""+element.getId()+""+element.getPesel()+"";
 				aktWypozyczen = (long) 0;

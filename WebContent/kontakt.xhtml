@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -12,17 +13,51 @@
 	
 	<div id="bocznemenu"> 
 		<center><h2>MENU</h2></center>
-    	
-        <ui:repeat value="#{bibliotekaController.znajdzWszystkieBiblioteki()}" var="biblioteka">
-            <ul id="tekstplacowek">
-				<li><a href="kontakt_detail.xhtml" > #{biblioteka.nazwa} </a></li>
-			</ul>
-        </ui:repeat>   
-    
+    	<ul id="tekstplacowek">
+        <ui:repeat value="#{bibliotekaController.pokazPlacowki()}" var="biblioteka">
+			<li>
+			<h:outputLink value="kontakt_detail.xhtml">
+				<h:outputText value="#{biblioteka.nazwa}"/>
+				<f:param name="id" value="#{biblioteka.id}"/>
+			</h:outputLink>
+			</li>
+			
+		</ui:repeat>  
+    </ul>
+ 
 	</div>
 	
 	<div id="srodek">
+	<div id="tekst2">
+		<h2>Kontakt</h2>
+		<hr color='#FF9966' size='5'/>
+	</div>
+		<br/>
+		<h3> <center>Możesz wybrać placówkę aby sprawdzić numer telefonu oraz adres.</center></h3>
+		<br/><br/>
+		<h2> <center>Formularz kontaktwy</center></h2>
+		<h:form action="mailto:jakisadresemeilowy@adres.com" method="post" enctype="text/plain">
+		<div id="formularz">
 
+			Podaj swoje imię: <input name="Imię" /> <br/>
+			Podaj swoje nazwisko: <input name="Nazwisko" /> <br/>
+			Podaj adres na jaki mamy odpowiedzieć: <input name="Adres" /> <br/>
+			<br/>
+			Zaznacz swoją płeć:
+			<br/>
+			<input type="radio" name="Płeć" value="Kobieta" />Kobieta
+			<br/>
+			<input type="radio" name="Płeć" value="Mężczyzna" />Mężczyzna
+			<br/> <br/>
+			
+			Wiadomość:
+			<br/>
+			<textarea name="Komentarz" cols="50" rows="10">Treść wiadomości...</textarea>
+			<br/><br/>
+			<input type="submit" value="Wyślij formularz" />
+			<input type="reset" value="Wyczyść dane" />
+		</div>
+		</h:form>	
 		
 	</div>		
 

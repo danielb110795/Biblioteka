@@ -20,10 +20,16 @@
 	
 	<div id="srodek">
 	<div id="tekst2">
-		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/>
+		<h2> 
+		<h:form>
+		Twój profil
+		<h:commandButton value="Wyloguj" action="#{autoryzacjaController.wyloguj()}"/>
+		</h:form></h2> <br/>
 		<hr color='#FF9966' size='5'/>
 		<div id="profil">
 		<table><tr><td>
+		
+		
 		
 		<img src="avatar.png" alt="Nie udalo sie zaladowac obrazka avatar" width="150px" height="165px" border="2px"/> <br/><br/>
 		<b>Imie:</b> <h:outputLabel value=" #{profilController.przeanalizujProfil()}"></h:outputLabel> <br/>

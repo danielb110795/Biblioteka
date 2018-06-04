@@ -27,7 +27,7 @@ public class Czytelnik implements Domain {
 	private Integer kara;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "uzytownik")
-	private Uzytkownik uzytkownk;
+	@JoinColumn(name = "uzytkownik")
+	private Uzytkownik uzytkownik;
 	
 }

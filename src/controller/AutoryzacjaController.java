@@ -62,6 +62,7 @@ public class AutoryzacjaController {
 	}
 
 	public String zaloguj() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		if(autoryzacja.getLogin().isEmpty() || autoryzacja.getHaslo().isEmpty())
 		{
 			errorMessage = "Wype³nij wszystkie pola";
@@ -82,22 +83,35 @@ public class AutoryzacjaController {
 		}
 		else
 		{
-			url = "profil_czytelnika.xhtml";
+			if(uzytkownik.getRola().equals("CZYTELNIK"))
+			{
+				url = "profil_czytelnika.xhtml";
+				if (!uzytkownik.isZalogowany()) {
+					errorMessage = "User o login " + uzytkownik.getLogin() + " jest nieaktywny";
+					return "moje_konto"; // TODO
+				}
+				
+
+				session.setAttribute("uzytkownik", uzytkownik);
+				return "profil_czytelnika";
+			}
+			if(uzytkownik.getRola().equals("PRACOWNIK"))
+			{
+				url = "profil_pracownika.xhtml";
+				session.setAttribute("uzytkownik", uzytkownik);
+				return "profil_czytelnika";
+			}
+			if(uzytkownik.getRola().equals("ADMINISTRATOR"))
+			{
+				url = "profil_administratora.xhtml";
+				session.setAttribute("uzytkownik", uzytkownik);
+				return "profil_administratora";
+			}
 		}
 
-		if (!uzytkownik.isZalogowany()) {
-			errorMessage = "User o login " + uzytkownik.getLogin() + " jest nieaktywny";
-			return "moje_konto"; // TODO
-		}
 		
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-		session.setAttribute("uzytkownik", uzytkownik);
-
-		if(uzytkownik.getRola().equals("CZYTELNIK"))
-			return "profil_czytelnika"; // TODO udalo sie
-		else
-			return "profil_administratora";
+		
+		return "moje_konto";
 	}
 
 	public String sprawdzCzyZalogowany()

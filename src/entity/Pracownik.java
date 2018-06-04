@@ -27,8 +27,8 @@ public class Pracownik implements Domain {
 	private String adres;
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "uzytownik")
-	private Uzytkownik uzytkownk;
+	@JoinColumn(name = "uzytkownik")
+	private Uzytkownik uzytkownik;
 	
 	@ManyToOne
 	private Biblioteka biblioteka; 
