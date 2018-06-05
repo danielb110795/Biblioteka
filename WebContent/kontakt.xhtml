@@ -28,38 +28,41 @@
 	</div>
 	
 	<div id="srodek">
-	<div id="tekst2">
+		<div id="tekst2">
 		<h2>Kontakt</h2>
-		<hr color='#FF9966' size='5'/>
-	</div>
+		<hr class='a' />
+		</div>
 		<br/>
 		<h3> <center>Możesz wybrać placówkę aby sprawdzić numer telefonu oraz adres.</center></h3>
 		<br/><br/>
 		<h2> <center>Formularz kontaktwy</center></h2>
-		<h:form action="mailto:jakisadresemeilowy@adres.com" method="post" enctype="text/plain">
+		<br/>
 		<div id="formularz">
-
-			Podaj swoje imię: <input name="Imię" /> <br/>
-			Podaj swoje nazwisko: <input name="Nazwisko" /> <br/>
-			Podaj adres na jaki mamy odpowiedzieć: <input name="Adres" /> <br/>
+		<form action="EmailServlet" method="post" >
+			Podaj swoje imię: <br/><input id="imie" type="text" name="imie" placeholder="np. Jan" required="true"/> 
 			<br/>
-			Zaznacz swoją płeć:
 			<br/>
-			<input type="radio" name="Płeć" value="Kobieta" />Kobieta
+			Podaj swoje nazwisko: <br/><input id="nazwisko" type="text" name="nazwisko" placeholder="np. Kowalski" required="true"/> 
 			<br/>
-			<input type="radio" name="Płeć" value="Mężczyzna" />Mężczyzna
-			<br/> <br/>
+			<br/>
+			Podaj email na jaki mamy odpowiedzieć: <br/><input id="adres" type="email" name="adres" value ="" placeholder="np. email@wp.pl" required="true"/> 
+			<br/>
+			<br/>
+			Temat wiadomości: <br/><input  id="temat" type="text" name="temat" placeholder="np. pytanie o książkę" required="true"/> 
+			<br/>
+			<br/>
 			
 			Wiadomość:
 			<br/>
-			<textarea name="Komentarz" cols="50" rows="10">Treść wiadomości...</textarea>
+			<textarea style="overflow:auto; resize:none" id="komentarz" name="komentarz" cols="70" rows="10" placeholder="np. Czy posiadają państwo ksiażkę Mały ksiażę" required="true"></textarea>
 			<br/><br/>
-			<input type="submit" value="Wyślij formularz" />
+			<input type="submit" onclick="return confirm('Aby email został wysłany należy wypełnić wszystkie pola a w adresie email uwzględnić @. Potiwerdz kliając ok.')" value="Wyslij" />
 			<input type="reset" value="Wyczyść dane" />
+		</form>
 		</div>
-		</h:form>	
 		
-	</div>		
+	</div>
+		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	
 </body> 
