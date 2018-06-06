@@ -15,8 +15,8 @@
 		<center><h2>MENU</h2></center>
 		<ul id="tekstplacowek">
 		<li><a href="czas_pracy.xhtml">Czas pracy</a></li>
-		<li><a href="uzytkownicy_pracownik.xhtml">Użytkownicy</a></li>
-		<li><a href="zamowienia_pracownik.xhtml">Zamówienia</a></li>
+		<li><a href="uzytkownicy_admin.xhtml">Użytkownicy</a></li>
+		<li><a href="zamowienia_admin.xhtml">Zamówienia</a></li>
 		</ul>
 	</div>
 	
@@ -35,14 +35,13 @@
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
 		<p color='red'>#{zamowienie.status}</p>
-		<c:set var = "ciag" scope = "session" value = "${ZAAKCEPTOWANY}"/>
-		<c:set var = "ciag2" scope = "session" value = "${ZLOZONE}"/>
-		<c:if test="${zamowienie.status eq ciag}">
-             <a href="#" id="przycisk3"> Zakończ </a><br/>
+		<c:if test="#{zamowienie.status} == 'ZLOZONE'">
+             <a href="#" id="przycisk3"> Akceptuj </a><br/>
+             <a href="#" id="przycisk3"> Odrzuć </a><br/>
         </c:if>
 
-        <c:if test="${zamowienie.status eq ciag2}">
-                <a id="przycisk_niaktywny"> Zakończ </a><br/>
+        <c:if test="#{zamowienie.status} == 'ZAKONCZONO'">
+                <a href="#" id="przycisk3"> Usuń </a><br/>
         </c:if>
 		</td>
 		<td>

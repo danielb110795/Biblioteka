@@ -10,10 +10,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import dao.Domain;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pracownik implements Domain {
 
 	@Id
