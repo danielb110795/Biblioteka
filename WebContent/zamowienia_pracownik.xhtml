@@ -37,11 +37,11 @@
 		<p color='red'>#{zamowienie.status}</p>
 		<c:set var = "ciag" scope = "session" value = "${ZAAKCEPTOWANY}"/>
 		<c:set var = "ciag2" scope = "session" value = "${ZLOZONE}"/>
-		<c:if test="${zamowienie.status eq ciag}">
+		<c:if test="${zamowienie.status == ciag}">
              <a href="#" id="przycisk3"> Zakończ </a><br/>
         </c:if>
 
-        <c:if test="${zamowienie.status eq ciag2}">
+        <c:if test="${zamowienie.status == ciag2}">
                 <a id="przycisk_niaktywny"> Zakończ </a><br/>
         </c:if>
 		</td>
