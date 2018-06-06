@@ -12,20 +12,17 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-    	<ul id="tekstplacowek">
-        <ui:repeat value="#{bibliotekaController.pokazPlacowki()}" var="biblioteka">
-			<li>
-			<h:outputLink value="kontakt_detail.xhtml">
-				<h:outputText value="#{biblioteka.nazwa}"/>
-				<f:param name="idBiblioteka" value="#{biblioteka.id}"/>
-			</h:outputLink>
-			</li>
-			
-		</ui:repeat>  
-    </ul>
- 
+	<div id="bocznemenu">
+		<center>
+			<h2>MENU</h2>
+		</center>
+		<hr class='b' />
+		<ui:repeat value="#{bibliotekaController.pokazPlacowki()}"
+			var="biblioteka">
+			<a href="kontakt_detail.xhtml?idBiblioteka=#{biblioteka.id}"
+				id="przyciskBoczny">#{biblioteka.nazwa}</a>
+		</ui:repeat>
+		<a href="kontakt.xhtml" id="przyciskBoczny">Formularz kontaktowy</a>
 	</div>
 	
 	<div id="srodek">

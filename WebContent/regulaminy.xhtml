@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body> 
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+	<center><h2>MENU</h2></center>
+	<hr class='b' />
+
+	<a href="o_nas.xhtml" id="przyciskBoczny">O bibliotece</a>
+	<a href="struktura.xhtml" id="przyciskBoczny">Struktura</a>
+	<a href="regulaminy.xhtml" id="przyciskBoczny">Regulaminy</a>
+
+	</div>
+	
+	
+	<div id="srodek">
+		<div id="tekst2">
+		<h2>REGULAMINY</h2>
+		<hr class='a' />
+		<br/>
+			Zarządzenie Dyrektora w sprawie zmiany regulaminu od 29 grudnia 2015 roku - <a href="pliki/regulamin1.doc">Pobierz</a> <br/><br/>	 	      
+			Regulamin wypożyczeń i udostępniania zbiorów - <a href="pliki/regulamin2.doc">Pobierz</a> <br/><br/>	 
+			Regulamin wypożyczania Czytaka plus - <a href="pliki/regulamin3.doc">Pobierz</a> <br/><br/>	 
+			Regulamin korzystania z internetu - <a href="pliki/regulamin4.doc">Pobierz</a> <br/><br/>	 
+		</div>		
+	</div>	
+		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

@@ -11,30 +11,17 @@
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
 	<div id="srodekcaly">
-		<h3>Dodawanie kategorii:</h3>
-		<h:form>
-				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{kategoriaController.nazwa}"/>
-				<br /> 		
-			<h:commandButton value="Dodaj" action="#{kategoriaController.saveKategoria()}"/>
-		</h:form>
-		
-		<br />
-		<h:outputLabel value="#{kategoriaController.showKategoria()} - Witamy!"></h:outputLabel>
-		
-		<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'CZYTELNIK'}">CZYTELNIK JEST ZALOGOWANY</ui:fragment>
-		
-		<h3>Dodawanie biblioteki:</h3>
-		<h:form>
-				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>
-				<br /> 		
-				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
-			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
-		</h:form>
-		 
-		 
-
-
-	</div>
+			<center>
+			<br/><br/><br/><br/>
+			<h1>Projekt</h1>
+			<h1>Projektowanie aplikacji internetowych 2</h1>
+			<br/><br/>
+			<h1>Wykonali:</h1>
+			<h1>Barchan Piotr</h1>
+			<h1>Brzeźnicki Daniel</h1>
+			</center>
+	</div>	
+	<a href="javascript:scroll(0,0);">W górę</a> 
 	
 </h:body>
 </html>

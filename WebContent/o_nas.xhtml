@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body> 
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+	<center><h2>MENU</h2></center>
+	<hr class='b' />
+
+	<a href="o_nas.xhtml" id="przyciskBoczny">O bibliotece</a>
+	<a href="struktura.xhtml" id="przyciskBoczny">Struktura</a>
+	<a href="regulaminy.xhtml" id="przyciskBoczny">Regulaminy</a>
+
+	</div>
+	
+	
+	<div id="srodek">
+		<div id="tekst2">
+		<h2>O BIBLIOTECE</h2>
+		<hr class='a' />
+		
+		<h3>Miejska Biblioteka Publiczna w Kielcach powołana została Uchwałą nr 977/2002 Rady Miejskiej w Kielcach 28 lutego 2002 roku i wpisana do Rejestru instytucji kultury. Powstała z 12 filii bibliotecznych Wojewódzkiej Biblioteki Publicznej w Kielcach.
+			MBP od 1 maja 2002 roku rozpoczęła działalność, jako odrębna instytucja. W ciągu kilku lat struktura MBP była modyfikowana, w miarę konieczności powstawały nowe działy: automatyzacji i informatyzacji, gromadzenia i opracowania zbiorów. Modyfikowana była również sieć filii. W 2005 roku uruchomiono 13 placówkę Pod Dalnią, a w 2009 roku filia nr 8 została przeniesiona z ul. Żeromskiego na Osiedle Barwinek. W minionym okresie wszystkie filie poprawiły swoje warunki lokalowe. Miejska Biblioteka Publiczna w Kielcach jest całkowicie zautomatyzowana. </h3>
+		</div>		
+	</div>	
+		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 
