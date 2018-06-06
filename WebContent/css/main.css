@@ -154,6 +154,24 @@ body
 	margin-top: 2%;
 
 }
+#przycisk_niaktywny
+{
+	height: 100%;
+	width: 100%;
+	background: silver;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: bottom;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
+	margin-top: 2%;
+
+}
 
 #przycisk3:hover {
 	background: blue;
