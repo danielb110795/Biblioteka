@@ -34,14 +34,17 @@
 		<p>Ilość: #{zamowienie.ilosc}</p>
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
-		<p color='red'>#{zamowienie.status}</p>
-		<c:if test="#{zamowienie.status} == 'ZLOZONE'">
-             <a href="#" id="przycisk3"> Akceptuj </a><br/>
-             <a href="#" id="przycisk3"> Odrzuć </a><br/>
+		<p id="error">#{zamowienie.status}</p>
+		<c:if test="${zamowienieController.sprawdzStatusZlozone(zamowienie.status) == true}">
+             <a href="zamowienieController.akceptuj(#{zamowienie.id})" id="przycisk3"> Akceptuj </a><br/>
+             <a href="zamowienieController.odrzuc(#{zamowienie.id})" id="przycisk3"> Odrzuć </a><br/>
         </c:if>
 
-        <c:if test="#{zamowienie.status} == 'ZAKONCZONO'">
-                <a href="#" id="przycisk3"> Usuń </a><br/>
+        <c:if test="${zamowienieController.sprawdzStatusZak(zamowienie.status) == true}">
+                <a href="zamowienieController.usun(#{zamowienie.id})" id="przycisk3"> Usuń </a><br/>
+        </c:if>
+        <c:if test="${zamowienieController.sprawdzStatusOdrzucone(zamowienie.status) == true}">
+                <a id="przycisk_niaktywny"> Usuń </a><br/>
         </c:if>
 		</td>
 		<td>

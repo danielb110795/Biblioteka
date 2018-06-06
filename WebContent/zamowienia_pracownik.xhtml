@@ -34,14 +34,16 @@
 		<p>Ilość: #{zamowienie.ilosc}</p>
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
-		<p color='red'>#{zamowienie.status}</p>
-		<c:set var = "ciag" scope = "session" value = "${ZAAKCEPTOWANY}"/>
-		<c:set var = "ciag2" scope = "session" value = "${ZLOZONE}"/>
-		<c:if test="${zamowienie.status == ciag}">
-             <a href="#" id="przycisk3"> Zakończ </a><br/>
+		<p id="error">Status: #{zamowienie.status}</p>
+		<c:set var = "stat" value = "zamowienie.id"/>
+		<c:if test="#{zamowienieController.sprawdzStatusAkcept(zamowienie.id)}">
+             <a href="#{zamowienieController.zakoncz(zamowienie.id)}" id="przycisk3"> Zakończ </a><br/>
         </c:if>
 
-        <c:if test="${zamowienie.status == ciag2}">
+        <c:if test="#{zamowienieController.sprawdzStatusOdrzucone(zamowienie.id)}">
+                <a href="#{zamowienieController.usun(zamowienie.id)}" id="przycisk3"> Usuń </a><br/>
+        </c:if>
+        <c:if test="#{zamowienieController.sprawdzStatusZlozone(zamowienie.id)}">
                 <a id="przycisk_niaktywny"> Zakończ </a><br/>
         </c:if>
 		</td>

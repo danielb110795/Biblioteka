@@ -56,7 +56,7 @@ public class ZamowienieController {
 		zamowienie.setIlosc(ilosc);
 		zamowienie.setOpis(opis);
 		zamowienie.setBiblioteka(tenPracownik.getBiblioteka());
-		zamowienie.setStatus("ZAAKCEPTOWANY");
+		zamowienie.setStatus("ZAAKCEPTOWANE");
 		
 		zamowienieDAO.save(zamowienie);
 		return "zamowienia_pracownik";
@@ -68,5 +68,68 @@ public class ZamowienieController {
 		zamowienia = zamowienieDAO.findAll();
 		
 		return zamowienia;
+	}
+	
+	public Boolean sprawdzStatusAkcept(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		if(zamowienie.getStatus().equals("ZAAKCEPTOWANE"))
+			return true;
+		else
+			return false;
+	}
+	
+	public Boolean sprawdzStatusOdrzucone(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		if(zamowienie.getStatus().equals("ODRZUCONE"))
+			return true;
+		else
+			return false;
+	}
+	
+	public Boolean sprawdzStatusZlozone(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		if(zamowienie.getStatus().equals("Z£O¯ONE"))
+			return true;
+		else
+			return false;
+	}
+	
+	public Boolean sprawdzStatusZak(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		if(zamowienie.getStatus().equals("ZAKOÑCZONE"))
+			return true;
+		else
+			return false;
+	}
+	
+	public String usun(Long id)
+	{
+		zamowienieDAO.remove(id);
+		return "zamowienia_pracownik.xhtml";
+	}
+	public String zakoncz(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		zamowienie.setStatus("ZAKOÑCZONE");
+		zamowienieDAO.save(zamowienie);
+		return "zamowienia_pracownik.xhtml";
+	}
+	public String akceptuj(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		zamowienie.setStatus("ZAAKCEPTOWANE");
+		zamowienieDAO.save(zamowienie);
+		return "zamowienia_pracownik.xhtml";
+	}
+	public String odrzuc(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		zamowienie.setStatus("ODRZUCONE");
+		zamowienieDAO.save(zamowienie);
+		return "zamowienia_pracownik.xhtml";
 	}
 }
