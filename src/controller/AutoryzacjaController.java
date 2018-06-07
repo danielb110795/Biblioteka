@@ -99,7 +99,7 @@ public class AutoryzacjaController {
 			{
 				url = "profil_pracownika.xhtml";
 				session.setAttribute("uzytkownik", uzytkownik);
-				return "profil_czytelnika";
+				return "profil_pracownika";
 			}
 			if(uzytkownik.getRola().equals("ADMINISTRATOR"))
 			{

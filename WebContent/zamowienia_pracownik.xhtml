@@ -35,17 +35,22 @@
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
 		<p id="error">Status: #{zamowienie.status}</p>
-		<c:set var = "stat" value = "zamowienie.id"/>
-		<c:if test="#{zamowienieController.sprawdzStatusAkcept(zamowienie.id)}">
-             <a href="#{zamowienieController.zakoncz(zamowienie.id)}" id="przycisk3"> Zakończ </a><br/>
-        </c:if>
+		<c:set var = "stat" value = "zamowienie.status"/>
+		<c:choose>
+		<c:when test="${zamowienie.id == 2}">
+             AAAA
+        </c:when>
 
-        <c:if test="#{zamowienieController.sprawdzStatusOdrzucone(zamowienie.id)}">
-                <a href="#{zamowienieController.usun(zamowienie.id)}" id="przycisk3"> Usuń </a><br/>
-        </c:if>
-        <c:if test="#{zamowienieController.sprawdzStatusZlozone(zamowienie.id)}">
-                <a id="przycisk_niaktywny"> Zakończ </a><br/>
-        </c:if>
+        <c:when test="${$zamowienie.status eq 'ODRZUCONE'}">
+                BBB<a href="#{zamowienieController.usun(zamowienie.id)}" id="przycisk3"> Usuń </a><br/>
+        </c:when>
+        <c:when test="${$zamowienie.status eq 'ZŁOŻONE'}">
+                CCC<a id="przycisk_niaktywny"> Zakończ </a><br/>
+        </c:when>
+        <c:otherwise>
+        skdvnsduiubbsbosndoinsmvskdnvsbvsdbvsdb
+        </c:otherwise>
+        </c:choose>
 		</td>
 		<td>
 		<br/><br/><br/><br/>

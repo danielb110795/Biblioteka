@@ -56,7 +56,7 @@ public class ZamowienieController {
 		zamowienie.setIlosc(ilosc);
 		zamowienie.setOpis(opis);
 		zamowienie.setBiblioteka(tenPracownik.getBiblioteka());
-		zamowienie.setStatus("ZAAKCEPTOWANE");
+		zamowienie.setStatus("Z£O¯ONE");
 		
 		zamowienieDAO.save(zamowienie);
 		return "zamowienia_pracownik";
@@ -131,5 +131,21 @@ public class ZamowienieController {
 		zamowienie.setStatus("ODRZUCONE");
 		zamowienieDAO.save(zamowienie);
 		return "zamowienia_pracownik.xhtml";
+	}
+	
+	public String sprawdzStatus(Long id)
+	{
+		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		
+		if(zamowienie.getStatus().equals("ZAAKCEPTOWANE"))
+			return "<a href=\"#{zamowienieController.zakoncz(zamowienie.id)}\" id=\"przycisk3\"> Zakoñcz </a><br/>";
+		if(zamowienie.getStatus().equals("ZAKOÑCZONE"))
+			return "<a id=\"przycisk_niaktywny\"> Zakoñcz </a><br/>";
+		if(zamowienie.getStatus().equals("Z£O¯ONE"))
+			return "<a id=\"przycisk_niaktywny\"> Zakoñcz </a><br/>";
+		if(zamowienie.getStatus().equals("ODRZUCONE"))
+			return "<a href=\"#{zamowienieController.usun(zamowienie.id)}\" id=\"przycisk3\"> Usuñ </a><br/>";
+		else
+			return "Nieznany status";
 	}
 }
