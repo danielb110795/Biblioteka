@@ -40,7 +40,7 @@ public class BibliotekaController {
 		
 		bibliotekaDAO.save(biblioteka);
 		
-		return "placowki";
+		return "placowki.xhtml";
 	}
 	
 	
@@ -63,6 +63,14 @@ public class BibliotekaController {
 		int id = Integer.parseInt(idBiblioteki);
 		placowka = bibliotekaDAO.findOne((long)id);	
 		return placowka.getUrlDoMapyGoogle();                
+	}
+	
+	public String usunPlacowke(String idBiblioteki) //zle napisana funkcja remve w CrudDAO
+	{
+		int id = Integer.parseInt(idBiblioteki);
+		bibliotekaDAO.remove((long)id);
+		
+		return "placowka";                
 	}
 	
 }

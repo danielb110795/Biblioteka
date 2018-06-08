@@ -81,7 +81,7 @@ body
 }
 
 #przyciskBoczny:hover {
-	background: blue;
+	background: #964B00;
 	color: white;
 }
 
@@ -106,11 +106,11 @@ body
 	color: red;
 }
 #przycisk4:hover {
-	background: blue;
+	background: #964B00;
 	color: white;
 }
 #przycisk:hover {
-	background: blue;
+	background: #964B00;
 	color: white;
 }
 
@@ -133,7 +133,7 @@ body
 }
 
 #przycisk2:hover {
-	background: blue;
+	background: #964B00;
 	color: white;
 }
 #przycisk3
@@ -175,7 +175,7 @@ body
 }
 
 #przycisk3:hover {
-	background: blue;
+	background: #964B00;
 	color: white;
 }
 #tekstplacowek

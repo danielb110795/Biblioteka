@@ -10,7 +10,16 @@
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+		<div id="bocznemenu"> 
+		<center><h2>MENU</h2></center>
+		<hr class='b'/>
+		<a href="placowki.xhtml" id="przyciskBoczny">Placówki</a>
+		<a href="pracownicy.xhtml" id="przyciskBoczny">Pracownicy</a>
+		<a href="uzytkownicy.xhtml" id="przyciskBoczny">Użytkownicy</a>
+		<a href="zamowienia.xhtml" id="przyciskBoczny">Zamówienia</a>
+	</div>
+	
+	<div id="srodek">
 
 	<div id="tekst2">
 		<h3>Dodawanie nowej placówki:</h3>
@@ -21,15 +30,15 @@
 				<br />
 				Adres: 
 				<br /> 	
-				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
+				<h:inputText styleClass="input-text" name="adres" value="#{bibliotekaController.adres}"/>
 				<br />
 				Numer telefonu: 
 				<br /> 	
-				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.numerTel}"/>
+				<h:inputText styleClass="input-text" name="numerTel" value="#{bibliotekaController.numerTel}"/>
 				<br />
 				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
 				<br /> 	
-				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.urlDoMapyGoogle}"/>
+				<h:inputText styleClass="input-text" name="url" value="#{bibliotekaController.urlDoMapyGoogle}"/>
 				<br /> 		
 				<br /> 	
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
