@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -25,22 +26,42 @@
 		<h3>Dodawanie nowej placówki:</h3>
 		<h:form>
 				Nazwa: 
-				<br /> 
-				<h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>	
-				<br />
+				<br/> 
+			    <h:inputText id="nazwa" styleClass="input-text" name="nazwa" 
+			    value="#{bibliotekaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nazwa" errorStyle="color:red; display:block"/>
+                <br/>
+                <br/>
+                
 				Adres: 
 				<br /> 	
-				<h:inputText styleClass="input-text" name="adres" value="#{bibliotekaController.adres}"/>
-				<br />
+				<h:inputText id="adres" styleClass="input-text" name="adres" 
+			    value="#{bibliotekaController.adres}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="adres" errorStyle="color:red; display:block"/>
+                <br/>
+				<br/>
+				
 				Numer telefonu: 
-				<br /> 	
-				<h:inputText styleClass="input-text" name="numerTel" value="#{bibliotekaController.numerTel}"/>
-				<br />
+				<br/> 	
+				<h:inputText id="numerTel" styleClass="input-text" name="numerTel" 
+			    value="#{bibliotekaController.numerTel}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+			    <f:validateRegex pattern="[0-9]{9,9}" />
+                </h:inputText>
+                <h:message for="numerTel" errorStyle="color:red; display:block"/>
+				<br/>
+				<br/>
+				
 				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
-				<br /> 	
-				<h:inputText styleClass="input-text" name="url" value="#{bibliotekaController.urlDoMapyGoogle}"/>
-				<br /> 		
-				<br /> 	
+				<br/> 	
+				<h:inputText id="url" styleClass="input-text" name="url" 
+			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="url" errorStyle="color:red; display:block"/>
+				<br/> 		
+				<br/> 	
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
 		</h:form>
 		
