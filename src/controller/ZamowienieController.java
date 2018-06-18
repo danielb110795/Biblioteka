@@ -70,82 +70,60 @@ public class ZamowienieController {
 		return zamowienia;
 	}
 	
-	public Boolean sprawdzStatusAkcept(Long id)
+	public String usun(String id)
 	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
-		if(zamowienie.getStatus().equals("ZAAKCEPTOWANE"))
-			return true;
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		Long idZam = Long.parseLong(id);
+		zamowienieDAO.remove(idZam);
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "zamowienia_pracownik.xhtml";
 		else
-			return false;
+			return "zamowienia_admin.xhtml";
 	}
-	
-	public Boolean sprawdzStatusOdrzucone(Long id)
+	public String zakoncz(String id)
 	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
-		if(zamowienie.getStatus().equals("ODRZUCONE"))
-			return true;
-		else
-			return false;
-	}
-	
-	public Boolean sprawdzStatusZlozone(Long id)
-	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
-		if(zamowienie.getStatus().equals("Z£O¯ONE"))
-			return true;
-		else
-			return false;
-	}
-	
-	public Boolean sprawdzStatusZak(Long id)
-	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
-		if(zamowienie.getStatus().equals("ZAKOÑCZONE"))
-			return true;
-		else
-			return false;
-	}
-	
-	public String usun(Long id)
-	{
-		zamowienieDAO.remove(id);
-		return "zamowienia_pracownik.xhtml";
-	}
-	public String zakoncz(Long id)
-	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		Long idZam = Long.parseLong(id);
+		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ZAKOÑCZONE");
 		zamowienieDAO.save(zamowienie);
-		return "zamowienia_pracownik.xhtml";
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "zamowienia_pracownik.xhtml";
+		else
+			return "zamowienia_admin.xhtml";
 	}
-	public String akceptuj(Long id)
+	public String akceptuj(String id)
 	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		Long idZam = Long.parseLong(id);
+		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ZAAKCEPTOWANE");
 		zamowienieDAO.save(zamowienie);
-		return "zamowienia_pracownik.xhtml";
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "zamowienia_pracownik.xhtml";
+		else
+			return "zamowienia_admin.xhtml";
 	}
-	public String odrzuc(Long id)
+	public String odrzuc(String id)
 	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		Long idZam = Long.parseLong(id);
+		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ODRZUCONE");
 		zamowienieDAO.save(zamowienie);
-		return "zamowienia_pracownik.xhtml";
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "zamowienia_pracownik.xhtml";
+		else
+			return "zamowienia_admin.xhtml";
 	}
 	
-	public String sprawdzStatus(Long id)
-	{
-		Zamowienie zamowienie = zamowienieDAO.findOne(id);
-		
-		if(zamowienie.getStatus().equals("ZAAKCEPTOWANE"))
-			return "<a href=\"#{zamowienieController.zakoncz(zamowienie.id)}\" id=\"przycisk3\"> Zakoñcz </a><br/>";
-		if(zamowienie.getStatus().equals("ZAKOÑCZONE"))
-			return "<a id=\"przycisk_niaktywny\"> Zakoñcz </a><br/>";
-		if(zamowienie.getStatus().equals("Z£O¯ONE"))
-			return "<a id=\"przycisk_niaktywny\"> Zakoñcz </a><br/>";
-		if(zamowienie.getStatus().equals("ODRZUCONE"))
-			return "<a href=\"#{zamowienieController.usun(zamowienie.id)}\" id=\"przycisk3\"> Usuñ </a><br/>";
-		else
-			return "Nieznany status";
-	}
 }

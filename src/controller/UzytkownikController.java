@@ -6,7 +6,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import dao.CzytelnikDAO;
 import dao.UzytkownikDAO;
@@ -64,4 +66,49 @@ public class UzytkownikController {
 		
 		return czytelnicy;
 	}
+	
+	public String edytujUzytkownika()
+	{
+		
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		String idCzyt = (String) session.getAttribute("id");
+		Long idCzytelnika = Long.parseLong(idCzyt);
+		
+		Czytelnik czytelnik = czytelnikDAO.findOne(idCzytelnika);
+		Uzytkownik uzytkownik = uzytkownikDAO.findOne(czytelnik.getUzytkownik().getId());
+		
+		//if(!login.equals(""))
+			uzytkownik.setLogin(login);
+		//if(!haslo.equals(""))
+			uzytkownik.setHaslo(haslo);
+
+		uzytkownik.setRola("CZYTELNIK");
+		uzytkownik.setAktywowane(true);
+		uzytkownik.setZalogowany(true);
+		
+		czytelnik.setImie(imie);
+		czytelnik.setNazwisko(nazwisko);
+		czytelnik.setEmail(email);
+		czytelnik.setPesel(pesel);
+		czytelnik.setAdres(adres);
+		czytelnik.setKara(0);
+		czytelnik.setUzytkownik(uzytkownik);
+		
+		uzytkownikDAO.save(uzytkownik);
+		czytelnikDAO.save(czytelnik); 
+		
+		return "uzytkownicy_pracownik";
+	}
+	public String pokazEdycje(String id)
+	{
+	
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		session.setAttribute("id", id);
+		return "edytuj_uzytkownika.xhtml";
+	}
+	
+	
 }

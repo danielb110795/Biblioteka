@@ -11,15 +11,7 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-		<hr class='b'/>
-		<a href="placowki.xhtml" id="przyciskBoczny">Placówki</a>
-		<a href="pracownicy.xhtml" id="przyciskBoczny">Pracownicy</a>
-		<a href="uzytkownicy.xhtml" id="przyciskBoczny">Użytkownicy</a>
-		<a href="zamowienia.xhtml" id="przyciskBoczny">Zamówienia</a>
-		<a href="ksiazki.xhtml" id="przyciskBoczny">Ksiazki</a>
-	</div>
+	<ui:include src="#{componentController.getMenuAdmin()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">

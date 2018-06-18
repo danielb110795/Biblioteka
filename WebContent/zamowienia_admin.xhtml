@@ -11,14 +11,7 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-		<ul id="tekstplacowek">
-		<li><a href="czas_pracy.xhtml">Czas pracy</a></li>
-		<li><a href="uzytkownicy_admin.xhtml">Użytkownicy</a></li>
-		<li><a href="zamowienia_admin.xhtml">Zamówienia</a></li>
-		</ul>
-	</div>
+	<ui:include src="#{componentController.getMenuAdmin()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">
@@ -35,17 +28,16 @@
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
 		<p id="error">#{zamowienie.status}</p>
-		<c:if test="${zamowienieController.sprawdzStatusZlozone(zamowienie.status) == true}">
-             <a href="zamowienieController.akceptuj(#{zamowienie.id})" id="przycisk3"> Akceptuj </a><br/>
-             <a href="zamowienieController.odrzuc(#{zamowienie.id})" id="przycisk3"> Odrzuć </a><br/>
-        </c:if>
-
-        <c:if test="${zamowienieController.sprawdzStatusZak(zamowienie.status) == true}">
-                <a href="zamowienieController.usun(#{zamowienie.id})" id="przycisk3"> Usuń </a><br/>
-        </c:if>
-        <c:if test="${zamowienieController.sprawdzStatusOdrzucone(zamowienie.status) == true}">
-                <a id="przycisk_niaktywny"> Usuń </a><br/>
-        </c:if>
+		
+        <h:form>
+       		<h:commandButton action="#{zamowienieController.akceptuj(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Akceptuj" ></h:commandButton>
+       	</h:form>
+       	<h:form>
+       		<h:commandButton action="#{zamowienieController.odrzuc(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Odrzuć" ></h:commandButton>
+       	</h:form>
+       	<h:form>
+       		<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAKOŃCZONE'}" value="Usuń"></h:commandButton>
+       	</h:form>
 		</td>
 		<td>
 		<br/><br/><br/><br/>

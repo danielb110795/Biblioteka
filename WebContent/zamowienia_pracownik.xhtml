@@ -35,22 +35,16 @@
 		<p>Wydanie: #{zamowienie.wydanie}</p>
 		<p>Opis: #{zamowienie.opis}</p>
 		<p id="error">Status: #{zamowienie.status}</p>
-		<c:set var = "stat" value = "zamowienie.status"/>
-		<c:choose>
-		<c:when test="${zamowienie.id == 2}">
-             AAAA
-        </c:when>
-
-        <c:when test="${$zamowienie.status eq 'ODRZUCONE'}">
-                BBB<a href="#{zamowienieController.usun(zamowienie.id)}" id="przycisk3"> Usuń </a><br/>
-        </c:when>
-        <c:when test="${$zamowienie.status eq 'ZŁOŻONE'}">
-                CCC<a id="przycisk_niaktywny"> Zakończ </a><br/>
-        </c:when>
-        <c:otherwise>
-        skdvnsduiubbsbosndoinsmvskdnvsbvsdbvsdb
-        </c:otherwise>
-        </c:choose>
+	
+		
+        <h:form>
+        	<h:commandButton action="#{zamowienieController.zakoncz(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAAKCEPTOWANE'}" value="Zakończ"/>
+        </h:form>   
+        <h:form>  
+        	<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ODRZUCONE'}" value="Usuń"></h:commandButton>
+        </h:form>
+        
+        
 		</td>
 		<td>
 		<br/><br/><br/><br/>

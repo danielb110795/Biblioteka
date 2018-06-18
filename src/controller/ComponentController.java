@@ -17,6 +17,10 @@ public class ComponentController {
 		return "head.xhtml";
 	}
 	
+	public String getMenuAdmin() {
+		return "menuAdmin.xhtml";
+	}
+	
 	/*public String getBookingEtaps() {
 		return "booking-etaps.xhtml";
 	}

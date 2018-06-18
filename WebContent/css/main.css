@@ -6,6 +6,23 @@ body
 	background-attachment: fixed;
 }
 
+input
+{
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: bottom;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	
+}
+input:hover {
+	background: #964B00;
+	color: white;
+}
 #gornemenu
 {
 	background-color: silver; 
