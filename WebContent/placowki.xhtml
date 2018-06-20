@@ -30,15 +30,18 @@
 		</td>
 		<td>
 		<br/><br/><br/><br/>
-
+		<h:form>
+			<h:commandButton action="#{bibliotekaController.przypiszPracownika(placowka.id)}" value="Przypisz pracownika"></h:commandButton>
+			<h:commandButton action="#{bibliotekaController.pokazEdycje(placowka.id)}" value="Edytuj"></h:commandButton>
+       		<h:commandButton action="#{bibliotekaController.usunPlacowke(placowka.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
+       		<h:outputText styleClass="error" value=" #{bibliotekaController.errorMessage}"></h:outputText><br/>
+       	</h:form>
 		
 		</td></tr></table>
 		</ui:repeat>
 		</div>
 	</div>
-		<a href="#" > Przypisz pracownika </a><br/>
-		<a href="#" > Edytuj </a><br/>
-		<a href="#" > Usuń </a><br/>
+		
 	</div>		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="srodekcaly">
+
+	<div id="tekst2">
+		<h3>Edycja użytkownika:</h3>
+		Wypełnij tylko te dane które chcesz edytować!
+		<br/>
+		<h:form>
+				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>
+				<br /> 	
+				<br /> 	
+				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
+				<br /> 	
+				<br /> 				
+				Nrumer telefonu: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.numerTel}"/>
+				<br /> 	
+				<br /> 		
+				Adres URL do mapy google: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.urlDoMapyGoogle}"/>
+				<br /> 	
+				<br /> 	
+			<h:commandButton value="Dodaj" action="#{bibliotekaController.edytujPlacowke()}"/>
+		</h:form>
+		
+	</div>
+	</div>
+</h:body>
+</html>

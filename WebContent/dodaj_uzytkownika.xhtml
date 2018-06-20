@@ -16,12 +16,14 @@
 		<h3>Dodawanie nowej placówki:</h3>
 		<h:form>
 				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.login}"/>
+				<h:outputText styleClass="error" value=" #{uzytkownikController.errorMessageLogin}"></h:outputText><br/>
 				<br /> 	
 				<br /> 	
 				Haslo: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.haslo}"/>
 				<br /> 	
 				<br /> 	
 				E-mail: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.email}"/>
+				<h:outputText styleClass="error" value=" #{uzytkownikController.errorMessageEmail}"></h:outputText><br/>
 				<br /> 	
 				<br /> 
 				Imie: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.imie}"/>

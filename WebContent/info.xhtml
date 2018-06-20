@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body> 
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<div id="bocznemenu"> 
+	<center><h2>MENU</h2></center>
+	<hr class='b'/>
+				<a href="nowe_konto.xhtml" id="przyciskBoczny">Załóż konto</a>
+				<a href="odzyskaj_haslo.html" id="przyciskBoczny">Odzyskaj hasło</a>
+	</div>
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Aktywuj konto</h2>
+		<hr color='#FF9966' size='5'/>
+		
+	</div>
+	
+		<div id="tekst">
+		Twoje konto zostało założone, ale jest nieaktywne !! <br />
+		Udaj się do najbliższej placówki z dowodem tożsamości, aby aktywować konto!
+		</div>
+		
+	</div>		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

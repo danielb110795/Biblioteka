@@ -25,10 +25,12 @@
 	</div>
 	
 		<div id="formularz">
-		<h:form>
-			Login: <br/> <h:inputText name="login" value="#{rejestracjaController.login}"/> <br/>
+		<h:form> 
+			Login: <br/> <h:inputText name="login" value="#{rejestracjaController.login}"/> 
+			<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageLogin}"></h:outputText><br/>
 			Hasło: <br/> <h:inputText styleClass="input-text" name="haslo" value="#{rejestracjaController.haslo}"/> <br/>
-			E-mail: <br/> <h:inputText styleClass="input-text" name="email" value="#{rejestracjaController.email}"/> <br/><br/>
+			E-mail: <br/> <h:inputText styleClass="input-text" name="email" value="#{rejestracjaController.email}"/> 
+			<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageEmail}"></h:outputText><br/><br/>
 			Imie: <br/> <h:inputText styleClass="input-text" name="imie" value="#{rejestracjaController.imie}"/> <br/>
 			Nazwisko: <br/> <h:inputText styleClass="input-text" name="nazwisko" value="#{rejestracjaController.nazwisko}"/> <br/>
 			Pesel: <br/> <h:inputText styleClass="input-text" name="pesel" value="#{rejestracjaController.pesel}"/> <br/>

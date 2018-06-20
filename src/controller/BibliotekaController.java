@@ -6,11 +6,15 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import dao.BibliotekaDAO;
 import entity.Biblioteka;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Stateless
 @Named
@@ -20,6 +24,10 @@ public class BibliotekaController {
 	
 	@EJB
 	private BibliotekaDAO bibliotekaDAO;
+	
+	@Getter
+	@Setter
+	private String errorMessage = "";
 	
 	private String nazwa;
 	private String adres;
@@ -65,12 +73,72 @@ public class BibliotekaController {
 		return placowka.getUrlDoMapyGoogle();                
 	}
 	
-	public String usunPlacowke(String idBiblioteki) //zle napisana funkcja remve w CrudDAO
+	public String usunPlacowke(String id) 
 	{
-		int id = Integer.parseInt(idBiblioteki);
-		bibliotekaDAO.remove((long)id);
+		Long idPlacowki = Long.parseLong(id);
+		try {
+		bibliotekaDAO.remove(idPlacowki);
+		}catch(Throwable e)
+		{
+			errorMessage = "Przed usuniêciem usuñ pracwoników z danej biblioteki";
+		}
 		
-		return "placowka";                
+		return "placowki";                
 	}
 	
+	public String przypiszPracownika(String id)
+	{
+		Long idPlacowki = Long.parseLong(id);
+		
+		
+		return "";
+	}
+	
+	public String pokazEdycje(String id)
+	{
+	
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		if(id.equals(""))
+			return "strona_glowna.xhtml";
+		session.setAttribute("idPlacowki", id);
+		
+		return "edytuj_placowke.xhtml";
+	}
+	
+	public String edytujPlacowke() 
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		String idPlac = (String) session.getAttribute("idPlacowki");
+		if(idPlac.equals(""))
+			return "nowe_konto.xhtml";
+		Long idPlacowki = Long.parseLong(idPlac);
+		
+		Biblioteka biblioteka = bibliotekaDAO.findOne(idPlacowki);
+		
+		if(nazwa.equals(""))
+			biblioteka.setNazwa(biblioteka.getNazwa());
+		else
+			biblioteka.setNazwa(nazwa);
+		
+		if(adres.equals(""))
+			biblioteka.setAdres(biblioteka.getAdres());
+		else
+			biblioteka.setAdres(adres);
+		
+		
+		if(numerTel.equals(""))
+			biblioteka.setNumerTel(biblioteka.getNumerTel());
+		else
+			biblioteka.setNumerTel(numerTel);
+		if(urlDoMapyGoogle.equals(""))
+			biblioteka.setUrlDoMapyGoogle(biblioteka.getUrlDoMapyGoogle());
+		else
+			biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
+		
+		bibliotekaDAO.save(biblioteka);
+		 
+		
+		return "placowki";              
+	}
 }

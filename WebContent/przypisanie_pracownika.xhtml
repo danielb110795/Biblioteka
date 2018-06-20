@@ -23,23 +23,17 @@
 		<ui:repeat var="pracownik" value="#{pracownikController.pokazPracownikow()}">
 		<table><tr><td>
 		<h2>#{pracownik.imie} #{pracownik.nazwisko}:</h2>
-		<hr color='grey' size='3' width='100%' align='left' />
-		<p>Login: #{pracownik.uzytkownik.login}</p>
-		<p>E-mail: #{pracownik.email}</p>
-		<p>Pesel: #{pracownik.pesel}</p>
-		<p>Adres: #{pracownik.adres}</p>
 		
-		
-		<h:outputText rendered="#{empty pracownik.biblioteka}" value="Nazwa placówki: Nieprzypisany"></h:outputText><br/>
-
+        <h:outputText rendered="#{empty pracownik.biblioteka}" value="Nazwa placówki: Nieprzypisany"></h:outputText><br/>
         <h:outputText rendered="#{not empty pracownik.biblioteka}" value="Nazwa placówki: #{pracownik.biblioteka.nazwa}"></h:outputText><br/>
-     	
+                
+        
 		</td>
 		<td>
 		<br/><br/><br/><br/>
-		<a href="#" id="przycisk3"> Czas pracy </a><br/>
-		<a href="#" id="przycisk3"> Edytuj </a><br/>
-		<a href="#" id="przycisk3"> Usuń </a><br/>
+		<h:form>
+			<h:commandButton action="#{bibliotekaController.przypiszDoBiblioteki(pracownik.id)}" value="Przypisz pracownika"></h:commandButton>
+		</h:form>
 		</td></tr></table>
 		</ui:repeat>
 		</div>
