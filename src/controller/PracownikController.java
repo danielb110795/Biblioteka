@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import dao.PracownikDAO;
 import dao.UzytkownikDAO;
-import entity.Biblioteka;
 import entity.Pracownik;
 import entity.Uzytkownik;
 import lombok.Data;

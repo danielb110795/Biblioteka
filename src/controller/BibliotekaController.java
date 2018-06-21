@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import dao.BibliotekaDAO;
+import dao.PracownikDAO;
 import entity.Biblioteka;
+import entity.Pracownik;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +27,9 @@ public class BibliotekaController {
 	
 	@EJB
 	private BibliotekaDAO bibliotekaDAO;
+	
+	@EJB
+	private PracownikDAO pracownikDAO;
 	
 	@Getter
 	@Setter
@@ -88,10 +94,48 @@ public class BibliotekaController {
 	
 	public String przypiszPracownika(String id)
 	{
-		Long idPlacowki = Long.parseLong(id);
 		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		session.setAttribute("idPlacowki",id);
 		
-		return "";
+		return "przypisanie_pracownika";
+	}
+	
+	public String przypiszDoBiblioteki(String id)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		String idPlacowki = (String) session.getAttribute("idPlacowki");
+		
+		Long idPracownika = Long.parseLong(id);
+		Long idPlac = Long.parseLong(idPlacowki);
+		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
+		Biblioteka biblioteka = bibliotekaDAO.findOne(idPlac);
+		pracownik.setBiblioteka(biblioteka);
+		pracownikDAO.save(pracownik);
+		
+		return "pracownicy";
+	}
+	
+	public List<Pracownik> znajdzPracownikow()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		String idPlacowki = (String) session.getAttribute("idPlacowki");
+		Long idPlac = Long.parseLong(idPlacowki);
+		List<Pracownik> pracownicyPlacowki = new LinkedList<>();
+		List<Pracownik> pracownicy = pracownikDAO.findAll();
+		for(Pracownik element : pracownicy)
+		{
+			if(element.getBiblioteka().getId() == idPlac)
+			{
+				pracownicyPlacowki.add(element);
+			}
+		}
+		if(pracownicyPlacowki.isEmpty())
+			return pracownicy;
+		return pracownicyPlacowki;
 	}
 	
 	public String pokazEdycje(String id)
@@ -103,6 +147,17 @@ public class BibliotekaController {
 		session.setAttribute("idPlacowki", id);
 		
 		return "edytuj_placowke.xhtml";
+	}
+	
+	public String pokazSzczegoly(String id)
+	{
+	
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		if(id.equals(""))
+			return "strona_glowna.xhtml";
+		session.setAttribute("idPlacowki", id);
+		
+		return "placowka_szczegoly";
 	}
 	
 	public String edytujPlacowke() 
