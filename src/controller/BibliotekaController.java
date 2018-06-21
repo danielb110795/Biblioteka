@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.Collection;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -124,17 +124,20 @@ public class BibliotekaController {
 
 		String idPlacowki = (String) session.getAttribute("idPlacowki");
 		Long idPlac = Long.parseLong(idPlacowki);
+		List<Pracownik> pracownicy = new LinkedList<>();
+		pracownicy = pracownikDAO.findAll();
+		
 		List<Pracownik> pracownicyPlacowki = new LinkedList<>();
-		List<Pracownik> pracownicy = pracownikDAO.findAll();
+		
 		for(Pracownik element : pracownicy)
 		{
-			if(element.getBiblioteka().getId() == idPlac)
+			if(element.getBiblioteka() != null)
 			{
-				pracownicyPlacowki.add(element);
+				if(element.getBiblioteka().getId() == idPlac)
+					pracownicyPlacowki.add(element);
 			}
 		}
-		if(pracownicyPlacowki.isEmpty())
-			return pracownicy;
+		
 		return pracownicyPlacowki;
 	}
 	

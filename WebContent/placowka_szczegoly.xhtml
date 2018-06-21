@@ -17,7 +17,7 @@
 		<h2>Pracownicy:</h2>
 		<hr color='#FF9966' size='5'/>
 		<div>
-		<ui:repeat var="pracownik" value="#{bibliotekaController.znajdzPracownikow()}">
+		<ui:repeat var="pracownik" value="${bibliotekaController.znajdzPracownikow()}">
 		<table><tr><td>
 		<h2>#{pracownik.imie} #{pracownik.nazwisko}:</h2>
 		<hr color='grey' size='3' width='100%' align='left' />
