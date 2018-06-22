@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Biblioteka implements Domain {
 	private String nazwa;
 	private String adres;
 	private String numerTel;
+	private List<Dzien> dzien;
 	
 	@Column(length = 1337)
 	private String urlDoMapyGoogle;

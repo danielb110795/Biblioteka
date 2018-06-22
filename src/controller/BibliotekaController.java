@@ -12,8 +12,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import dao.BibliotekaDAO;
+import dao.DzienDAO;
 import dao.PracownikDAO;
 import entity.Biblioteka;
+import entity.Dzien;
 import entity.Pracownik;
 import lombok.Data;
 import lombok.Getter;
@@ -31,6 +33,9 @@ public class BibliotekaController {
 	@EJB
 	private PracownikDAO pracownikDAO;
 	
+	@EJB
+	private DzienDAO dzienDAO;
+	
 	@Getter
 	@Setter
 	private String errorMessage = "";
@@ -39,6 +44,20 @@ public class BibliotekaController {
 	private String adres;
 	private String numerTel;
 	private String urlDoMapyGoogle;
+	
+	private String pnOtwarcie;
+	private String pnZamkniecie;
+	private String wtOtwarcie;
+	private String wtZamkniecie;
+	private String srOtwarcie;
+	private String srZamkniecie;
+	private String czOtwarcie;
+	private String czZamkniecie;
+	private String ptOtwarcie;
+	private String ptZamkniecie;
+	private String sobOtwarcie;
+	private String sobZamkniecie;
+	
 	
 	private Biblioteka placowka;;
 	private Long id;
@@ -51,6 +70,21 @@ public class BibliotekaController {
 		biblioteka.setAdres(adres);
 		biblioteka.setNumerTel(numerTel);
 		biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
+		List<Dzien> dni = new LinkedList<>();
+		Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzialek").czasOtwarcia(pnOtwarcie).czasZamkniêcia(pnZamkniecie).build());
+		Dzien wtorek = dzienDAO.save(Dzien.builder().nazwa("Wtorek").czasOtwarcia(wtOtwarcie).czasZamkniêcia(wtZamkniecie).build());
+		Dzien sroda = dzienDAO.save(Dzien.builder().nazwa("Œroda").czasOtwarcia(srOtwarcie).czasZamkniêcia(srZamkniecie).build());
+		Dzien czwartek = dzienDAO.save(Dzien.builder().nazwa("Czwartek").czasOtwarcia(czOtwarcie).czasZamkniêcia(czZamkniecie).build());
+		Dzien piatek = dzienDAO.save(Dzien.builder().nazwa("Pi¹tek").czasOtwarcia(ptOtwarcie).czasZamkniêcia(ptZamkniecie).build());
+		Dzien sobota = dzienDAO.save(Dzien.builder().nazwa("Sobota").czasOtwarcia(sobOtwarcie).czasZamkniêcia(sobZamkniecie).build());
+		dni.add(poniedzialek);
+		dni.add(wtorek);
+		dni.add(sroda);
+		dni.add(czwartek);
+		dni.add(piatek);
+		dni.add(sobota);
+		
+		biblioteka.setDzien(dni);
 		
 		bibliotekaDAO.save(biblioteka);
 		
@@ -193,6 +227,12 @@ public class BibliotekaController {
 			biblioteka.setUrlDoMapyGoogle(biblioteka.getUrlDoMapyGoogle());
 		else
 			biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
+		
+		//Zacz¹³em robic edycje
+		//List<Dzien> dni = new LinkedList<>();
+		//if(pnOtwarcie.equals(""))
+		//	Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzialek").czasOtwarcia(pnOtwarcie).czasZamkniêcia(pnZamkniecie).build());
+			
 		
 		bibliotekaDAO.save(biblioteka);
 		 

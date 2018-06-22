@@ -31,6 +31,10 @@ public class Ksiazka implements Domain {
 	
 	@ManyToMany
 	@JoinColumn(name = "kategoria_id")
-	private List <Kategoria> kategoria; //lita kategorii do jakich nale¿y ksi¹¿ka
+	private List <Kategoria> kategoria; 
+	
+	@ManyToMany
+	@JoinColumn(name = "egzemplarz_id")
+	private List <Egzemplarz> egzemplarz; 
 	
 }

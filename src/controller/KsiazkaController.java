@@ -203,8 +203,8 @@ public class KsiazkaController {
 		Egzemplarz egzemplarz = new Egzemplarz();
 		egzemplarz.setStatus("Dostêpna");
 		egzemplarz.setISBN(ISBN);
-		egzemplarz.setKsiazka(getKsiazka(idKsiazki));
-		egzemplarz.setWydanie(getWydanie(idWydania));
+		//egzemplarz.setKsiazka(getKsiazka(idKsiazki));
+		//egzemplarz.setWydanie(getWydanie(idWydania));
 
 
 		egzemplarzDAO.save(egzemplarz);

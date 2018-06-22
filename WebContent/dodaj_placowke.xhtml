@@ -63,6 +63,14 @@
                 <h:message for="url" errorStyle="color:red; display:block"/>
 				<br/> 		
 				<br/> 	
+				
+				Czas otwarcia:
+				<br/>
+				Poniedziałek: <h:inputText name="pnOtwarcie" 
+			    value="#{bibliotekaController.pnOtwarcie}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText><h:inputText name="pnZamkniecie" 
+			    value="#{bibliotekaController.pnOtwarcie}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
 		</h:form>
 		
