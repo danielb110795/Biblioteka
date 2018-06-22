@@ -10,20 +10,12 @@
 <body> 
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-		<ul id="tekstplacowek">
-		<li><a href="#">Edytuj profil</a></li>
-		<li><a href="wypozyczenia.html">Wypożyczenia</a></li>
-		<li><a href="platnosci.html">Płatności</a></li>
-		<li><a href="historia.html">Historia</a></li>
-		</ul>
-	</div>
+	<ui:include src="#{componentController.getMenuCzytelnik()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">
-		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/> <br/>
-		<hr color='#FF9966' size='5'/>
+		<h2>Twój profil</h2>
+		<hr class='a'/>
 		<div id="profil">
 		<table><tr><td>
 		

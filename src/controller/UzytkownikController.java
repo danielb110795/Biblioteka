@@ -74,13 +74,13 @@ public class UzytkownikController {
 			{
 				errorMessageEmail = "";
 				errorMessageLogin = "U¿ytkownik o podanym loginie ju¿ istnieje";
-				return "nowe_konto";
+				return "dodaj_uzytkownika";
 			}
 			if(element.getEmail().equals(email))
 			{
 				errorMessageLogin = "";
 				errorMessageEmail = "U¿ytkownik o podanym adresie e-mail ju¿ istnieje";
-				return "nowe_konto";
+				return "dodaj_uzytkownika";
 			}
 		}
 		

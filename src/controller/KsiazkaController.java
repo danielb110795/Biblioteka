@@ -14,7 +14,6 @@ import dao.KsiazkaDAO;
 import dao.WydanieDAO;
 import dao.WydawnictwoDAO;
 import entity.Autor;
-import entity.Biblioteka;
 import entity.Kategoria;
 import entity.Ksiazka;
 import entity.Wydanie;

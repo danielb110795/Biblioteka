@@ -10,10 +10,12 @@
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Dodawanie nowej placówki:</h3>
+		<h3>Dodawanie pracownika:</h3>
 		<h:form>
 				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.login}"/>
 				<br /> 	

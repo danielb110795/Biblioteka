@@ -11,7 +11,7 @@ public class ComponentController {
 
 	public String getMainMenu() {
 		return "mainMenu.xhtml";
-	}
+	} 
 	
 	public String getHead() {
 		return "head.xhtml";
@@ -21,20 +21,11 @@ public class ComponentController {
 		return "menuAdmin.xhtml";
 	}
 	
-	/*public String getBookingEtaps() {
-		return "booking-etaps.xhtml";
+	public String getMenuPracownik() {
+		return "menuPracownik.xhtml";
 	}
 	
-	public String getClientAccountMenu() {
-		return "client-account-menu.xhtml";
+	public String getMenuCzytelnik() {
+		return "menuCzytelnik.xhtml";
 	}
-	
-	public String getConfigurationMenu() {
-		return "configuration-menu.xhtml";
-	}
-	
-	public String getTasksMenu() {
-		return "tasks-menu.xhtml";
-	}*/
-	
 }

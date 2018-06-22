@@ -11,36 +11,46 @@
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+			<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+			<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
+	
+	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Edycja użytkownika:</h3>
+		<h2>Edycja użytkownika:</h2>
+		<hr class='a'/>
 		<br/>
 		Wypełnij tylko te dane które chcesz edytować!
+		<br/>
 		<br/>
 		<h:form>
 				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.login}"/>
 				<br /> 	
-				<br /> 	
+					
 				Haslo: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.haslo}"/>
 				<br /> 	
-				<br /> 	
+				 	
 				E-mail: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.email}"/>
 				<br /> 	
-				<br /> 
+				
 				Imie: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.imie}"/>
 				<br /> 	
-				<br /> 		
+					
 				Nazwisko: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.nazwisko}"/>
 				<br /> 	
-				<br /> 	
+				
 				Pesel: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.pesel}"/>
 				<br /> 	
-				<br /> 		
+					
 				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.adres}"/>
 				<br /> 	
-				<br /> 	
-			<h:commandButton value="Dodaj" action="#{uzytkownikController.edytujUzytkownika()}"/>
+					
+			<h:commandButton value="Edytuj" action="#{uzytkownikController.edytujUzytkownika()}"/>
 		</h:form>
 		
 	</div>

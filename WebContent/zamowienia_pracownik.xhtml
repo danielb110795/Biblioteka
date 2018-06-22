@@ -11,19 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-		<ul id="tekstplacowek">
-		<li><a href="czas_pracy.xhtml">Czas pracy</a></li>
-		<li><a href="uzytkownicy_pracownik.xhtml">Użytkownicy</a></li>
-		<li><a href="zamowienia_pracownik.xhtml">Zamówienia</a></li>
-		</ul>
-	</div>
+	<ui:include src="#{componentController.getMenuPracownik()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">
 		<h2>Zamówienia</h2>
-		<hr color='#FF9966' size='5'/>
+		<hr class='a'/>
+		<br/>
 		<div>
 		
 		<a href="zloz_zamowienie.xhtml" id="przycisk2"> Złóż zamówienie </a><br/><br/><br/>

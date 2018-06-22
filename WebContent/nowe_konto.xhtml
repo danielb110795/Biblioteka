@@ -3,45 +3,108 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
-<body> 
+<body>
 	<ui:include src="#{componentController.getMainMenu()}" />
-	
-	<div id="bocznemenu"> 
-	<center><h2>MENU</h2></center>
-	<hr class='b'/>
-				<a href="nowe_konto.xhtml" id="przyciskBoczny">Załóż konto</a>
-				<a href="odzyskaj_haslo.html" id="przyciskBoczny">Odzyskaj hasło</a>
-	</div>
-	
-	<div id="srodek">
-	<div id="tekst2">
-		<h2>Zarejestruj się</h2>
-		<hr color='#FF9966' size='5'/>
-		
-	</div>
-	
-		<div id="formularz">
-		<h:form> 
-			Login: <br/> <h:inputText name="login" value="#{rejestracjaController.login}"/> 
-			<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageLogin}"></h:outputText><br/>
-			Hasło: <br/> <h:inputText styleClass="input-text" name="haslo" value="#{rejestracjaController.haslo}"/> <br/>
-			E-mail: <br/> <h:inputText styleClass="input-text" name="email" value="#{rejestracjaController.email}"/> 
-			<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageEmail}"></h:outputText><br/><br/>
-			Imie: <br/> <h:inputText styleClass="input-text" name="imie" value="#{rejestracjaController.imie}"/> <br/>
-			Nazwisko: <br/> <h:inputText styleClass="input-text" name="nazwisko" value="#{rejestracjaController.nazwisko}"/> <br/>
-			Pesel: <br/> <h:inputText styleClass="input-text" name="pesel" value="#{rejestracjaController.pesel}"/> <br/>
-			Adres: <br/> <h:inputText styleClass="input-text" name="adres" value="#{rejestracjaController.adres}"/> <br/>
-			<br/>
-			<h:commandButton value="Zarejestruj" action="#{rejestracjaController.zarejestruj()}"/>
-		</h:form>
-		</div>
-		
-	</div>		
 
-	<a href="javascript:scroll(0,0);">W górę</a> 	
-</body> 
-</html> 
+	<div id="bocznemenu">
+		<center>
+			<h2>MENU</h2>
+		</center>
+		<hr class='b' />
+		<a href="nowe_konto.xhtml" id="przyciskBoczny">Załóż konto</a> 
+		<a href="odzyskaj_haslo.html" id="przyciskBoczny">Odzyskaj hasło</a>
+	</div>
+
+	<div id="srodek">
+		<div id="tekst2">
+			<h2>Zarejestruj się</h2>
+			<hr class='a' />
+			<br/> 
+
+		</div>
+		<div id="formularz">
+
+			<h:form> 
+				Login: 
+				<br/>
+					<h:inputText id="login" name="login" styleClass="input-text" 
+					value="#{rejestracjaController.login}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Login musi zawierać tylko litery i liczby i mieć od 4 do 10 znaków">
+					<f:validateRegex pattern="[0-9A-Za-z]{4,10}" />
+					</h:inputText>	
+					<h:message for="login" errorStyle="color:red; display:block"/>
+					<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageLogin}"></h:outputText>
+				<br/>
+				
+				Hasło: 
+				<br/>
+					<h:inputText id="haslo" name="haslo" styleClass="input-text" 
+					value="#{rejestracjaController.haslo}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę i mieć od 4 do 10 znaków">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})" />
+					</h:inputText>
+					<h:message for="haslo" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				E-mail: 
+				<br/>
+					<h:inputText id="email" name="email" styleClass="input-text" 
+					value="#{rejestracjaController.email}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj odpowiedni email np. daniel@gmail.com">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</h:inputText>
+					<h:message for="email" errorStyle="color:red; display:block"/>	
+					<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageEmail}"></h:outputText>	
+				<br/>
+				
+				Imie: 
+				<br/>
+					<h:inputText id="imie" name="imie" styleClass="input-text" 
+					value="#{rejestracjaController.imie}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
+					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					</h:inputText>
+					<h:message for="imie" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Nazwisko: 
+				<br/>
+					<h:inputText id="nazwisko" name="nazwisko" styleClass="input-text" 
+					value="#{rejestracjaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
+					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					</h:inputText>
+					<h:message for="nazwisko" errorStyle="color:red; display:block"/>	
+				<br/>
+				
+				Pesel: 
+				<br/>
+					<h:inputText id="pesel" name="pesel" styleClass="input-text" 
+					value="#{rejestracjaController.pesel}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj 9 cyfr">
+					<f:validateRegex pattern="[0-9]{9,9}" />
+					</h:inputText>
+					<h:message for="pesel" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Adres: 
+				<br/>
+					<h:inputText id="adres" name="adres" styleClass="input-text" 
+					value="#{rejestracjaController.adres}" required="true" requiredMessage="To pole jest wymagane"/>
+					<h:message for="adres" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				<h:commandButton value="Zarejestruj" action="#{rejestracjaController.zarejestruj()}" />
+			</h:form>
+
+		</div>
+	</div>
+
+	<a href="javascript:scroll(0,0);">W górę</a>
+</body>
+</html>

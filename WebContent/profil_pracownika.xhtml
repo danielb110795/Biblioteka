@@ -10,19 +10,12 @@
 <body> 
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="bocznemenu"> 
-		<center><h2>MENU</h2></center>
-		<ul id="tekstplacowek">
-		<li><a href="czas_pracy.xhtml">Czas pracy</a></li>
-		<li><a href="uzytkownicy_pracownik.xhtml">Użytkownicy</a></li>
-		<li><a href="zamowienia_pracownik.xhtml">Zamówienia</a></li>
-		</ul>
-	</div>
+	<ui:include src="#{componentController.getMenuPracownik()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">
-		<h2>Twój profil <a href="#{autoryzacjaController.getWyloguj()}"> Wyloguj </a></h2> <br/>
-		<hr color='#FF9966' size='5'/>
+		<h2>Twój profil</h2>
+		<hr class='a'/>
 		<div id="profil">
 		<table><tr><td>
 		<img src="avatar.png" alt="Nie udalo sie zaladowac obrazka avatar" width="150px" height="165px" border="2px"/> <br/><br/>

@@ -11,25 +11,36 @@
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
+			
+	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Edycja użytkownika:</h3>
+		<h2>Edycja użytkownika:</h2>
+		<hr class='a'/>
+		<br/>
 		Wypełnij tylko te dane które chcesz edytować!
+		<br/>
 		<br/>
 		<h:form>
 				Nazwa: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.nazwa}"/>
 				<br /> 	
-				<br /> 	
+				 	
 				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.adres}"/>
 				<br /> 	
-				<br /> 				
+								
 				Nrumer telefonu: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.numerTel}"/>
 				<br /> 	
-				<br /> 		
+				 		
 				Adres URL do mapy google: <h:inputText styleClass="input-text" name="nazwa" value="#{bibliotekaController.urlDoMapyGoogle}"/>
 				<br /> 	
-				<br /> 	
+			
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.edytujPlacowke()}"/>
 		</h:form>
 		

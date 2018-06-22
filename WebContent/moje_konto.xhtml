@@ -20,14 +20,29 @@
 	<div id="srodek">
 	<div id="tekst2">
 		<h2>Zaloguj się</h2>
-		<hr color='#FF9966' size='5'/>
-		
+		<hr class='a' />
+	<br/> 
 	</div>
-		<div id="formularz">
+	<div id="formularz">
 		<h:form>
-			Login: <br/> <h:inputText id="login" value="#{autoryzacjaController.autoryzacja.login}"/> <br/>
-			Hasło: <br/> <h:inputSecret id="haslo" value="#{autoryzacjaController.autoryzacja.haslo}"/> <br/>
+	
+			Login: 
+			<br/> 
+			<h:inputText id="login" styleClass="input-text" name="login" 
+			value="#{autoryzacjaController.autoryzacja.login}" required="true" 
+			requiredMessage="Musisz podać login"/> 
+			<h:message for="login" errorStyle="color:red; display:block"/>
+			<br/>  
+			
+			Hasło: 
+			<br/> 
+			<h:inputSecret id="haslo" styleClass="input-text" name="haslo" 
+			value="#{autoryzacjaController.autoryzacja.haslo}" required="true" 
+			requiredMessage="Musisz podać hasło"/> 
+			<h:message for="haslo" errorStyle="color:red; display:block"/>
 			<h:outputText styleClass="error" value=" #{autoryzacjaController.errorMessage}"></h:outputText><br/>
+			<br/>  
+
 		<h:commandButton value="Zaloguj" action="#{autoryzacjaController.zaloguj()}"/>
 		</h:form>
 		</div>

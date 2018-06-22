@@ -3,6 +3,14 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() != 'NIEZALOGOWANY'}">
+		<div align="right">
+	        <h:form>
+				<h:commandButton style="width:150px; height:50px" id="wyloguj" action="#{autoryzacjaController.getWyloguj()}" value="Wyloguj"></h:commandButton>
+	  		</h:form>
+	    </div>
+	</ui:fragment>
+  
 	<div id="gornemenu"> 
 		<a href="strona_glowna.xhtml" id="przycisk"> Strona główna </a>
 		<a href="o_nas.xhtml" id="przycisk"> O Nas </a>
