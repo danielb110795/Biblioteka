@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<h:body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+			<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+			<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
+	
+	<div id="srodek">
+
+	<div id="tekst2">
+		<h2>Edycja pracownika:</h2>
+		<hr class='a'/>
+		<br/>
+		Wypełnij tylko te dane które chcesz edytować!
+		<br/>
+		<br/>
+		<h:form>
+				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.login}"/>
+				<br /> 	
+					
+				Haslo: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.haslo}"/>
+				<br /> 	
+				 	
+				E-mail: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.email}"/>
+				<br /> 	
+				
+				Imie: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.imie}"/>
+				<br /> 	
+					
+				Nazwisko: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.nazwisko}"/>
+				<br /> 	
+				
+				Pesel: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.pesel}"/>
+				<br /> 	
+					
+				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.adres}"/>
+				<br /> 	
+					
+			<h:commandButton value="Edytuj" action="#{pracownikController.edytujPracownika()}"/>
+		</h:form>
+		
+	</div>
+	</div>
+</h:body>
+</html>

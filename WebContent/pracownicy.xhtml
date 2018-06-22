@@ -37,9 +37,11 @@
 		</td>
 		<td>
 		<br/><br/><br/><br/>
-		<a href="#" id="przycisk3"> Czas pracy </a><br/>
-		<a href="#" id="przycisk3"> Edytuj </a><br/>
-		<a href="#" id="przycisk3"> Usuń </a><br/>
+		<h:form>  
+        	<h:commandButton action="#" value="Czas pracy"></h:commandButton>
+        	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Edytuj"></h:commandButton>
+        	<h:commandButton action="#{pracownikController.usunPracownika(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
+        </h:form>
 		</td></tr></table>
 		</ui:repeat>
 		</div>
