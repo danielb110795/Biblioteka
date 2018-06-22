@@ -9,11 +9,13 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import dao.AutorDAO;
+import dao.EgzemplarzDAO;
 import dao.KategoriaDAO;
 import dao.KsiazkaDAO;
 import dao.WydanieDAO;
 import dao.WydawnictwoDAO;
 import entity.Autor;
+import entity.Egzemplarz;
 import entity.Kategoria;
 import entity.Ksiazka;
 import entity.Wydanie;
@@ -40,6 +42,11 @@ public class KsiazkaController {
 	@EJB
 	private WydawnictwoDAO wydawnictwoDAO;
 	
+	@EJB
+	private EgzemplarzDAO egzemplarzDAO;
+	
+	
+	
 	//kategoria
 	private String nazwa;
 	
@@ -59,8 +66,15 @@ public class KsiazkaController {
 	private String opis;
 	private String stan;
 	private String zdjecie;
-	private List <Autor> autors; 
-	private List <Kategoria> kategorias;
+	private int idAutora;
+	private int idKategoria;
+	//private List <Autor> autors; 
+	//private List <Kategoria> kategorias;
+	
+	//egzemplarz
+	private String ISBN;
+	private int idKsiazki;
+	private int idWydania;
 	
 	
 	public String saveKategoria() {
@@ -69,6 +83,19 @@ public class KsiazkaController {
 		kategoriaDAO.save(kategoria);
 		
 		return "ksiazki";
+	}
+	
+	public List<Kategoria> pokazKategorie()
+	{
+		List<Kategoria> kategorie = new LinkedList<>();
+		kategorie = kategoriaDAO.findAll();	
+		return kategorie;
+	}
+	
+	public Kategoria getKategoria(int idKategoria)
+	{
+		Kategoria kategoria = kategoriaDAO.findOne((long)idKategoria);	
+		return kategoria;                
 	}
 	
 	public String saveAutor() {
@@ -80,6 +107,19 @@ public class KsiazkaController {
 		return "ksiazki";
 	}
 	
+	public List<Autor> pokazAutorow()
+	{
+		List<Autor> autors = new LinkedList<>();
+		autors = autorDAO.findAll();	
+		return autors;
+	}
+	
+	public Autor getAutor(int idAutora)
+	{
+		Autor autor = autorDAO.findOne((long)idAutora);	
+		return autor;                
+	}
+	
 	public String saveWydawnictwo() {
 		Wydawnictwo wydawnictwo = new Wydawnictwo();
 		wydawnictwo.setNazwa(nazwaWydawnictwa);
@@ -88,14 +128,6 @@ public class KsiazkaController {
 		return "ksiazki";
 	}
 	
-	public String saveWydanie() {
-		Wydanie wydanie = new Wydanie();
-		wydanie.setRokWydania(rokWydania);
-		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
-		wydanieDAO.save(wydanie);
-
-		return "ksiazki";
-	}
 	
 	public Wydawnictwo getWydanictwo(int idWydawnictwa)
 	{
@@ -110,18 +142,73 @@ public class KsiazkaController {
 		return wydawnictwa;
 	}
 	
+	public String saveWydanie() {
+		Wydanie wydanie = new Wydanie();
+		wydanie.setRokWydania(rokWydania);
+		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
+		wydanieDAO.save(wydanie);
+
+		return "ksiazki";
+	}
+	
+	public Wydanie getWydanie(int idWydania)
+	{
+		Wydanie wydanie = wydanieDAO.findOne((long)idWydania);	
+		return wydanie;                
+	}
+	
+	public List<Wydanie> pokazWydania()
+	{
+		List<Wydanie> wydania = new LinkedList<>();
+		wydania = wydanieDAO.findAll();	
+		return wydania;
+	}
+	
 	public String saveKsiazka() {
 		Ksiazka ksiazka = new Ksiazka();
 		ksiazka.setTytul(tytul);
 		ksiazka.setOpis(opis);
 		ksiazka.setStan("Niezniszczona");
 		ksiazka.setZdjecie(zdjecie);
-		ksiazka.setAutor(autors);
-		ksiazka.setKategoria(kategorias);
+		
+		//zapis autorow
+		List<Autor> autorzy = new LinkedList<>();
+		autorzy.add(getAutor(idAutora));
+		ksiazka.setAutor(autorzy);
+		
+		//zapis kategorii
+		List<Kategoria> kategorie = new LinkedList<>();
+		kategorie.add(getKategoria(idKategoria));
+		ksiazka.setKategoria(kategorie);
 		
 		ksiazkaDAO.save(ksiazka);
 
 		return "ksiazki";
 	}
 	
+	public Ksiazka getKsiazka(int idKsiazki)
+	{
+		Ksiazka ksiazka = ksiazkaDAO.findOne((long)idKsiazki);	
+		return ksiazka;                
+	}
+	
+	public List<Ksiazka> pokazKsiazki()
+	{
+		List<Ksiazka> ksiazki = new LinkedList<>();
+		ksiazki = ksiazkaDAO.findAll();	
+		return ksiazki;
+	}
+	
+	public String saveEgzemplarz() {
+		Egzemplarz egzemplarz = new Egzemplarz();
+		egzemplarz.setStatus("Dostêpna");
+		egzemplarz.setISBN(ISBN);
+		egzemplarz.setKsiazka(getKsiazka(idKsiazki));
+		egzemplarz.setWydanie(getWydanie(idWydania));
+
+
+		egzemplarzDAO.save(egzemplarz);
+
+		return "ksiazki";
+	}
 }

@@ -89,6 +89,7 @@
 					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
        			<br/> 
+       			<br/>
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
 		</h:form>		
 	</div>
@@ -122,14 +123,56 @@
                 <br/>
                 
                 Autor: 
-				<br/> 
-			    <h:inputText id="autors" styleClass="input-text" name="autors" 
-			    value="#{ksiazkaController.autors}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
-                <h:message for="autors" errorStyle="color:red; display:block"/>
                 <br/>
-                        
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.imie}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+				<br/>
+				
+				Kategoria: 
+                <br/>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+				<br/>
+
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKsiazka()}"/>
+		</h:form>		
+	</div>
+	
+	
+	
+	<br/>
+	<div id="tekst2">
+		<h3>Dodawanie egzemplarza:</h3>
+		<h:form>
+				ISBN: 
+				<br/> 
+			    <h:inputText id="ISBN" styleClass="input-text" name="ISBN" 
+			    value="#{ksiazkaController.ISBN}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="ISBN" errorStyle="color:red; display:block"/>
+                <br/>      
+                
+                Ksiazka: 
+                <br/>
+                <h:selectOneMenu id="idKsiazki" value="#{ksiazkaController.idKsiazki}"> 
+					<f:selectItems name="idKsiazki" value="#{ksiazkaController.pokazKsiazki()}" var="tmp" itemLabel="#{tmp.tytul}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+				<br/>
+				
+				Wydanie: 
+                <br/>
+                <h:selectOneMenu id="idWydania" value="#{ksiazkaController.idWydania}"> 
+					<f:selectItems name="idWydania" value="#{ksiazkaController.pokazWydania()}" var="tmp" itemLabel="#{tmp.rokWydania}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+				<br/>
+
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveEgzemplarz()}"/>
 		</h:form>		
 	</div>
 	
