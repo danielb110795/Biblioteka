@@ -292,3 +292,19 @@ hr.c
     color: grey;
     background: grey;
 }
+
+
+.aTable{
+	border: 1px solid black;
+
+}
+
+.aTable th{
+	border: 1px solid black;
+}
+
+.aTable td{
+	border: 1px solid black;
+	text-align: center;
+	padding: 5px;
+}

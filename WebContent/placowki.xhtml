@@ -19,30 +19,37 @@
 		<div>
 		<br/>
 		<a href="dodaj_placowke.xhtml" id="przycisk2"> Dodaj placówkę </a><br/><br/><br/>
+		</div>
+		<br/>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Nazwa</th>
+   			<th>Adres</th> 
+  			<th>Pracownicy</th>
+  			<th>Godziny otwarcia</th>
+  			<th>Operacje</th>
+  		</tr>
+  		
 		<ui:repeat var="placowka" value="#{bibliotekaController.pokazPlacowki()}">
-		<table><tr><td>
-		<h2>#{placowka.nazwa}:</h2>
-		<hr color='grey' size='3' width='100%' align='left' />
-		<p>Nazwa: #{placowka.nazwa}</p>
-		<p>Adres: #{placowka.adres}</p>
-		<p>Przypisanych pracowników: 2</p>
-		<p>Godziny otwarcia: 9:00 - 18:00</p>
-		</td>
+		<tr>
+			<td>#{placowka.nazwa}</td>
+			<td>#{placowka.adres}</td>
+			<td>2</td>
+			<td>9:00 - 18:00</td>
 		<td>
-		<br/><br/><br/><br/>
 		<h:form>
 			<h:commandButton action="#{bibliotekaController.przypiszPracownika(placowka.id)}" value="Przypisz pracownika"></h:commandButton>
 			<h:commandButton action="#{bibliotekaController.pokazSzczegoly(placowka.id)}" value="Szczegóły"></h:commandButton>
 			<h:commandButton action="#{bibliotekaController.pokazEdycje(placowka.id)}" value="Edytuj"></h:commandButton>
        		<h:commandButton action="#{bibliotekaController.usunPlacowke(placowka.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
-       		<h:outputText styleClass="error" value=" #{bibliotekaController.errorMessage}"></h:outputText><br/>
        	</h:form>
-		
-		</td></tr></table>
+       	</td>
+       	</tr>
 		</ui:repeat>
-		</div>
-	</div>
-		
+			
+		</table>	
+	</div>		
 	</div>		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	
