@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+	<div id="bocznemenu"> 
+		<center><h2>Placówki</h2></center>
+		<ul id="tekstplacowek">
+		<li><a href="spis_ksiazek.html">Placówka 1</a></li>
+		<li><a href="spis_ksiazek.html">Placówka 2</a></li>
+		<li><a href="spis_ksiazek.html">Placówka 3</a></li>
+		</ul>
+	</div>
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Placówki</h2>
+		<hr color='#FF9966' size='5'/>
+		<div>
+		
+		<form method="post" enctype="text/plain">
+		<div id="formularz">
+			Szukaj książki: <input name="login" /> 
+			<input type="submit" value="Szukaj" />
+		</div>
+		</form>	
+		<table class ="aTable" style="width:100%">
+  		<tr>
+  			<th>Zdjęcie</th>
+   			<th>Tytuł</th>
+   			<th>Autorzy</th> 
+   			<th>Kategorie</th>
+  			<th>Placówka</th>
+   			<th>Dostępna ilość</th> 
+  			<th>Operacje</th>
+  		</tr>
+  		
+		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki()}">
+
+		<tr>
+		<td>#{ksiazka.zdjecie} </td>
+		<td>#{ksiazka.tytul} </td>
+		<td><ui:repeat var="autor" value="#{ksiazka.autor}"><p>#{autor.imie} #{autor.nazwisko}</p></ui:repeat> </td>
+		<td><ui:repeat var="kategoria" value="#{ksiazka.kategoria}"><p>#{kategoria.nazwa}</p></ui:repeat></td>
+		<td>Placówka1 </td>
+		<td>
+			<h:outputText rendered="2 == 3" value="Brak"></h:outputText>
+       		<h:outputText rendered="#{2 == 2}" value="3"></h:outputText>
+		</td>
+		<td>
+		<h:form>  
+        	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Wypożycz"></h:commandButton>
+        	<h:commandButton action="#{pracownikController.usunPracownika(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Zarezerwuj"></h:commandButton>
+        </h:form>
+		</td>
+		</tr>
+		</ui:repeat>
+		</table>
+		</div>
+		
+	</div>
+	</div>		
+	<a href="javascript:scroll(0,0);">W górę</a> 
+</body> 
+</html> 
