@@ -50,15 +50,14 @@
 		<td>#{ksiazka.tytul} </td>
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"><p>#{autor.imie} #{autor.nazwisko}</p></ui:repeat> </td>
 		<td><ui:repeat var="kategoria" value="#{ksiazka.kategoria}"><p>#{kategoria.nazwa}</p></ui:repeat></td>
-		<td>Placówka1 </td>
+		<td>#{ksiazka.biblioteka.nazwa}</td>
 		<td>
 			<h:outputText rendered="2 == 3" value="Brak"></h:outputText>
-       		<h:outputText rendered="#{2 == 2}" value="3"></h:outputText>
+       		<h:outputText rendered="#{ksiazka.egzemplarz.size() > 0}" value="#{ksiazka.egzemplarz.size()}"></h:outputText>
 		</td>
 		<td>
 		<h:form>  
-        	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Wypożycz"></h:commandButton>
-        	<h:commandButton action="#{pracownikController.usunPracownika(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Zarezerwuj"></h:commandButton>
+        	<h:commandButton action="#" value="Pokaż"></h:commandButton>
         </h:form>
 		</td>
 		</tr>

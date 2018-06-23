@@ -94,6 +94,13 @@
                 <h:message for="opis" errorStyle="color:red; display:block"/>
                 <br/>
                 
+                Placówka:
+                <br/>
+                <h:selectOneMenu id="idPlacowki" value="#{ksiazkaController.idPlacowki}"> 
+					<f:selectItems name="idPlacowki" value="#{bibliotekaController.pokazPlacowki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+				<br/>
                 Tu będzie wstawienie zdjęcia z dysku
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.dodawanieKsiazki()}"/> 

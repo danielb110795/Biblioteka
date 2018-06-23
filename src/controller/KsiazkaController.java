@@ -12,12 +12,14 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import dao.AutorDAO;
+import dao.BibliotekaDAO;
 import dao.EgzemplarzDAO;
 import dao.KategoriaDAO;
 import dao.KsiazkaDAO;
 import dao.WydanieDAO;
 import dao.WydawnictwoDAO;
 import entity.Autor;
+import entity.Biblioteka;
 import entity.Egzemplarz;
 import entity.Kategoria;
 import entity.Ksiazka;
@@ -49,6 +51,9 @@ public class KsiazkaController {
 	
 	@EJB
 	private EgzemplarzDAO egzemplarzDAO;
+	
+	@EJB
+	private BibliotekaDAO bibliotekaDAO;
 	
 	@Getter
 	@Setter
@@ -93,7 +98,7 @@ public class KsiazkaController {
 	private int idKsiazki;
 	private int idWydania;
 	//private int liczbaEgzemplarzy;
-	
+	private int idPlacowki;
 	
 	public String saveKategoria(int skad) {
 		errorMessageKategoria = "";
@@ -243,11 +248,9 @@ public class KsiazkaController {
 		ksiazka.setOpis(opis);
 		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
 		ksiazka.setZdjecie("zdjecie.jpg");
+		Biblioteka biblioteka = bibliotekaDAO.findOne((long)idPlacowki);
+		ksiazka.setBiblioteka(biblioteka);
 		
-		//zapis autorow
-		//List<Autor> autorzy = new LinkedList<>();
-		//autorzy.add(getAutor(idAutora));
-		//ksiazka.setAutor(autorzy);
 		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
