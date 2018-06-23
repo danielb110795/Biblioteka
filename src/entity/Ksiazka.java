@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import dao.Domain;
 import lombok.Data;
@@ -36,5 +37,8 @@ public class Ksiazka implements Domain {
 	@ManyToMany
 	@JoinColumn(name = "egzemplarz_id")
 	private List <Egzemplarz> egzemplarz; 
+	
+	@ManyToOne 
+	private Biblioteka biblioteka;
 	
 }
