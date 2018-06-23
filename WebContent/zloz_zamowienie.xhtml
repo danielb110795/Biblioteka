@@ -10,22 +10,29 @@
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
+	
+	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Składanie nowego zamówienia:</h3>
+		<h2>Składanie nowego zamówienia:</h2>
+		<hr class='a'/>
+		<br/>
+		
 		<h:form>
 				Tytuł: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.tytul}"/>
 				<br /> 	
-				<br /> 	
 				Wydanie: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.wydanie}"/>
-				<br /> 	
 				<br /> 	
 				Ilość: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.ilosc}"/>
 				<br /> 	
-				<br /> 
 				Opis: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.opis}"/>
-				<br /> 	
 				<br /> 		
 			<h:commandButton value="Dodaj" action="#{zamowienieController.zlozZamowienie()}"/>
 		</h:form>

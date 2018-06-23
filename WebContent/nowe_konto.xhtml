@@ -66,8 +66,8 @@
 				<br/>
 					<h:inputText id="imie" name="imie" styleClass="input-text" 
 					value="#{rejestracjaController.imie}" required="true" requiredMessage="To pole jest wymagane"
-					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
-					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{1,30}" />
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
 					</h:inputText>
 					<h:message for="imie" errorStyle="color:red; display:block"/>		
 				<br/>
@@ -76,8 +76,8 @@
 				<br/>
 					<h:inputText id="nazwisko" name="nazwisko" styleClass="input-text" 
 					value="#{rejestracjaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
-					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
-					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{1,30}" />
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-40 znaków">
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż-]{2,40}" />
 					</h:inputText>
 					<h:message for="nazwisko" errorStyle="color:red; display:block"/>	
 				<br/>
