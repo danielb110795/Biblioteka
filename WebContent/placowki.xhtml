@@ -26,7 +26,6 @@
   		<tr>
    			<th>Nazwa</th>
    			<th>Adres</th> 
-  			<th>Pracownicy</th>
   			<th>Godziny otwarcia</th>
   			<th>Operacje</th>
   		</tr>
@@ -35,12 +34,15 @@
 		<tr>
 			<td>#{placowka.nazwa}</td>
 			<td>#{placowka.adres}</td>
-			<td>2</td>
-			<td>9:00 - 18:00</td>
+			<td>
+			<ui:repeat var="dzien" value="#{placowka.dzien}">
+				#{dzien.nazwa}: #{dzien.czasOtwarcia} - #{dzien.czasZamkniecia} <br/>
+			</ui:repeat>
+			</td>
 		<td>
 		<h:form>
 			<h:commandButton action="#{bibliotekaController.przypiszPracownika(placowka.id)}" value="Przypisz pracownika"></h:commandButton>
-			<h:commandButton action="#{bibliotekaController.pokazSzczegoly(placowka.id)}" value="Szczegóły"></h:commandButton>
+			<h:commandButton action="#{bibliotekaController.pokazSzczegoly(placowka.id)}" value="Pracownicy"></h:commandButton>
 			<h:commandButton action="#{bibliotekaController.pokazEdycje(placowka.id)}" value="Edytuj"></h:commandButton>
        		<h:commandButton action="#{bibliotekaController.usunPlacowke(placowka.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
        	</h:form>

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import dao.Domain;
 import lombok.Data;
@@ -20,8 +21,10 @@ public class Biblioteka implements Domain {
 	private Long id;	
 	 
 	private String nazwa;
-	private String adres;
+	private String adres; 
 	private String numerTel;
+	
+	@OneToMany
 	private List<Dzien> dzien;
 	
 	@Column(length = 1337)

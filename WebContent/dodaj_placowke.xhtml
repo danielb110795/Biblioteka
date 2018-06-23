@@ -18,13 +18,15 @@
 		<a href="pracownicy.xhtml" id="przyciskBoczny">Pracownicy</a>
 		<a href="uzytkownicy.xhtml" id="przyciskBoczny">Użytkownicy</a>
 		<a href="zamowienia.xhtml" id="przyciskBoczny">Zamówienia</a>
-		<a href="ksiazki.xhtml" id="przyciskBoczny">Ksiazki</a>
+		<a href="ksiazki.xhtml" id="przyciskBoczny">Książki</a>
 	</div>
 	
 	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Dodawanie nowej placówki:</h3>
+		<h2>Dodawanie nowej placówki:</h2>
+		<hr class='a' />
+		<br/>
 		<h:form>
 				Nazwa: 
 				<br/> 
@@ -32,7 +34,6 @@
 			    value="#{bibliotekaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
-                <br/>
                 <br/>
                 
 				Adres: 
@@ -42,7 +43,6 @@
                 </h:inputText>
                 <h:message for="adres" errorStyle="color:red; display:block"/>
                 <br/>
-				<br/>
 				
 				Numer telefonu: 
 				<br/> 	
@@ -53,24 +53,88 @@
                 </h:inputText>
                 <h:message for="numerTel" errorStyle="color:red; display:block"/>
 				<br/>
-				<br/>
 				
 				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
 				<br/> 	
 				<h:inputText id="url" styleClass="input-text" name="url" 
-			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane">
+			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Podaj odpowiedni url.">
+			    <f:validateRegex pattern="^(https://www.google.com/maps/)" />
                 </h:inputText>
+                
                 <h:message for="url" errorStyle="color:red; display:block"/>
-				<br/> 		
-				<br/> 	
-				
-				Czas otwarcia:
+
 				<br/>
-				Poniedziałek: <h:inputText name="pnOtwarcie" 
-			    value="#{bibliotekaController.pnOtwarcie}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText><h:inputText name="pnZamkniecie" 
-			    value="#{bibliotekaController.pnOtwarcie}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
+				<h3>Godziny otwarcia:</h3>
+			
+				<table>
+					<tr>
+			   			<th>Dzień</th>
+			   			<th>Godz. otwarcia</th> 
+			  			<th>Godz. zamknięcia</th>
+  					</tr>
+				
+				<tr>
+				<td>Poniedziałek: </td>
+				<td><h:inputText name="pnOtwarcie" value="#{bibliotekaController.pnOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText> 
+				<h:message for="url" errorStyle="color:red; display:block"/> </td>
+                <td><h:inputText name="pnZamkniecie" value="#{bibliotekaController.pnZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText> 
+                <h:message for="url" errorStyle="color:red; display:block"/> </td>
+                </tr>
+                
+                <tr>
+                <td>Wtorek: </td>
+				<td><h:inputText name="wtOtwarcie" value="#{bibliotekaController.wtOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText> 
+				<h:message for="url" errorStyle="color:red; display:block"/></td>
+                <td><h:inputText name="wtZamkniecie" value="#{bibliotekaController.wtZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText> 
+                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                </tr>
+                
+                <tr>
+                <td>Środa: </td>
+				<td><h:inputText name="srOtwarcie" value="#{bibliotekaController.srOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<h:message for="url" errorStyle="color:red; display:block"/></td>
+                <td><h:inputText name="srZamkniecie" value="#{bibliotekaController.srZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                </tr>
+                
+                <tr>
+                <td>Czwartek: </td>
+				<td><h:inputText name="czOtwarcie" value="#{bibliotekaController.czOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<h:message for="url" errorStyle="color:red; display:block"/></td>
+                <td><h:inputText name="czZamkniecie" value="#{bibliotekaController.czZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                </tr>
+                
+                <tr>
+                <td>Piątek: </td>
+				<td><h:inputText name="ptOtwarcie" value="#{bibliotekaController.ptOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<h:message for="url" errorStyle="color:red; display:block"/></td>
+                <td><h:inputText name="ptZamkniecie" value="#{bibliotekaController.ptZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                </tr>
+                
+                <tr>
+                <td>Sobota: </td>
+				<td><h:inputText name="sobOtwarcie" value="#{bibliotekaController.sobOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<h:message for="url" errorStyle="color:red; display:block"/></td>
+                <td><h:inputText name="sobZamkniecie" value="#{bibliotekaController.sobZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                </tr>
+                
+                </table>
 			<h:commandButton value="Dodaj" action="#{bibliotekaController.saveBiblioteka()}"/>
 		</h:form>
 		

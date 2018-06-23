@@ -23,5 +23,5 @@ public class Dzien implements Domain{
 	
 	private String nazwa;
 	private String czasOtwarcia;
-	private String czasZamkniêcia;
-}
+	private String czasZamkniecia;
+}  

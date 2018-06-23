@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,10 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import dao.PracownikDAO;
 import dao.UzytkownikDAO;
-import entity.Czytelnik;
 import entity.Pracownik;
 import entity.Uzytkownik;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Stateless
 @Named
@@ -36,6 +38,13 @@ public class PracownikController {
 	private String login;
 	private String haslo;
 	
+	@Getter
+	@Setter
+	private String errorMessageLogin = "";
+	
+	@Getter
+	@Setter
+	private String errorMessageEmail = "";
 	
 	public String dodajPracownika()
 	{
@@ -54,6 +63,25 @@ public class PracownikController {
 		pracownik.setPesel(pesel);
 		pracownik.setEmail(email);
 		pracownik.setUzytkownik(uzytkownik);
+		
+		Collection<Pracownik> pracownicy = pracownikDAO.findAll();
+		for(Pracownik element : pracownicy)
+		{
+			if(element.getUzytkownik().getLogin().equals(login))
+			{
+				errorMessageEmail = "";
+				errorMessageLogin = "Pracownik o podanym loginie ju¿ istnieje";
+				return "dodaj_pracownika";
+			}
+			if(element.getEmail().equals(email))
+			{
+				errorMessageLogin = "";
+				errorMessageEmail = "Pracownik o podanym adresie e-mail ju¿ istnieje";
+				return "dodaj_pracownika";
+			}
+		}
+		
+		
 		
 		uzytkownikDAO.save(uzytkownik);
 		pracownikDAO.save(pracownik);

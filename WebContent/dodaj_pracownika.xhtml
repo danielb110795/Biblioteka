@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -14,34 +15,87 @@
 	
 	<div id="srodek">
 
+
 	<div id="tekst2">
-		<h3>Dodawanie pracownika:</h3>
-		<h:form>
-				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.login}"/>
-				<br /> 	
-				<br /> 	
-				Haslo: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.haslo}"/>
-				<br /> 	
-				<br /> 	
-				E-mail: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.email}"/>
-				<br /> 	
-				<br /> 
-				Imie: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.imie}"/>
-				<br /> 	
-				<br /> 		
-				Nazwisko: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.nazwisko}"/>
-				<br /> 	
-				<br /> 	
-				Pesel: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.pesel}"/>
-				<br /> 	
-				<br /> 		
-				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{pracownikController.adres}"/>
-				<br /> 	
-				<br /> 	
-			<h:commandButton value="Dodaj" action="#{pracownikController.dodajPracownika()}"/>
-		</h:form>
+		<h2>Dodawanie pracownika:</h2>
+		<hr class='a' />
+		<br/>
 		
+		<h:form> 
+				Login: 
+				<br/>
+					<h:inputText id="login" name="login" styleClass="input-text" 
+					value="#{pracownikController.login}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Login musi zawierać tylko litery i liczby i mieć od 4 do 10 znaków">
+					<f:validateRegex pattern="[0-9A-Za-z]{4,10}" />
+					</h:inputText>	
+					<h:message for="login" errorStyle="color:red; display:block"/>
+					<h:outputText styleClass="error" value=" #{pracownikController.errorMessageLogin}"></h:outputText>
+				<br/>
+				
+				Hasło: 
+				<br/>
+					<h:inputText id="haslo" name="haslo" styleClass="input-text" 
+					value="#{pracownikController.haslo}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę i mieć od 4 do 10 znaków">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})" />
+					</h:inputText>
+					<h:message for="haslo" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				E-mail: 
+				<br/>
+					<h:inputText id="email" name="email" styleClass="input-text" 
+					value="#{pracownikController.email}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj odpowiedni email np. daniel@gmail.com">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</h:inputText>
+					<h:message for="email" errorStyle="color:red; display:block"/>	
+					<h:outputText styleClass="error" value=" #{pracownikController.errorMessageEmail}"></h:outputText>	
+				<br/>
+				
+				Imie: 
+				<br/>
+					<h:inputText id="imie" name="imie" styleClass="input-text" 
+					value="#{pracownikController.imie}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
+					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					</h:inputText>
+					<h:message for="imie" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Nazwisko: 
+				<br/>
+					<h:inputText id="nazwisko" name="nazwisko" styleClass="input-text" 
+					value="#{pracownikController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
+					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					</h:inputText>
+					<h:message for="nazwisko" errorStyle="color:red; display:block"/>	
+				<br/>
+				
+				Pesel: 
+				<br/>
+					<h:inputText id="pesel" name="pesel" styleClass="input-text" 
+					value="#{pracownikController.pesel}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj 9 cyfr">
+					<f:validateRegex pattern="[0-9]{9,9}" />
+					</h:inputText>
+					<h:message for="pesel" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Adres: 
+				<br/>
+					<h:inputText id="adres" name="adres" styleClass="input-text" 
+					value="#{pracownikController.adres}" required="true" requiredMessage="To pole jest wymagane"/>
+					<h:message for="adres" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				<h:commandButton value="Dodaj" action="#{pracownikController.dodajPracownika()}"/>
+			</h:form>
+					
 	</div>
+
 	</div>
 </h:body>
 </html>

@@ -68,21 +68,21 @@ public class BibliotekaController {
 		
 		biblioteka.setNazwa(nazwa);
 		biblioteka.setAdres(adres);
-		biblioteka.setNumerTel(numerTel);
+		biblioteka.setNumerTel(numerTel); 
 		biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
 		List<Dzien> dni = new LinkedList<>();
-		Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzialek").czasOtwarcia(pnOtwarcie).czasZamkniêcia(pnZamkniecie).build());
-		Dzien wtorek = dzienDAO.save(Dzien.builder().nazwa("Wtorek").czasOtwarcia(wtOtwarcie).czasZamkniêcia(wtZamkniecie).build());
-		Dzien sroda = dzienDAO.save(Dzien.builder().nazwa("Œroda").czasOtwarcia(srOtwarcie).czasZamkniêcia(srZamkniecie).build());
-		Dzien czwartek = dzienDAO.save(Dzien.builder().nazwa("Czwartek").czasOtwarcia(czOtwarcie).czasZamkniêcia(czZamkniecie).build());
-		Dzien piatek = dzienDAO.save(Dzien.builder().nazwa("Pi¹tek").czasOtwarcia(ptOtwarcie).czasZamkniêcia(ptZamkniecie).build());
-		Dzien sobota = dzienDAO.save(Dzien.builder().nazwa("Sobota").czasOtwarcia(sobOtwarcie).czasZamkniêcia(sobZamkniecie).build());
-		dni.add(poniedzialek);
-		dni.add(wtorek);
-		dni.add(sroda);
-		dni.add(czwartek);
-		dni.add(piatek);
-		dni.add(sobota);
+		Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzia³ek").czasOtwarcia(pnOtwarcie).czasZamkniecia(pnZamkniecie).build());
+		Dzien wtorek = dzienDAO.save(Dzien.builder().nazwa("Wtorek").czasOtwarcia(wtOtwarcie).czasZamkniecia(wtZamkniecie).build());
+		Dzien sroda = dzienDAO.save(Dzien.builder().nazwa("Œroda").czasOtwarcia(srOtwarcie).czasZamkniecia(srZamkniecie).build());
+		Dzien czwartek = dzienDAO.save(Dzien.builder().nazwa("Czwartek").czasOtwarcia(czOtwarcie).czasZamkniecia(czZamkniecie).build());
+		Dzien piatek = dzienDAO.save(Dzien.builder().nazwa("Pi¹tek").czasOtwarcia(ptOtwarcie).czasZamkniecia(ptZamkniecie).build());
+		Dzien sobota = dzienDAO.save(Dzien.builder().nazwa("Sobota").czasOtwarcia(sobOtwarcie).czasZamkniecia(sobZamkniecie).build());
+		dni.add(0, poniedzialek);
+		dni.add(1, wtorek);
+		dni.add(2, sroda);
+		dni.add(3, czwartek);
+		dni.add(4, piatek);
+		dni.add(5, sobota);
 		
 		biblioteka.setDzien(dni);
 		
