@@ -24,6 +24,7 @@
 			    value="#{ksiazkaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria()}"/>
 		</h:form>		
@@ -48,6 +49,7 @@
 			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwisko" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
                 <br/>
                         
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor()}"/>
@@ -125,7 +127,7 @@
                 Autor: 
                 <br/>
                 <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.imie}" itemValue="#{tmp.id}"/>
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
 				<br/> 
 				<br/>

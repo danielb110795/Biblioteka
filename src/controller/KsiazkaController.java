@@ -2,6 +2,7 @@ package controller;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -21,6 +22,8 @@ import entity.Ksiazka;
 import entity.Wydanie;
 import entity.Wydawnictwo;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Stateless
 @Named
@@ -45,7 +48,17 @@ public class KsiazkaController {
 	@EJB
 	private EgzemplarzDAO egzemplarzDAO;
 	
+	@Getter
+	@Setter
+	private String errorMessageKategoria = "";
 	
+	@Getter
+	@Setter
+	private String errorMessageAutor = "";
+	
+	//@Getter
+	//@Setter
+	//private String errorMessageKategoria = "";
 	
 	//kategoria
 	private String nazwa;
@@ -78,8 +91,21 @@ public class KsiazkaController {
 	
 	
 	public String saveKategoria() {
+		
+		List<Kategoria> kategorie = kategoriaDAO.findAll();
+		for(Kategoria element : kategorie)
+		{
+			if(element.getNazwa().equals(nazwa))
+			{
+				errorMessageKategoria = "Ju¿ istnieje!!!";
+				errorMessageAutor = "";
+				return "ksiazki";
+			}
+		}
+		
 		Kategoria kategoria = new Kategoria();
 		kategoria.setNazwa(nazwa);
+		errorMessageKategoria = "";
 		kategoriaDAO.save(kategoria);
 		
 		return "ksiazki";
@@ -88,7 +114,11 @@ public class KsiazkaController {
 	public List<Kategoria> pokazKategorie()
 	{
 		List<Kategoria> kategorie = new LinkedList<>();
-		kategorie = kategoriaDAO.findAll();	
+		//kategorie = kategoriaDAO.findAll();//.stream().sorted().map(Kategoria::getNazwa).collect(Collectors.toList());
+		kategorie = kategoriaDAO.findAll().stream().sorted((k1, k2)->{
+			  return k1.getNazwa().toLowerCase().compareTo(k2.getNazwa().toLowerCase());
+			}).collect(Collectors.toList());
+		
 		return kategorie;
 	}
 	
@@ -99,7 +129,18 @@ public class KsiazkaController {
 	}
 	
 	public String saveAutor() {
+		List<Autor> autorzy = autorDAO.findAll();
+		for(Autor element : autorzy)
+		{
+			if(element.getImie().equals(imie) && element.getNazwisko().equals(nazwisko))
+			{
+				errorMessageAutor = "Ju¿ istnieje";
+				errorMessageKategoria = "";
+				return "ksiazki";
+			}
+		}
 		Autor autor = new Autor();
+		errorMessageAutor = "";
 		autor.setImie(imie);
 		autor.setNazwisko(nazwisko);
 		autorDAO.save(autor);
@@ -110,7 +151,9 @@ public class KsiazkaController {
 	public List<Autor> pokazAutorow()
 	{
 		List<Autor> autors = new LinkedList<>();
-		autors = autorDAO.findAll();	
+		autors = autorDAO.findAll().stream().sorted((a1, a2)->{
+			  return a1.getNazwisko().toLowerCase().compareTo(a2.getNazwisko().toLowerCase());
+			}).collect(Collectors.toList());
 		return autors;
 	}
 	
