@@ -18,33 +18,40 @@
 		<hr class='a'/>
 		<br/>
 		<div>
-		
 		<a href="dodaj_uzytkownika.xhtml" id="przycisk2"> Dodaj czytelnika </a><br/><br/><br/>
-		<ui:repeat var="czytelnik" value="#{uzytkownikController.pokazUzytkownikow()}">
-		<table><tr><td>
-		<h2>#{czytelnik.imie} #{czytelnik.nazwisko}:</h2>
-		<hr color='grey' size='3' width='100%' align='left' />
-		<p>Login: #{czytelnik.uzytkownik.login}</p>
-		<p>E-mail: #{czytelnik.email}</p>
-		<p>Pesel: #{czytelnik.pesel}</p>
-		<p>Adres: #{czytelnik.adres}</p>
-		</td>
+		<br/>
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Imie</th>
+   			<th>Nazwisko</th> 
+  			<th>Login</th>
+  			<th>Email</th> 
+  			<th>Pesel</th>
+  			<th>Adres</th>
+  			<th>Operacje</th>
+  		</tr>
+  		
+  		<ui:repeat var="czytelnik" value="#{uzytkownikController.pokazUzytkownikow()}">
+  		
+		<tr>
+		<td>#{czytelnik.imie} </td>
+		<td>#{czytelnik.nazwisko} </td>
+		<td>#{czytelnik.uzytkownik.login} </td>
+		<td>#{czytelnik.email} </td>
+		<td>#{czytelnik.pesel} </td>
+		<td>#{czytelnik.adres} </td>
 		<td>
-		<br/><br/><br/><br/> 
 		<h:form>  
         	<h:commandButton action="#" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Wypożyczenia"></h:commandButton>
         	<h:commandButton action="#{uzytkownikController.deaktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Deaktywuj"></h:commandButton>
-        	<h:commandButton action="#{uzytkownikController.aktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == false}" value="Aktywuj"></h:commandButton>
-        </h:form>
-        
-		<h:form>  
+        	<h:commandButton action="#{uzytkownikController.aktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == false}" value="Aktywuj"></h:commandButton> 
         	<h:commandButton action="#{uzytkownikController.pokazEdycje(czytelnik.id)}" value="Edytuj"></h:commandButton>
-        </h:form>
-		<h:form>  
         	<h:commandButton action="#{uzytkownikController.usunUzytkownika(czytelnik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
         </h:form>
-		</td></tr></table>
+		</td>
+		</tr>
 		</ui:repeat>
+		</table>
 		</div>
 	</div>
 	</div>		

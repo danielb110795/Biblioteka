@@ -19,7 +19,7 @@ public class Zamowienie implements Domain {
 	 
 	private String tytul; 
 	private String wydanie;
-	private Integer ilosc;
+	private String ilosc;
 	private String opis;
 	private String status;
 	 

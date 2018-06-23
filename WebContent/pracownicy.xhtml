@@ -20,29 +20,42 @@
 		<div>
 		<br/>
 		<a href="dodaj_pracownika.xhtml" id="przycisk2"> Dodaj pracownika </a><br/><br/><br/>
+		<br/>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Imie</th>
+   			<th>Nazwisko</th> 
+  			<th>Login</th>
+   			<th>Email</th> 
+  			<th>Pesel</th>
+  			<th>Adres</th>
+  			<th>Biblioteka</th>
+  			<th>Operacje</th>
+  		</tr>
+  		
 		<ui:repeat var="pracownik" value="#{pracownikController.pokazPracownikow()}">
-		<table><tr><td>
-		<h2>#{pracownik.imie} #{pracownik.nazwisko}:</h2>
-		<hr color='grey' size='3' width='100%' align='left' />
-		<p>Login: #{pracownik.uzytkownik.login}</p>
-		<p>E-mail: #{pracownik.email}</p>
-		<p>Pesel: #{pracownik.pesel}</p>
-		<p>Adres: #{pracownik.adres}</p>
-		
-		
-		<h:outputText rendered="#{empty pracownik.biblioteka}" value="Nazwa placówki: Nieprzypisany"></h:outputText><br/>
 
-        <h:outputText rendered="#{not empty pracownik.biblioteka}" value="Nazwa placówki: #{pracownik.biblioteka.nazwa}"></h:outputText><br/>
-     	
+		<tr>
+		<td>#{pracownik.imie} </td>
+		<td>#{pracownik.nazwisko} </td>
+		<td>#{pracownik.uzytkownik.login} </td>
+		<td>#{pracownik.email} </td>
+		<td>#{pracownik.pesel} </td>
+		<td>#{pracownik.adres} </td>	
+		<td>
+			<h:outputText rendered="#{empty pracownik.biblioteka}" value="Nieprzypisany"></h:outputText>
+       		<h:outputText rendered="#{not empty pracownik.biblioteka}" value="#{pracownik.biblioteka.nazwa}"></h:outputText>
 		</td>
 		<td>
-		<br/><br/><br/><br/>
 		<h:form>  
         	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Edytuj"></h:commandButton>
         	<h:commandButton action="#{pracownikController.usunPracownika(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
         </h:form>
-		</td></tr></table>
+		</td>
+		</tr>
 		</ui:repeat>
+		</table>
 		</div>
 	</div>
 	</div>		

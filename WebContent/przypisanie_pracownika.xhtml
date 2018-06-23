@@ -15,21 +15,46 @@
 	
 	<div id="srodek">
 	<div id="tekst2">
-		<h2>Pracownicy</h2>
+		<h2>Nieprzypisani pracownicy</h2>
 		<hr class='a'/>
 		<div>
+		
+
+		<br/><br/>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Imie</th>
+   			<th>Nazwisko</th> 
+   			<th>Email</th> 
+  			<th>Pesel</th>
+  			<th>Adres</th>
+  			<th>Biblioteka</th>
+  			<th>Operacje</th>
+  		</tr>
+		
 		<ui:repeat var="pracownik" value="#{pracownikController.pokazPracownikow()}">
-		<h:form rendered="#{empty pracownik.biblioteka}">
-		<table><tr><td>
 		
-		 <h2>#{pracownik.imie} #{pracownik.nazwisko}</h2>
-		
+		<tr>
+		<td>#{pracownik.imie} </td>
+		<td>#{pracownik.nazwisko} </td>
+		<td>#{pracownik.email} </td>
+		<td>#{pracownik.pesel} </td>
+		<td>#{pracownik.adres} </td>	
+		<td> 
+		<h:outputText rendered="#{empty pracownik.biblioteka}" value="Nieprzypisany"></h:outputText> 
+		<h:outputText rendered="#{!empty pracownik.biblioteka}" value="#{pracownik.biblioteka.nazwa}"></h:outputText> 
+		</td>
+		<td>
+		<h:form>  
 		<h:commandButton action="#{bibliotekaController.przypiszDoBiblioteki(pracownik.id)}" value="Przypisz pracownika"></h:commandButton>
-		
-		</td></tr></table>
-		<br/><br/><br/>
 		</h:form>
+		</td>
+		</tr>
 		</ui:repeat>
+		</table>
+		
+		
 		</div>
 	</div>
 	</div>		

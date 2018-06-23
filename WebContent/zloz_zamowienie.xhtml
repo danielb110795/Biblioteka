@@ -3,31 +3,56 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
 <h:body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<div id="srodekcaly">
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
+	
+	<div id="srodek">
 
 	<div id="tekst2">
-		<h3>Składanie nowego zamówienia:</h3>
+		<h2>Składanie nowego zamówienia:</h2>
+		<hr class='a'/>
+		<br/>
+		
 		<h:form>
-				Tytuł: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.tytul}"/>
-				<br /> 	
-				<br /> 	
-				Wydanie: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.wydanie}"/>
-				<br /> 	
-				<br /> 	
-				Ilość: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.ilosc}"/>
-				<br /> 	
-				<br /> 
-				Opis: <h:inputText styleClass="input-text" name="nazwa" value="#{zamowienieController.opis}"/>
-				<br /> 	
-				<br /> 		
-			<h:commandButton value="Dodaj" action="#{zamowienieController.zlozZamowienie()}"/>
+				Tytuł: <h:inputText  id="tytul" name="tytul" styleClass="input-text" value="#{zamowienieController.tytul}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="tytul" errorStyle="color:red; display:block"/>
+                <br/>
+                
+				Wydanie: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <br/>
+				
+				Ilość: <h:inputText  id="ilosc" name="ilosc" styleClass="input-text" value="#{zamowienieController.ilosc}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, max liczba 99">
+			    <f:validateRegex pattern="[0-9]{1,2}" />
+                </h:inputText>
+                <h:message for="ilosc" errorStyle="color:red; display:block"/>
+                <br/>
+                
+				Opis: <h:inputText  id="opis" name="opis" styleClass="input-text" value="#{zamowienieController.opis}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="opis" errorStyle="color:red; display:block"/>
+                <br/>
+                
+			<h:commandButton value="Złóż zamówienie" action="#{zamowienieController.zlozZamowienie()}"/>
 		</h:form>
 		
 	</div>

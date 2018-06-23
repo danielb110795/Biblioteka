@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -17,7 +17,7 @@ import entity.Uzytkownik;
 import entity.Zamowienie;
 import lombok.Data;
 
-@Stateless
+@RequestScoped
 @Named
 @Data
 @LocalBean
@@ -31,7 +31,7 @@ public class ZamowienieController {
 	private String tytul;
 	private String wydanie;
 	private String opis;
-	private Integer ilosc;
+	private String ilosc;
 	
 	
 	public String zlozZamowienie()
