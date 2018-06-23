@@ -19,31 +19,37 @@
 		<hr class='a'/>
 		<div>
 		
-		<ui:repeat var="zamowienie" value="#{zamowienieController.pokazZamowienia()}">
-		<table><tr><td>
-		<h2>#{zamowienie.tytul}:</h2>
-		<hr color='grey' size='3' width='100%' align='left' />
-		<p>Ilość: #{zamowienie.ilosc}</p>
-		<p>Wydanie: #{zamowienie.wydanie}</p>
-		<p>Opis: #{zamowienie.opis}</p>
-		<p id="error">#{zamowienie.status}</p>
+		<br/>
 		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Tytuł</th>
+   			<th>Ilość</th> 
+  			<th>Wydanie</th>
+  			<th>Opis</th>
+  			<th>Status</th>
+  			<th>Operacje</th>
+  		</tr>
+  		
+		<ui:repeat var="zamowienie" value="#{zamowienieController.pokazZamowienia()}">
+
+		<tr>
+		<td>#{zamowienie.tytul}</td>
+		<td>#{zamowienie.ilosc}</td>
+		<td>#{zamowienie.wydanie}</td>
+		<td>#{zamowienie.opis}</td>
+		<td>#{zamowienie.status}</td>
+		<td>
         <h:form>
        		<h:commandButton action="#{zamowienieController.akceptuj(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Akceptuj" ></h:commandButton>
-       	</h:form>
-       	<h:form>
        		<h:commandButton action="#{zamowienieController.odrzuc(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Odrzuć" ></h:commandButton>
-       	</h:form>
-       	<h:form>
-       		<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAKOŃCZONE'}" value="Usuń"></h:commandButton>
+       		<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAKOŃCZONE'}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
        	</h:form>
 		</td>
-		<td>
-		<br/><br/><br/><br/>
-		
-		
-		</td></tr></table>
+		</tr>
 		</ui:repeat>
+		</table>
+		
 		</div>
 	</div>
 	</div>		

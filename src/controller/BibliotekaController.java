@@ -149,7 +149,7 @@ public class BibliotekaController {
 		pracownik.setBiblioteka(biblioteka);
 		pracownikDAO.save(pracownik);
 		
-		return "pracownicy";
+		return "placowki";
 	}
 	
 	public List<Pracownik> znajdzPracownikow()
