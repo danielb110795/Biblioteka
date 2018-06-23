@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Stateless
+@RequestScoped
 @Named
 @Data
 @LocalBean
@@ -111,6 +111,24 @@ public class PracownikController {
 		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
 		Uzytkownik uzytkownik = uzytkownikDAO.findOne(pracownik.getUzytkownik().getId());
 		
+		Collection<Pracownik> pracownicy = pracownikDAO.findAll();
+		pracownicy.remove(pracownik);
+		for(Pracownik element : pracownicy)
+		{
+			if(element.getUzytkownik().getLogin().equals(login))
+			{
+				errorMessageEmail = "";
+				errorMessageLogin = "Pracownik o podanym loginie ju¿ istnieje";
+				return "edytuj_pracownika";
+			}
+			if(element.getEmail().equals(email))
+			{
+				errorMessageLogin = "";
+				errorMessageEmail = "Pracownik o podanym adresie e-mail ju¿ istnieje";
+				return "edytuj_pracownika";
+			}
+		}
+		
 		if(login.equals(""))
 			uzytkownik.setLogin(uzytkownik.getLogin());
 		else
@@ -120,7 +138,7 @@ public class PracownikController {
 		else
 			uzytkownik.setHaslo(haslo);
 		
-		uzytkownik.setRola("CZYTELNIK");
+		uzytkownik.setRola("PRACOWNIK");
 		
 		uzytkownik.setAktywowane(true);
 		uzytkownik.setZalogowany(true);
@@ -157,10 +175,23 @@ public class PracownikController {
 		
 		return "pracownicy";
 	}
+	
 	public String pokazEdycje(String id)
 	{
 	
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		Long idPracownika = Long.parseLong(id);
+		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
+		Uzytkownik uzytkownik = uzytkownikDAO.findOne(pracownik.getUzytkownik().getId());
+		
+		login = uzytkownik.getLogin();
+		haslo = uzytkownik.getHaslo();
+		email = pracownik.getEmail();
+		imie = pracownik.getImie();
+		nazwisko = pracownik.getNazwisko();
+		pesel = pracownik.getPesel();
+		adres = pracownik.getAdres();
 		
 		session.setAttribute("idPracownika", id);
 		return "edytuj_pracownika.xhtml";

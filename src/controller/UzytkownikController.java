@@ -115,6 +115,27 @@ public class UzytkownikController {
 		Czytelnik czytelnik = czytelnikDAO.findOne(idCzytelnika);
 		Uzytkownik uzytkownik = uzytkownikDAO.findOne(czytelnik.getUzytkownik().getId());
 		
+		
+		
+		Collection<Czytelnik> czytelnicy = czytelnikDAO.findAll();
+		czytelnicy.remove(czytelnik);
+		for(Czytelnik element : czytelnicy)
+		{
+			if(element.getUzytkownik().getLogin().equals(login))
+			{
+				errorMessageEmail = "";
+				errorMessageLogin = "U¿ytkownik o podanym loginie ju¿ istnieje";
+				return "edytuj_uzytkownika";
+			}
+			if(element.getEmail().equals(email))
+			{
+				errorMessageLogin = "";
+				errorMessageEmail = "U¿ytkownik o podanym adresie e-mail ju¿ istnieje";
+				return "edytuj_uzytkownika";
+			}
+		}
+		
+		
 		if(login.equals(""))
 			uzytkownik.setLogin(uzytkownik.getLogin());
 		else
@@ -154,18 +175,34 @@ public class UzytkownikController {
 		czytelnik.setKara(czytelnik.getKara());
 		czytelnik.setUzytkownik(uzytkownik);
 		
+		
+		
 		uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
 		return "uzytkownicy_pracownik";
-	}
+	} 
+	
 	public String pokazEdycje(String id)
 	{
 	
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		
+		
+		Long idCzytelnika = Long.parseLong(id);
+		Czytelnik czytelnik = czytelnikDAO.findOne(idCzytelnika);
+		Uzytkownik uzytkownik = uzytkownikDAO.findOne(czytelnik.getUzytkownik().getId());
+		
+		login = uzytkownik.getLogin();
+		haslo = uzytkownik.getHaslo();
+		email = czytelnik.getEmail();
+		imie = czytelnik.getImie();
+		nazwisko = czytelnik.getNazwisko();
+		pesel = czytelnik.getPesel();
+		adres = czytelnik.getAdres();
+		
 		session.setAttribute("idUzytkownika", id);
-		return "edytuj_uzytkownika.xhtml";
+		return "edytuj_uzytkownika";
 	}
 	
 	public String aktywujUzytkownika(String id)

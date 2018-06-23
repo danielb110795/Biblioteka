@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -22,33 +23,81 @@
 	<div id="srodek">
 
 	<div id="tekst2">
-		<h2>Edycja użytkownika:</h2>
+		<h2>Edycja użytkownika: #{uzytkownikController.imie} #{uzytkownikController.nazwisko}</h2>
 		<hr class='a'/>
 		<br/>
-		Wypełnij tylko te dane które chcesz edytować!
+		Dane zostały automatycznie uzupełnione, zmień dane które chcesz edytować. 
 		<br/>
 		<br/>
 		<h:form>
-				Login: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.login}"/>
-				<br /> 	
+				Login: 
+				<br/>
+					<h:inputText id="login" name="login" styleClass="input-text" 
+					value="#{uzytkownikController.login}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Login musi zawierać tylko litery i liczby, wymagane 4-10 znaków">
+					<f:validateRegex pattern="[0-9A-Za-z]{4,10}" />
+					</h:inputText>	
+					<h:message for="login" errorStyle="color:red; display:block"/>
+					<h:outputText styleClass="error" value=" #{uzytkownikController.errorMessageLogin}"></h:outputText>
+				<br/>
 					
-				Haslo: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.haslo}"/>
-				<br /> 	
-				 	
-				E-mail: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.email}"/>
-				<br /> 	
+				Hasło: 
+				<br/>
+					<h:inputText id="haslo" name="haslo" styleClass="input-text" 
+					value="#{uzytkownikController.haslo}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę, wymagane 4-10 znaków">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})" />
+					</h:inputText>
+					<h:message for="haslo" errorStyle="color:red; display:block"/>		
+				<br/>
 				
-				Imie: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.imie}"/>
-				<br /> 	
-					
-				Nazwisko: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.nazwisko}"/>
-				<br /> 	
+				E-mail: 
+				<br/>
+					<h:inputText id="email" name="email" styleClass="input-text" 
+					value="#{uzytkownikController.email}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj odpowiedni email np. daniel@gmail.com">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</h:inputText>
+					<h:message for="email" errorStyle="color:red; display:block"/>	
+					<h:outputText styleClass="error" value=" #{uzytkownikController.errorMessageEmail}"></h:outputText>	
+				<br/>
 				
-				Pesel: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.pesel}"/>
-				<br /> 	
-					
-				Adres: <h:inputText styleClass="input-text" name="nazwa" value="#{uzytkownikController.adres}"/>
-				<br /> 	
+				Imię: 
+				<br/>
+					<h:inputText id="imie" name="imie" styleClass="input-text" 
+					value="#{uzytkownikController.imie}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
+					</h:inputText>
+					<h:message for="imie" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Nazwisko: 
+				<br/>
+					<h:inputText id="nazwisko" name="nazwisko" styleClass="input-text" 
+					value="#{uzytkownikController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-40 znaków">
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż-]{2,40}" />
+					</h:inputText>
+					<h:message for="nazwisko" errorStyle="color:red; display:block"/>	
+				<br/>
+				
+				Pesel: 
+				<br/>
+					<h:inputText id="pesel" name="pesel" styleClass="input-text" 
+					value="#{uzytkownikController.pesel}" required="true" requiredMessage="To pole jest wymagane"
+					validatorMessage="Podaj 11 cyfr">
+					<f:validateRegex pattern="[0-9]{11,11}" />
+					</h:inputText>
+					<h:message for="pesel" errorStyle="color:red; display:block"/>		
+				<br/>
+				
+				Adres: 
+				<br/>
+					<h:inputText id="adres" name="adres" styleClass="input-text" 
+					value="#{uzytkownikController.adres}" required="true" requiredMessage="To pole jest wymagane"/>
+					<h:message for="adres" errorStyle="color:red; display:block"/>		
+				<br/>
 					
 			<h:commandButton value="Edytuj" action="#{uzytkownikController.edytujUzytkownika()}"/>
 		</h:form>
