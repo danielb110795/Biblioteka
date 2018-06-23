@@ -228,10 +228,21 @@ public class BibliotekaController {
 		else
 			biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
 		
-		//Zacz¹³em robic edycje
-		//List<Dzien> dni = new LinkedList<>();
-		//if(pnOtwarcie.equals(""))
-		//	Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzialek").czasOtwarcia(pnOtwarcie).czasZamkniêcia(pnZamkniecie).build());
+		List<Dzien> dni = new LinkedList<>();
+		Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzia³ek").czasOtwarcia(pnOtwarcie).czasZamkniecia(pnZamkniecie).build());
+		Dzien wtorek = dzienDAO.save(Dzien.builder().nazwa("Wtorek").czasOtwarcia(wtOtwarcie).czasZamkniecia(wtZamkniecie).build());
+		Dzien sroda = dzienDAO.save(Dzien.builder().nazwa("Œroda").czasOtwarcia(srOtwarcie).czasZamkniecia(srZamkniecie).build());
+		Dzien czwartek = dzienDAO.save(Dzien.builder().nazwa("Czwartek").czasOtwarcia(czOtwarcie).czasZamkniecia(czZamkniecie).build());
+		Dzien piatek = dzienDAO.save(Dzien.builder().nazwa("Pi¹tek").czasOtwarcia(ptOtwarcie).czasZamkniecia(ptZamkniecie).build());
+		Dzien sobota = dzienDAO.save(Dzien.builder().nazwa("Sobota").czasOtwarcia(sobOtwarcie).czasZamkniecia(sobZamkniecie).build());
+		dni.add(0, poniedzialek);
+		dni.add(1, wtorek);
+		dni.add(2, sroda);
+		dni.add(3, czwartek);
+		dni.add(4, piatek);
+		dni.add(5, sobota);
+		
+		biblioteka.setDzien(dni);
 			
 		
 		bibliotekaDAO.save(biblioteka);
