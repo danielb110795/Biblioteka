@@ -16,7 +16,7 @@
 	<div id="srodek">
 	
 	<div id="tekst2">
-		<h3>Dodawanie kategorii:</h3>
+		<h3>Dodawanie nowej kategorii:</h3>
 		<h:form>
 				Nazwa: 
 				<br/> 
@@ -26,14 +26,14 @@
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
                 <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
                 <br/>              
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria()}"/>
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(0)}"/>
 		</h:form>		
 	</div>
 	
 	<br/>
 	
 	<div id="tekst2">
-		<h3>Dodawanie autora:</h3>
+		<h3>Dodawanie nowego autora:</h3>
 		<h:form>
 				Imie: 
 				<br/> 
@@ -52,14 +52,14 @@
                 <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
                 <br/>
                         
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor()}"/>
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(0)}"/>
 		</h:form>		
 	</div>
 	
 	<br/>
 	
 	<div id="tekst2">
-		<h3>Dodawanie wydawnictwa:</h3>
+		<h3>Dodawanie nowego wydawnictwa:</h3>
 		<h:form>
 				Nazwa: 
 				<br/> 
@@ -76,30 +76,7 @@
 		<br/>
 	
 	<div id="tekst2">
-		<h3>Dodawanie wydawnia:</h3>
-		<h:form>
-				Rok wydania: 
-				<br/> 
-			    <h:inputText id="rokWydania" styleClass="input-text" name="rokWydania" 
-			    value="#{ksiazkaController.rokWydania}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
-                <h:message for="rokWydania" errorStyle="color:red; display:block"/>
-                <br/>         
-                
-                Wydawnictwo:   
-                <br/>              
-                <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
-					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-       			<br/> 
-       			<br/>
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
-		</h:form>		
-	</div>
-	
-	<br/>
-	<div id="tekst2">
-		<h3>Dodawanie książki:</h3>
+		<h3>Dodawanie nowej książki:</h3>
 		<h:form>
 				Tytuł: 
 				<br/> 
@@ -117,67 +94,14 @@
                 <h:message for="opis" errorStyle="color:red; display:block"/>
                 <br/>
                 
-                Zdjecie: 
-				<br/> 
-			    <h:inputText id="zdjecie" styleClass="input-text" name="zdjecie" 
-			    value="#{ksiazkaController.zdjecie}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
-                <h:message for="zdjecie" errorStyle="color:red; display:block"/>
-                <br/>
-                
-                Autor: 
-                <br/>
-                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-				<br/>
-				
-				Kategoria: 
-                <br/>
-                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
-					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-				<br/>
-
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKsiazka()}"/>
+                Tu będzie wstawienie zdjęcia z dysku
+                <br/>              
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.dodawanieKsiazki()}"/> 
 		</h:form>		
 	</div>
 	
 	
 	
-	<br/>
-	<div id="tekst2">
-		<h3>Dodawanie egzemplarza:</h3>
-		<h:form>
-				ISBN: 
-				<br/> 
-			    <h:inputText id="ISBN" styleClass="input-text" name="ISBN" 
-			    value="#{ksiazkaController.ISBN}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
-                <h:message for="ISBN" errorStyle="color:red; display:block"/>
-                <br/>      
-                
-                Ksiazka: 
-                <br/>
-                <h:selectOneMenu id="idKsiazki" value="#{ksiazkaController.idKsiazki}"> 
-					<f:selectItems name="idKsiazki" value="#{ksiazkaController.pokazKsiazki()}" var="tmp" itemLabel="#{tmp.tytul}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-				<br/>
-				
-				Wydanie: 
-                <br/>
-                <h:selectOneMenu id="idWydania" value="#{ksiazkaController.idWydania}"> 
-					<f:selectItems name="idWydania" value="#{ksiazkaController.pokazWydania()}" var="tmp" itemLabel="#{tmp.rokWydania}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-				<br/>
-
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveEgzemplarz()}"/>
-		</h:form>		
-	</div>
 	
 	</div>
 

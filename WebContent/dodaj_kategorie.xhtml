@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	
+	<div id="tekst2">
+		<h3>Dodawanie nowej kategorii:</h3>
+		<h:form>
+				Nazwa: 
+				<br/> 
+			    <h:inputText id="nazwa" styleClass="input-text" name="nazwa" 
+			    value="#{ksiazkaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nazwa" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
+                <br/>              
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(1)}"/>
+		</h:form>		
+	</div>
+	
+	<br/>
+	
+	<div id="tekst2">
+		<h3>Kategoria dla książki:</h3>
+		<h:form>
+                <br/>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+				<br/>
+			<h:commandButton value="Dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/> 
+			<h:commandButton value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
+		</h:form>		
+	</div>
+	
+	
+	
+	</div>
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

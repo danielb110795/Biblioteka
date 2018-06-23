@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import dao.AutorDAO;
 import dao.EgzemplarzDAO;
@@ -73,6 +75,8 @@ public class KsiazkaController {
 	//wydanie
 	private String rokWydania;
 	private int idWydawnictwa;
+	private int nrWydania;
+	private String miejsceWydania;
 	
 	//ksiazka
 	private String tytul;
@@ -88,9 +92,10 @@ public class KsiazkaController {
 	private String ISBN;
 	private int idKsiazki;
 	private int idWydania;
+	//private int liczbaEgzemplarzy;
 	
 	
-	public String saveKategoria() {
+	public String saveKategoria(int skad) {
 		errorMessageKategoria = "";
 		errorMessageAutor = "";
 		errorMessageWydawnictwo = "";
@@ -108,8 +113,10 @@ public class KsiazkaController {
 		Kategoria kategoria = new Kategoria();
 		kategoria.setNazwa(nazwa);
 		kategoriaDAO.save(kategoria);
-		
-		return "ksiazki";
+		if(skad == 0)
+			return "ksiazki";
+		else
+			return "dodaj_kategorie";
 	}
 	
 	public List<Kategoria> pokazKategorie()
@@ -129,7 +136,7 @@ public class KsiazkaController {
 		return kategoria;                
 	}
 	
-	public String saveAutor() {
+	public String saveAutor(int skad) {
 		List<Autor> autorzy = autorDAO.findAll();
 		for(Autor element : autorzy)
 		{
@@ -144,8 +151,10 @@ public class KsiazkaController {
 		autor.setImie(imie);
 		autor.setNazwisko(nazwisko);
 		autorDAO.save(autor);
-
-		return "ksiazki";
+		if(skad == 0)
+			return "ksiazki";
+		else
+			return "dodaj_autora";
 	}
 	
 	public List<Autor> pokazAutorow()
@@ -203,12 +212,16 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydanie() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Wydanie wydanie = new Wydanie();
 		wydanie.setRokWydania(rokWydania);
+		wydanie.setMiejsceWydania(miejsceWydania);
+		wydanie.setNazwa("Wydanie: "+nrWydania);
 		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
-		wydanieDAO.save(wydanie);
+		session.setAttribute("wydanie",wydanie);
+		//wydanieDAO.save(wydanie);
 
-		return "ksiazki";
+		return "dodaj_egzemplarz";
 	}
 	
 	public Wydanie getWydanie(int idWydania)
@@ -224,12 +237,65 @@ public class KsiazkaController {
 		return wydania;
 	}
 	
+	public String dodawanieKsiazki() {
+		Ksiazka ksiazka = new Ksiazka();
+		ksiazka.setTytul(tytul);
+		ksiazka.setOpis(opis);
+		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
+		ksiazka.setZdjecie("zdjecie.jpg");
+		
+		//zapis autorow
+		//List<Autor> autorzy = new LinkedList<>();
+		//autorzy.add(getAutor(idAutora));
+		//ksiazka.setAutor(autorzy);
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		session.setAttribute("ksiazka",ksiazka);
+
+		return "dodaj_kategorie";
+	}
+	
+	public String dodajKategorieDoKsiazki(int skad)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		List<Kategoria> kategorie = new LinkedList<Kategoria>();
+		if(ksiazka.getKategoria() != null)
+			kategorie = ksiazka.getKategoria();
+		kategorie.add(getKategoria(idKategoria));
+		ksiazka.setKategoria(kategorie);
+		session.setAttribute("ksiazka",ksiazka);
+		if(skad == 0)
+			return "dodaj_autora";
+		else
+			return "dodaj_kategorie";
+	}
+	
+	public String dodajAutoraDoKsiazki(int skad)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		List<Autor> autorzy = new LinkedList<Autor>();
+		if(ksiazka.getAutor() != null)
+			autorzy = ksiazka.getAutor();
+		autorzy.add(getAutor(idAutora));
+		ksiazka.setAutor(autorzy);
+		session.setAttribute("ksiazka",ksiazka);
+		if(skad == 0)
+			return "dodaj_wydanie";
+		else
+			return "dodaj_autora";
+	}
+	
 	public String saveKsiazka() {
 		Ksiazka ksiazka = new Ksiazka();
 		ksiazka.setTytul(tytul);
 		ksiazka.setOpis(opis);
-		ksiazka.setStan("Niezniszczona");
-		ksiazka.setZdjecie(zdjecie);
+		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
+		ksiazka.setZdjecie("zdjecie.jpg");
 		
 		//zapis autorow
 		List<Autor> autorzy = new LinkedList<>();
@@ -259,16 +325,37 @@ public class KsiazkaController {
 		return ksiazki;
 	}
 	
-	public String saveEgzemplarz() {
+	public String saveEgzemplarz(int skad) {
 		Egzemplarz egzemplarz = new Egzemplarz();
 		egzemplarz.setStatus("Dostêpna");
 		egzemplarz.setISBN(ISBN);
-		//egzemplarz.setKsiazka(getKsiazka(idKsiazki));
-		//egzemplarz.setWydanie(getWydanie(idWydania));
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
+		Wydanie wydanie = (Wydanie) session.getAttribute("wydanie");
+		
+		egzemplarz.setWydanie(wydanie);
+		
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		List<Egzemplarz> egzemplarze = new LinkedList<>();
+		if(ksiazka.getEgzemplarz() != null)
+		{
+			egzemplarze = ksiazka.getEgzemplarz();
+		}
+		egzemplarze.add(egzemplarz);
+		ksiazka.setEgzemplarz(egzemplarze);
+		
 
-		egzemplarzDAO.save(egzemplarz);
-
-		return "ksiazki";
+		//session.setAttribute("ksiazka", ksiazka);
+		
+		if(skad  == 0)
+		{
+			ksiazkaDAO.save(ksiazka);
+			return "ksiazki";
+		}
+		else
+		{
+			session.setAttribute("ksiazka", ksiazka);
+			return "dodaj_egzemplarz";
+		}
 	}
 }

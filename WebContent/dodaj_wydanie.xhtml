@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	
+	<div id="tekst2">
+		<h3>Dodawanie wydania:</h3>
+		<h:form>
+				
+				Numer wydania: 
+				<br/> 
+			    <h:inputText id="nrWydania" styleClass="input-text" name="nrWydania" 
+			    value="#{ksiazkaController.nrWydania}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nrWydania" errorStyle="color:red; display:block"/>
+                <br/> 
+                Miejsce wydania: 
+				<br/> 
+			    <h:inputText id="miejsceWydania" styleClass="input-text" name="miejsceWydania" 
+			    value="#{ksiazkaController.miejsceWydania}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="miejsceWydania" errorStyle="color:red; display:block"/>
+                <br/> 
+                Rok wydania: 
+				<br/> 
+			    <h:inputText id="rokWydania" styleClass="input-text" name="rokWydania" 
+			    value="#{ksiazkaController.rokWydania}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="rokWydania" errorStyle="color:red; display:block"/>
+                <br/> 
+				Wydawnictwo:   
+                <br/>              
+                <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
+					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+       			<br/> 
+       			<br/>
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
+		</h:form>		
+	</div>
+	
+	<br/>
+	</div>
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	
+	<div id="tekst2">
+		<h3>Dodawanie nowego autora:</h3>
+		<h:form>
+				Imie: 
+				<br/> 
+			    <h:inputText id="imie" styleClass="input-text" name="imie" 
+			    value="#{ksiazkaController.imie}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="imie" errorStyle="color:red; display:block"/>
+                <br/>      
+                
+                Nazwisko: 
+				<br/> 
+			    <h:inputText id="nazwisko" styleClass="input-text" name="nazwisko" 
+			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nazwisko" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
+                <br/>
+                        
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(1)}"/>
+		</h:form>		
+	</div>
+	
+	<br/>
+	
+	<div id="tekst2">
+		<h3>Autor dla książki:</h3>
+		<h:form>
+                <br/>
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+				<br/>
+			<h:commandButton value="Dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
+			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
+		</h:form>		
+	</div>
+	
+	
+	
+	</div>
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 
