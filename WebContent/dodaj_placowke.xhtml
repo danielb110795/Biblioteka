@@ -57,11 +57,8 @@
 				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
 				<br/> 	
 				<h:inputText id="url" styleClass="input-text" name="url" 
-			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane"
-			    validatorMessage="Podaj odpowiedni url.">
-			    <f:validateRegex pattern="^(https://www.google.com/maps/)" />
-                </h:inputText>
-                
+			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane" />
+
                 <h:message for="url" errorStyle="color:red; display:block"/>
 
 				<br/>
@@ -78,60 +75,60 @@
 				<td>Poniedziałek: </td>
 				<td><h:inputText name="pnOtwarcie" value="#{bibliotekaController.pnOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText> 
-				<h:message for="url" errorStyle="color:red; display:block"/> </td>
+				<h:message for="pnOtwarcie" errorStyle="color:red; display:block"/> </td>
                 <td><h:inputText name="pnZamkniecie" value="#{bibliotekaController.pnZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText> 
-                <h:message for="url" errorStyle="color:red; display:block"/> </td>
+                <h:message for="pnZamkniecie" errorStyle="color:red; display:block"/> </td>
                 </tr>
                 
                 <tr>
                 <td>Wtorek: </td>
 				<td><h:inputText name="wtOtwarcie" value="#{bibliotekaController.wtOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText> 
-				<h:message for="url" errorStyle="color:red; display:block"/></td>
+				<h:message for="wtOtwarcie" errorStyle="color:red; display:block"/></td>
                 <td><h:inputText name="wtZamkniecie" value="#{bibliotekaController.wtZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText> 
-                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                <h:message for="wtZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Środa: </td>
 				<td><h:inputText name="srOtwarcie" value="#{bibliotekaController.srOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText>
-				<h:message for="url" errorStyle="color:red; display:block"/></td>
+				<h:message for="srOtwarcie" errorStyle="color:red; display:block"/></td>
                 <td><h:inputText name="srZamkniecie" value="#{bibliotekaController.srZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText>
-                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                <h:message for="srZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Czwartek: </td>
 				<td><h:inputText name="czOtwarcie" value="#{bibliotekaController.czOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText>
-				<h:message for="url" errorStyle="color:red; display:block"/></td>
+				<h:message for="czOtwarcie" errorStyle="color:red; display:block"/></td>
                 <td><h:inputText name="czZamkniecie" value="#{bibliotekaController.czZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText>
-                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                <h:message for="czZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Piątek: </td>
 				<td><h:inputText name="ptOtwarcie" value="#{bibliotekaController.ptOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText>
-				<h:message for="url" errorStyle="color:red; display:block"/></td>
+				<h:message for="ptOtwarcie" errorStyle="color:red; display:block"/></td>
                 <td><h:inputText name="ptZamkniecie" value="#{bibliotekaController.ptZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText>
-                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                <h:message for="ptZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Sobota: </td>
 				<td><h:inputText name="sobOtwarcie" value="#{bibliotekaController.sobOtwarcie}" required="true" 
 				requiredMessage="To pole jest wymagane"> </h:inputText>
-				<h:message for="url" errorStyle="color:red; display:block"/></td>
+				<h:message for="sobOtwarcie" errorStyle="color:red; display:block"/></td>
                 <td><h:inputText name="sobZamkniecie" value="#{bibliotekaController.sobZamkniecie}" required="true" 
                 requiredMessage="To pole jest wymagane"> </h:inputText>
-                <h:message for="url" errorStyle="color:red; display:block"/></td>
+                <h:message for="sobZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 </table>
