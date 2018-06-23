@@ -56,9 +56,9 @@ public class KsiazkaController {
 	@Setter
 	private String errorMessageAutor = "";
 	
-	//@Getter
-	//@Setter
-	//private String errorMessageKategoria = "";
+	@Getter
+	@Setter
+	private String errorMessageWydawnictwo= "";
 	
 	//kategoria
 	private String nazwa;
@@ -91,6 +91,9 @@ public class KsiazkaController {
 	
 	
 	public String saveKategoria() {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
 		
 		List<Kategoria> kategorie = kategoriaDAO.findAll();
 		for(Kategoria element : kategorie)
@@ -98,14 +101,12 @@ public class KsiazkaController {
 			if(element.getNazwa().equals(nazwa))
 			{
 				errorMessageKategoria = "Ju¿ istnieje!!!";
-				errorMessageAutor = "";
 				return "ksiazki";
 			}
 		}
 		
 		Kategoria kategoria = new Kategoria();
 		kategoria.setNazwa(nazwa);
-		errorMessageKategoria = "";
 		kategoriaDAO.save(kategoria);
 		
 		return "ksiazki";
@@ -135,7 +136,6 @@ public class KsiazkaController {
 			if(element.getImie().equals(imie) && element.getNazwisko().equals(nazwisko))
 			{
 				errorMessageAutor = "Ju¿ istnieje";
-				errorMessageKategoria = "";
 				return "ksiazki";
 			}
 		}
@@ -152,7 +152,13 @@ public class KsiazkaController {
 	{
 		List<Autor> autors = new LinkedList<>();
 		autors = autorDAO.findAll().stream().sorted((a1, a2)->{
-			  return a1.getNazwisko().toLowerCase().compareTo(a2.getNazwisko().toLowerCase());
+				int nazwisko;
+				nazwisko = a1.getNazwisko().toLowerCase().compareTo(a2.getNazwisko().toLowerCase());
+			  if(nazwisko != 0)
+				  {
+				  	return nazwisko;
+				  }
+			  else return a1.getImie().toLowerCase().compareTo(a2.getImie().toLowerCase());
 			}).collect(Collectors.toList());
 		return autors;
 	}
@@ -164,6 +170,15 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydawnictwo() {
+		List<Wydawnictwo> wydawnictwa = wydawnictwoDAO.findAll();
+		for(Wydawnictwo element : wydawnictwa)
+		{
+			if(element.getNazwa().equals(nazwaWydawnictwa))
+			{
+				errorMessageWydawnictwo = "To wydawnictwo ju¿ istnieje";
+				return "ksiazki";
+			}
+		}
 		Wydawnictwo wydawnictwo = new Wydawnictwo();
 		wydawnictwo.setNazwa(nazwaWydawnictwa);
 		wydawnictwoDAO.save(wydawnictwo);
@@ -181,7 +196,9 @@ public class KsiazkaController {
 	public List<Wydawnictwo> pokazWydawnictwa()
 	{
 		List<Wydawnictwo> wydawnictwa = new LinkedList<>();
-		wydawnictwa = wydawnictwoDAO.findAll();	
+		wydawnictwa = wydawnictwoDAO.findAll().stream().sorted((k1, k2)->{
+			  return k1.getNazwa().toLowerCase().compareTo(k2.getNazwa().toLowerCase());
+			}).collect(Collectors.toList());;	
 		return wydawnictwa;
 	}
 	
