@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -21,7 +21,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Stateless
+@RequestScoped
 @Named
 @Data
 @LocalBean
@@ -59,7 +59,7 @@ public class BibliotekaController {
 	private String sobZamkniecie;
 	
 	
-	private Biblioteka placowka;;
+	private Biblioteka placowka;
 	private Long id;
 	
 	public String saveBiblioteka()
@@ -181,8 +181,42 @@ public class BibliotekaController {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		if(id.equals(""))
 			return "strona_glowna.xhtml";
-		session.setAttribute("idPlacowki", id);
 		
+		
+		Long idPlacowki = Long.parseLong(id);
+		Biblioteka biblioteka = bibliotekaDAO.findOne(idPlacowki);
+		List<Dzien> dni = biblioteka.getDzien();
+
+		nazwa = biblioteka.getNazwa();
+		adres = biblioteka.getAdres();
+		numerTel = biblioteka.getNumerTel();
+		urlDoMapyGoogle = biblioteka.getUrlDoMapyGoogle();
+		
+		Dzien poniedzialek = dni.get(0);
+		pnOtwarcie = poniedzialek.getCzasOtwarcia();
+		pnZamkniecie = poniedzialek.getCzasZamkniecia();
+		
+		Dzien wtorek = dni.get(1);
+		wtOtwarcie = wtorek.getCzasOtwarcia();
+		wtZamkniecie = wtorek.getCzasZamkniecia();
+		
+		Dzien sroda = dni.get(2);
+		srOtwarcie = sroda.getCzasOtwarcia();
+		srZamkniecie = sroda.getCzasZamkniecia();
+		
+		Dzien czwartek = dni.get(3);
+		czOtwarcie = czwartek.getCzasOtwarcia();
+		czZamkniecie = czwartek.getCzasZamkniecia();
+		
+		Dzien piatek = dni.get(4);
+		ptOtwarcie = piatek.getCzasOtwarcia();
+		ptZamkniecie = piatek.getCzasZamkniecia();
+		
+		Dzien sobota = dni.get(5);
+		sobOtwarcie = sobota.getCzasOtwarcia();
+		sobZamkniecie = sobota.getCzasZamkniecia();
+		
+		session.setAttribute("idPlacowki", id);		
 		return "edytuj_placowke.xhtml";
 	}
 	

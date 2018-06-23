@@ -58,7 +58,7 @@
 				<br/> 	
 				<h:inputText id="url" styleClass="input-text" name="url" 
 			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane" 
-			    validatorMessage="Format: xx:xx albo x:xx">
+			    validatorMessage="Podaj url do mapy google">
 			    <f:validateRegex pattern="^(https|http)://(www\.|)google\.[a-z]+/maps/.*" />
                 </h:inputText>
                 <h:message for="url" errorStyle="color:red; display:block"/>
