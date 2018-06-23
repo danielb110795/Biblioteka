@@ -34,7 +34,7 @@
 				<br/>
 					<h:inputText id="login" name="login" styleClass="input-text" 
 					value="#{rejestracjaController.login}" required="true" requiredMessage="To pole jest wymagane"
-					validatorMessage="Login musi zawierać tylko litery i liczby i mieć od 4 do 10 znaków">
+					validatorMessage="Login musi zawierać tylko litery i liczby, wymagane 4-10 znaków">
 					<f:validateRegex pattern="[0-9A-Za-z]{4,10}" />
 					</h:inputText>	
 					<h:message for="login" errorStyle="color:red; display:block"/>
@@ -45,7 +45,7 @@
 				<br/>
 					<h:inputText id="haslo" name="haslo" styleClass="input-text" 
 					value="#{rejestracjaController.haslo}" required="true" requiredMessage="To pole jest wymagane"
-					validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę i mieć od 4 do 10 znaków">
+					validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę, wymagane 4-10 znaków">
 					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})" />
 					</h:inputText>
 					<h:message for="haslo" errorStyle="color:red; display:block"/>		
@@ -62,12 +62,12 @@
 					<h:outputText styleClass="error" value=" #{rejestracjaController.errorMessageEmail}"></h:outputText>	
 				<br/>
 				
-				Imie: 
+				Imię: 
 				<br/>
 					<h:inputText id="imie" name="imie" styleClass="input-text" 
 					value="#{rejestracjaController.imie}" required="true" requiredMessage="To pole jest wymagane"
 					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
-					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{1,30}" />
 					</h:inputText>
 					<h:message for="imie" errorStyle="color:red; display:block"/>		
 				<br/>
@@ -77,7 +77,7 @@
 					<h:inputText id="nazwisko" name="nazwisko" styleClass="input-text" 
 					value="#{rejestracjaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
 					validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 1-30 znaków">
-					<f:validateRegex pattern="[A-Za-z]{1,30}" />
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{1,30}" />
 					</h:inputText>
 					<h:message for="nazwisko" errorStyle="color:red; display:block"/>	
 				<br/>
@@ -86,8 +86,8 @@
 				<br/>
 					<h:inputText id="pesel" name="pesel" styleClass="input-text" 
 					value="#{rejestracjaController.pesel}" required="true" requiredMessage="To pole jest wymagane"
-					validatorMessage="Podaj 9 cyfr">
-					<f:validateRegex pattern="[0-9]{9,9}" />
+					validatorMessage="Podaj 11 cyfr">
+					<f:validateRegex pattern="[0-9]{11,11}" />
 					</h:inputText>
 					<h:message for="pesel" errorStyle="color:red; display:block"/>		
 				<br/>

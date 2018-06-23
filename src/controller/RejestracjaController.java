@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import dao.CzytelnikDAO;
@@ -14,11 +13,13 @@ import entity.Uzytkownik;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import javax.enterprise.context.RequestScoped;
 
-@Stateless
+@RequestScoped
 @Named
 @Data
 @LocalBean
+
 public class RejestracjaController {
 	@EJB
 	private UzytkownikDAO uzytkownikDAO;
