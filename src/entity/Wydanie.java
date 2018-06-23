@@ -18,6 +18,8 @@ public class Wydanie implements Domain {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String nazwa; 
+	private String miejsceWydania;
 	private String rokWydania;
 
 	@ManyToOne

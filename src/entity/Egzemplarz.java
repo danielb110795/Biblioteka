@@ -19,15 +19,9 @@ public class Egzemplarz implements Domain{
 	
 	private String status; //wypozyczony, zarezerwowany, dostepny
 	private String ISBN;
-	
-	private int nrWydania;
-	private String miejsceWydania;
-	private int rokWydania; 
-	
-	
-	
+		
 	@ManyToOne
-	private Wydawnictwo wydawnictwo; 
+	private Wydanie wydanie; 
 	
 	
 	
