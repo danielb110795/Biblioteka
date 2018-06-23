@@ -31,7 +31,7 @@
 				Nazwa: 
 				<br/> 
 			    <h:inputText id="nazwa" styleClass="input-text" name="nazwa" 
-			    value="#{bibliotekaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
+			    value="#{bibliotekaController.nazwa}" required="true" requiredMessage="To pole jest wymagane" >
                 </h:inputText>
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
                 <br/>
@@ -57,8 +57,10 @@
 				Url do mapy google (należy podać wartość w "src", bez cudzysłowiu): 
 				<br/> 	
 				<h:inputText id="url" styleClass="input-text" name="url" 
-			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane" />
-
+			    value="#{bibliotekaController.urlDoMapyGoogle}" required="true" requiredMessage="To pole jest wymagane" 
+			    validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^(https|http)://(www\.|)google\.[a-z]+/maps/.*" />
+                </h:inputText>
                 <h:message for="url" errorStyle="color:red; display:block"/>
 
 				<br/>
@@ -73,61 +75,85 @@
 				
 				<tr>
 				<td>Poniedziałek: </td>
-				<td><h:inputText name="pnOtwarcie" value="#{bibliotekaController.pnOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText> 
+				<td><h:inputText id="pnOtwarcie" name="pnOtwarcie" value="#{bibliotekaController.pnOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="pnOtwarcie" errorStyle="color:red; display:block"/> </td>
-                <td><h:inputText name="pnZamkniecie" value="#{bibliotekaController.pnZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText> 
+                <td><h:inputText id="pnZamkniecie" name="pnZamkniecie" value="#{bibliotekaController.pnZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="pnZamkniecie" errorStyle="color:red; display:block"/> </td>
                 </tr>
-                
+                  
                 <tr>
                 <td>Wtorek: </td>
-				<td><h:inputText name="wtOtwarcie" value="#{bibliotekaController.wtOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText> 
+				<td><h:inputText id="wtOtwarcie" name="wtOtwarcie" value="#{bibliotekaController.wtOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="wtOtwarcie" errorStyle="color:red; display:block"/></td>
-                <td><h:inputText name="wtZamkniecie" value="#{bibliotekaController.wtZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText> 
+                <td><h:inputText id="wtZamkniecie" name="wtZamkniecie" value="#{bibliotekaController.wtZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="wtZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Środa: </td>
-				<td><h:inputText name="srOtwarcie" value="#{bibliotekaController.srOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<td><h:inputText id="srOtwarcie" name="srOtwarcie" value="#{bibliotekaController.srOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="srOtwarcie" errorStyle="color:red; display:block"/></td>
-                <td><h:inputText name="srZamkniecie" value="#{bibliotekaController.srZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <td><h:inputText id="srZamkniecie" name="srZamkniecie" value="#{bibliotekaController.srZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="srZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Czwartek: </td>
-				<td><h:inputText name="czOtwarcie" value="#{bibliotekaController.czOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<td><h:inputText id="czOtwarcie" name="czOtwarcie" value="#{bibliotekaController.czOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="czOtwarcie" errorStyle="color:red; display:block"/></td>
-                <td><h:inputText name="czZamkniecie" value="#{bibliotekaController.czZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <td><h:inputText id="czZamkniecie" name="czZamkniecie" value="#{bibliotekaController.czZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="czZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Piątek: </td>
-				<td><h:inputText name="ptOtwarcie" value="#{bibliotekaController.ptOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<td><h:inputText id="ptOtwarcie" name="ptOtwarcie" value="#{bibliotekaController.ptOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="ptOtwarcie" errorStyle="color:red; display:block"/></td>
-                <td><h:inputText name="ptZamkniecie" value="#{bibliotekaController.ptZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <td><h:inputText id="ptZamkniecie" name="ptZamkniecie" value="#{bibliotekaController.ptZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="ptZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
                 <tr>
                 <td>Sobota: </td>
-				<td><h:inputText name="sobOtwarcie" value="#{bibliotekaController.sobOtwarcie}" required="true" 
-				requiredMessage="To pole jest wymagane"> </h:inputText>
+				<td><h:inputText id="sobOtwarcie" name="sobOtwarcie" value="#{bibliotekaController.sobOtwarcie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
 				<h:message for="sobOtwarcie" errorStyle="color:red; display:block"/></td>
-                <td><h:inputText name="sobZamkniecie" value="#{bibliotekaController.sobZamkniecie}" required="true" 
-                requiredMessage="To pole jest wymagane"> </h:inputText>
+                <td><h:inputText id="sobZamkniecie" name="sobZamkniecie" value="#{bibliotekaController.sobZamkniecie}" required="true" 
+                requiredMessage="To pole jest wymagane" validatorMessage="Format: xx:xx albo x:xx">
+			    <f:validateRegex pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" />
+                </h:inputText>
                 <h:message for="sobZamkniecie" errorStyle="color:red; display:block"/></td>
                 </tr>
                 
