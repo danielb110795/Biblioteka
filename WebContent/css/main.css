@@ -279,8 +279,8 @@ hr.a
 hr.b
 {
     height: 3px;
-    color: grey;
-    background: grey;
+    color: silver;
+    background: silver;
     font-size: 0;
     border: 0;
 }
@@ -289,8 +289,8 @@ hr.c
 {
     height: 2px;
     width: 30%;
-    color: grey;
-    background: grey;
+    color: silver;
+    background: silver;
 }
 
 
