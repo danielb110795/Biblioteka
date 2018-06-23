@@ -181,7 +181,8 @@ public class UzytkownikController {
 		czytelnikDAO.save(czytelnik); 
 		
 		return "uzytkownicy_pracownik";
-	}
+	} 
+	
 	public String pokazEdycje(String id)
 	{
 	
