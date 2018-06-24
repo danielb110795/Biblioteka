@@ -117,12 +117,17 @@ public class BibliotekaController {
 	{
 		Long idPlacowki = Long.parseLong(id);
 		try {
-		bibliotekaDAO.remove(idPlacowki);
+			bibliotekaDAO.remove(idPlacowki);
 		}catch(Throwable e)
 		{
-			errorMessage = "Przed usuniêciem usuñ pracwoników z danej biblioteki";
+			return "blad_usun_placowke"; 
 		}
 		
+		return "placowki";                
+	}
+	
+	public String getUrlPlacowki() 
+	{
 		return "placowki";                
 	}
 	
