@@ -44,7 +44,7 @@
 		<td>
 		<h:form>  
         	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Edytuj"></h:commandButton>
-        	<h:commandButton action="#{pracownikController.usunPracownika(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
+        	<h:commandButton action="#{bibliotekaController.wypiszZBiblioteki(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz wypisać pracownika z placówki?')" value="Wypisz"></h:commandButton>
         </h:form>
 		</td>
 		</tr>

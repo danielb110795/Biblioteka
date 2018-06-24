@@ -152,6 +152,17 @@ public class BibliotekaController {
 		return "placowki";
 	}
 	
+	public String wypiszZBiblioteki(String id)
+	{
+
+		Long idPracownika = Long.parseLong(id);
+		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
+		pracownik.setBiblioteka(null);
+		pracownikDAO.save(pracownik);
+		
+		return "placowki";
+	}
+	
 	public List<Pracownik> znajdzPracownikow()
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
