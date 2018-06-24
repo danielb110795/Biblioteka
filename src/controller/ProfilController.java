@@ -52,7 +52,7 @@ public class ProfilController {
 				pesel = ""+element.getPesel()+"";
 				adres = element.getAdres();
 				kara = ""+element.getKara()+"";
-				if(element.getKara()==null || element.getKara() == 0)
+				if(element.getKara()==null || element.getKara().equals("0"))
 					kara = "Brak";
 				nrKarty = ""+element.getId()+""+element.getPesel()+"";
 				aktWypozyczen = (long) 0;

@@ -24,7 +24,7 @@ public class Czytelnik implements Domain {
 	private String pesel;
 	private String email;
 	private String adres;
-	private Integer kara;
+	private String kara;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "uzytkownik")
