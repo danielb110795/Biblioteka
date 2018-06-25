@@ -134,7 +134,7 @@ input:hover {
 #przycisk2
 {
 	height: 100%;
-	width: 40%;
+	width: 25%;
 	background: #FF9966;	
 	color: black;	
 	text-align: center;
@@ -307,4 +307,27 @@ hr.c
 	border: 1px solid black;
 	text-align: center;
 	padding: 5px;
+}
+
+#przycisk5
+{
+	height: 100%;
+	width: 100%;
+	background: #FF9966;	
+	color: black;	
+	text-align: center;
+	display: block;
+	line-height: 50px;
+	/*font: 10px Arial;*/
+	font-weight: bold;
+	float: left;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	overflow: auto;
+
+}
+
+#przycisk5:hover {
+	background: #964B00;
+	color: white;
 }
