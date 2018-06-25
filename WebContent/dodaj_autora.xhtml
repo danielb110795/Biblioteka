@@ -17,6 +17,7 @@
 	
 	<div id="tekst2">
 		<h3>Dodawanie nowego autora:</h3>
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
 		<h:form>
 				Imie: 
 				<br/> 
@@ -32,7 +33,6 @@
 			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwisko" errorStyle="color:red; display:block"/>
-                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
                 <br/>
                         
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(1)}"/>
@@ -50,9 +50,11 @@
 				</h:selectOneMenu> 
 				<br/>  
 				<br/>
-			<h:commandButton value="Dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
 			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
-		</h:form>		
+		</h:form>	
+		<h:form><h:commandButton value="Pomiń" action="dodaj_wydanie"/> </h:form>	
 	</div>
 	
 	

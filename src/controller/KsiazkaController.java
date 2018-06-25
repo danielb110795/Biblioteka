@@ -67,6 +67,18 @@ public class KsiazkaController {
 	@Setter
 	private String errorMessageWydawnictwo= "";
 	
+	@Getter
+	@Setter
+	private String errorMessageEgzemplarz = "";
+	
+	@Getter
+	@Setter
+	private String errorMessageKsiazka = "";
+	
+	@Getter
+	@Setter
+	private String errorMessagePodsumowanie = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -104,7 +116,9 @@ public class KsiazkaController {
 		errorMessageKategoria = "";
 		errorMessageAutor = "";
 		errorMessageWydawnictwo = "";
-		
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		List<Kategoria> kategorie = kategoriaDAO.findAll();
 		for(Kategoria element : kategorie)
 		{
@@ -142,6 +156,12 @@ public class KsiazkaController {
 	}
 	
 	public String saveAutor(int skad) {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		List<Autor> autorzy = autorDAO.findAll();
 		for(Autor element : autorzy)
 		{
@@ -184,6 +204,12 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydawnictwo() {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		List<Wydawnictwo> wydawnictwa = wydawnictwoDAO.findAll();
 		for(Wydawnictwo element : wydawnictwa)
 		{
@@ -217,6 +243,12 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydanie() {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Wydanie wydanie = new Wydanie();
 		wydanie.setRokWydania(rokWydania);
@@ -243,7 +275,23 @@ public class KsiazkaController {
 	}
 	
 	public String dodawanieKsiazki() {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		Ksiazka ksiazka = new Ksiazka();
+		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
+		for(Ksiazka element : ksiazki)
+		{
+			if(element.getTytul().equals(tytul))
+			{
+				errorMessageKsiazka = "Ksiazka o podanym tytule juz istnieje";
+				return "ksiazki";
+			}
+		}
 		ksiazka.setTytul(tytul);
 		ksiazka.setOpis(opis);
 		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
@@ -255,45 +303,108 @@ public class KsiazkaController {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		session.setAttribute("ksiazka",ksiazka);
+		session.setAttribute("podsumowanie", 0);
 
 		return "dodaj_kategorie";
 	}
 	
 	public String dodajKategorieDoKsiazki(int skad)
 	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
 		List<Kategoria> kategorie = new LinkedList<Kategoria>();
+		Kategoria podanaKategoria = getKategoria(idKategoria);
+		if(podanaKategoria.getNazwa().equals(""))
+		{
+			errorMessageKategoria = "Nie poda³eœ kategori";
+			if(skad == 0)
+				return "dodaj_autora";
+			if(skad == 2)
+				return "podsumowanie_ksiazki";
+			else
+				return "dodaj_kategorie";
+		}
 		if(ksiazka.getKategoria() != null)
+		{
 			kategorie = ksiazka.getKategoria();
-		kategorie.add(getKategoria(idKategoria));
+			for(Kategoria element : kategorie)
+			{
+				if(element.getNazwa().equals(podanaKategoria.getNazwa()))
+				{
+					errorMessageKategoria = "Podana kategoria zosta³a ju¿ dodana do tej ksi¹¿ki";
+					return "dodaj_kategorie";
+				}
+			}
+		}
+		kategorie.add(podanaKategoria);
 		ksiazka.setKategoria(kategorie);
 		session.setAttribute("ksiazka",ksiazka);
 		if(skad == 0)
 			return "dodaj_autora";
+		if(skad == 2)
+			return "podsumowanie_ksiazki";
 		else
 			return "dodaj_kategorie";
 	}
 	
 	public String dodajAutoraDoKsiazki(int skad)
 	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
 		List<Autor> autorzy = new LinkedList<Autor>();
+		Autor podanyAutor = getAutor(idAutora);
+		if(podanyAutor.getImie().equals("") || podanyAutor.getNazwisko().equals(""))
+		{
+			errorMessageAutor = "Nie poda³eœ autora";
+			if(skad == 0)
+				return "dodaj_wydanie";
+			if(skad == 2)
+				return "podsumowanie_ksiazki";
+			else
+				return "dodaj_autora";
+		}
 		if(ksiazka.getAutor() != null)
+		{
 			autorzy = ksiazka.getAutor();
-		autorzy.add(getAutor(idAutora));
+			for(Autor element : autorzy)
+			{
+				if(element.getImie().equals(podanyAutor.getImie()) && element.getNazwisko().equals(podanyAutor.getNazwisko()))
+				{
+					errorMessageAutor = "Podany autor zosta³ ju¿ dodany do tej ksi¹¿ki";
+					return "dodaj_autora";
+				}
+			}
+		}
+		autorzy.add(podanyAutor);
 		ksiazka.setAutor(autorzy);
 		session.setAttribute("ksiazka",ksiazka);
 		if(skad == 0)
 			return "dodaj_wydanie";
+		if(skad == 2)
+			return "podsumowanie_ksiazki";
 		else
 			return "dodaj_autora";
 	}
 	
-	public String saveKsiazka() {
+	/*public String saveKsiazka() {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
 		Ksiazka ksiazka = new Ksiazka();
 		ksiazka.setTytul(tytul);
 		ksiazka.setOpis(opis);
@@ -313,7 +424,7 @@ public class KsiazkaController {
 		ksiazkaDAO.save(ksiazka);
 
 		return "ksiazki";
-	}
+	}*/
 	
 	public Ksiazka getKsiazka(int idKsiazki)
 	{
@@ -329,7 +440,25 @@ public class KsiazkaController {
 	}
 	
 	public String saveEgzemplarz(int skad) {
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
 		Egzemplarz egzemplarz = new Egzemplarz();
+		if(ISBN.equals(""))
+		{
+			errorMessageEgzemplarz = "Poda³eœ puste pole!";
+			if(skad  == 0)
+			{
+				return "ksiazki";
+			}
+			else
+			{
+				return "dodaj_egzemplarz";
+			}
+		}
 		egzemplarz.setStatus("Dostêpna");
 		egzemplarz.setISBN(ISBN);
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -343,22 +472,191 @@ public class KsiazkaController {
 		if(ksiazka.getEgzemplarz() != null)
 		{
 			egzemplarze = ksiazka.getEgzemplarz();
+			for(Egzemplarz element : egzemplarze)
+			{
+				if(element.getISBN().equals(egzemplarz.getISBN()))
+				{
+					errorMessageEgzemplarz = "Podany egzemplarz zosta³ ju¿ dodany do ksi¹¿ki";
+					return "dodaj_egzemplarz";
+				}
+			}
+		}
+		List<Egzemplarz> dostepneEgzemplarze = egzemplarzDAO.findAll();
+		for(Egzemplarz element : dostepneEgzemplarze)
+		{
+			if(element.getISBN().equals(ISBN))
+			{
+				errorMessageEgzemplarz = "Podany egzemplarz istnieje ju¿ w bazie";
+				return "dodaj_egzemplarz";
+			}
 		}
 		egzemplarze.add(egzemplarz);
 		ksiazka.setEgzemplarz(egzemplarze);
 		
 
-		//session.setAttribute("ksiazka", ksiazka);
+		session.setAttribute("ksiazka", ksiazka);
 		
 		if(skad  == 0)
 		{
-			ksiazkaDAO.save(ksiazka);
-			return "ksiazki";
+			session.setAttribute("podsumowanie", 1);
+			return "podsumowanie_ksiazki";
 		}
 		else
 		{
-			session.setAttribute("ksiazka", ksiazka);
 			return "dodaj_egzemplarz";
 		}
+	}
+	public List<Ksiazka> pokazPodsumowanie()
+	{
+		List<Ksiazka> ksiazki = new LinkedList<>();
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		ksiazki.add(ksiazka);
+		return ksiazki;
+	}
+	public String dodajKsiazke()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		Wydanie wydanie = (Wydanie) session.getAttribute("wydanie");
+		if(ksiazka.getKategoria() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹zka musi posiadaæ kategoriê !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getAutor() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ autora !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getEgzemplarz() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ autora !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getEgzemplarz() != null)
+		{
+			List<Egzemplarz> egzemplarze = ksiazka.getEgzemplarz();
+			int licznik = 0;
+			for(Egzemplarz element : egzemplarze)
+			{
+				if(element.getWydanie() == null)
+				{
+					errorMessagePodsumowanie = "Pominiêto dodanie wydania Anuluj i zacznij jeszcze raz !";
+					return "podsumowanie_ksiazki";
+				}
+				if(element.getWydanie().getId() == wydanie.getId())
+				{
+					licznik = 1;
+					break;
+				}
+			}
+			if(licznik == 0)
+			{
+				errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ egzemplarz aktualnie dodawanego wydania !";
+				return "podsumowanie_ksiazki";
+			}
+		}
+		ksiazkaDAO.save(ksiazka);
+		return "ksiazki";
+	}
+	
+	public String zapiszIDodajWydanie()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		Wydanie wydanie = (Wydanie) session.getAttribute("wydanie");
+		if(ksiazka.getKategoria() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹zka musi posiadaæ kategoriê !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getAutor() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ autora !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getEgzemplarz() == null)
+		{
+			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ egzemplarz !";
+			return "podsumowanie_ksiazki";
+		}
+		if(ksiazka.getEgzemplarz() != null)
+		{
+			List<Egzemplarz> egzemplarze = ksiazka.getEgzemplarz();
+			int licznik = 0;
+			for(Egzemplarz element : egzemplarze)
+			{
+				if(element.getWydanie() == null)
+				{
+					errorMessagePodsumowanie = "Pominiêto dodanie wydania Anuluj i zacznij jeszcze raz !";
+					return "podsumowanie_ksiazki";
+				}
+				if(element.getWydanie().getId() == wydanie.getId())
+				{
+					licznik = 1;
+					break;
+				}
+			}
+			if(licznik == 0)
+			{
+				errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ egzemplarz aktualnie dodawanego wydania !";
+				return "podsumowanie_ksiazki";
+			}
+		}
+		Long id = (long) -1;
+		ksiazkaDAO.save(ksiazka);
+		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();//.stream().filter(k -> k.getTytul().equals(ksiazka.getTytul()))
+		for(Ksiazka element : ksiazki)
+		{
+			if(element.getTytul().equals(ksiazka.getTytul()))
+			{
+				id = element.getId();
+			}
+		}
+		if(id == -1)
+			return "ksiazki";
+		Ksiazka ksiazkaEdit = ksiazkaDAO.findOne(id);
+		session.setAttribute("ksiazka",ksiazkaEdit);
+		return "dodaj_wydanie";
+	}
+	
+	public int czyZPodsumowania()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		int skad = (int) session.getAttribute("podsumowanie");
+		return skad;
+	}
+	
+	public String pokazSzczegoly(String id)
+	{
+		Long idK = Long.parseLong(id);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.setAttribute("idKsiazki", idK);
+		return "ksiazka_szczegoly";
+	}
+	
+	public Ksiazka znajdzKsiazke()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idK = (Long) session.getAttribute("idKsiazki");
+		
+		Ksiazka ksiazka = ksiazkaDAO.findOne(idK);
+		return ksiazka;
 	}
 }

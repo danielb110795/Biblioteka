@@ -84,6 +84,7 @@
 			    value="#{ksiazkaController.tytul}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="tytul" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKsiazka}"></h:outputText>
                 <br/>      
                 
                 Opis: 

@@ -17,6 +17,7 @@
 	
 	<div id="tekst2">
 		<h3>Dodawanie nowej kategorii:</h3>
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
 		<h:form>
 				Nazwa: 
 				<br/> 
@@ -24,7 +25,6 @@
 			    value="#{ksiazkaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
-                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(1)}"/>
 		</h:form>		
@@ -41,9 +41,11 @@
 				</h:selectOneMenu> 
 				<br/>  
 				<br/>
-			<h:commandButton value="Dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/>
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
 			<h:commandButton value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
-		</h:form>		
+		</h:form>	
+		<h:form><h:commandButton value="Pomiń" action="dodaj_autora"/> </h:form>		
 	</div>
 	
 	

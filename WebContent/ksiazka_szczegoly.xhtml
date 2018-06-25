@@ -10,28 +10,15 @@
 
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
-
-	<div id="bocznemenu"> 
-		<center><h2>Placówki</h2></center>
-		<ul id="tekstplacowek">
-		<li><a href="spis_ksiazek.html">Placówka 1</a></li>
-		<li><a href="spis_ksiazek.html">Placówka 2</a></li>
-		<li><a href="spis_ksiazek.html">Placówka 3</a></li>
-		</ul>
-	</div>
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
 	
 	<div id="srodek">
 	<div id="tekst2">
-		<h2>Placówki</h2>
+		<h2>Podsumowanie</h2>
 		<hr color='#FF9966' size='5'/>
 		<div>
-		
-		<form method="post" enctype="text/plain">
-		<div id="formularz">
-			Szukaj książki: <input name="login" /> 
-			<input type="submit" value="Szukaj" />
-		</div>
-		</form>	
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessagePodsumowanie}"></h:outputText>
 		<table class ="aTable" style="width:100%">
   		<tr>
   			<th>Zdjęcie</th>
@@ -39,25 +26,44 @@
    			<th>Autorzy</th> 
    			<th>Kategorie</th>
   			<th>Placówka</th>
-   			<th>Dostępna ilość</th> 
-  			<th>Operacje</th>
   		</tr>
   		
-		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki()}">
+		
 
 		<tr>
-		<td>#{ksiazka.zdjecie} </td>
+		<td>#{ksiazkaController.znajdzKsiazke().zdjecie} </td>
 		<td>#{ksiazka.tytul} </td>
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"><p>#{autor.imie} #{autor.nazwisko}</p></ui:repeat> </td>
 		<td><ui:repeat var="kategoria" value="#{ksiazka.kategoria}"><p>#{kategoria.nazwa}</p></ui:repeat></td>
 		<td>#{ksiazka.biblioteka.nazwa}</td>
+		</tr>
+		
+		</table>
+		</div>
+		
+		<div>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+  			<th>Wydanie</th>
+   			<th>ISBN Egzemplarza</th>
+   			<th>Operacje</th>
+  		</tr>
+  		<ui:repeat var="egzemplarz" value="#{ksiazka.egzemplarz}">
+		<tr>
 		<td>
-			<h:outputText rendered="2 == 3" value="Brak"></h:outputText>
-       		<h:outputText rendered="#{ksiazka.egzemplarz.size() > 0}" value="#{ksiazka.egzemplarz.size()}"></h:outputText>
+		#{egzemplarz.wydanie.wydawnictwo.nazwa} #{egzemplarz.wydanie.nazwa} #{egzemplarz.wydanie.miejsceWydania} #{egzemplarz.wydanie.rokWydania}</td>
+		<td>
+		#{egzemplarz.ISBN}
 		</td>
 		<td>
 		<h:form>  
-        	<h:commandButton action="#{ksiazkaController.pokazSzczegoly(ksiazka.id)}" value="Pokaż"></h:commandButton>
+			<h:commandButton action="#" value="Wypożycz"></h:commandButton>
+			<h:commandButton rendered="2 == 3" action="#" value="Zwróć"></h:commandButton>
+			<h:commandButton action="#" value="Do renowacji"></h:commandButton>
+			<h:commandButton rendered="2 == 3" action="#" value="Zwróć z renowacji"></h:commandButton>
+			<h:commandButton rendered="2 == 3" action="dodaj_egzemplarz" value="Zarezerwuj"></h:commandButton>
+			<h:commandButton action="#" value="Usuń"></h:commandButton>
         </h:form>
 		</td>
 		</tr>

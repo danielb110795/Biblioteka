@@ -16,7 +16,8 @@
 	<div id="srodek">
 	
 	<div id="tekst2">
-		<h3>Dodawanie wydania:</h3>
+		<h3>Dodawanie nowego egzemplarza:</h3>
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageEgzemplarz}"></h:outputText>
 		<h:form>
 				
 				ISBN: 
@@ -30,6 +31,7 @@
 			<h:commandButton value="Dodaj książke" action="#{ksiazkaController.saveEgzemplarz(0)}"/>
 			<h:commandButton value="Dodaj egzemplarz" action="#{ksiazkaController.saveEgzemplarz(1)}"/>
 		</h:form>		
+		<h:form><h:commandButton value="Pomiń" action="podsumowanie_ksiazki"/> </h:form>	
 	</div>
 	
 	<br/>
