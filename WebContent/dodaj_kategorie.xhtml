@@ -31,14 +31,25 @@
 				<br/>  
 
 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/>
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i przejd" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
 			<h:commandButton value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
 			
 		</h:form>	
-		<h:form><h:commandButton value="Przejdź do etapu 3" action="dodaj_autora"/> </h:form>
+		<h:form><h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="podsumowanie_ksiazki"/> </h:form>
 		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>		
 		<h3>Jeśli nie ma odpowiedniej kategorii możesz ją dodać poniżej.</h3>
 		
+		<h2>Usunięcie kategorii:</h2>
+		
+		<h:form>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorieKsiazki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunKategorieZKsiazki()}"/> 
+			
+		</h:form>	
 		<br/>
 		<br/>
 		<h2>Dodawanie nowej kategorii:</h2>

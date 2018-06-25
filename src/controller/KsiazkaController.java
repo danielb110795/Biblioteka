@@ -362,6 +362,34 @@ public class KsiazkaController {
 			return "dodaj_kategorie";
 	}
 	
+	public String usunKategorieZKsiazki()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		List<Kategoria> kategorie = new LinkedList<Kategoria>();
+		Kategoria podanaKategoria = getKategoria(idKategoria);
+		
+		if(ksiazka.getKategoria() != null)
+		{
+			kategorie = ksiazka.getKategoria();
+			
+		}
+		//int id;
+		//id = podanaKategoria.getId();
+		kategorie.remove(podanaKategoria);
+		ksiazka.setKategoria(kategorie);
+		session.setAttribute("ksiazka",ksiazka);
+		
+		return "dodaj_kategorie";
+	}
+	
 	public String dodajAutoraDoKsiazki(int skad)
 	{
 		errorMessageKategoria = "";
@@ -522,6 +550,11 @@ public class KsiazkaController {
 		ksiazki.add(ksiazka);
 		return ksiazki;
 	}
+	public List<Kategoria> pokazKategorieKsiazki()
+	{
+		List<Kategoria> kategorie = pokazPodsumowanie().get(0).getKategoria();
+		return kategorie;
+	}
 	public String dodajKsiazke()
 	{
 		errorMessageKategoria = "";
@@ -534,17 +567,17 @@ public class KsiazkaController {
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
 		Wydanie wydanie = (Wydanie) session.getAttribute("wydanie");
-		if(ksiazka.getKategoria() == null)
+		if(ksiazka.getKategoria() == null || ksiazka.getKategoria().isEmpty())
 		{
 			errorMessagePodsumowanie = "Ksi¹zka musi posiadaæ kategoriê !";
 			return "podsumowanie_ksiazki";
 		}
-		if(ksiazka.getAutor() == null)
+		if(ksiazka.getAutor() == null || ksiazka.getAutor().isEmpty())
 		{
 			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ autora !";
 			return "podsumowanie_ksiazki";
 		}
-		if(ksiazka.getEgzemplarz() == null)
+		if(ksiazka.getEgzemplarz() == null || ksiazka.getEgzemplarz().isEmpty())
 		{
 			errorMessagePodsumowanie = "Ksi¹¿ka musi posiadaæ autora !";
 			return "podsumowanie_ksiazki";

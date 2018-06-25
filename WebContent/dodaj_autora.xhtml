@@ -32,7 +32,8 @@
 			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
 		</h:form>	
 		<h:form>
-		<h:commandButton value="Przejdź do etapu 4" action="dodaj_wydanie"/> </h:form>	
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 4" action="dodaj_wydanie"/> 
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="podsumowanie_ksiazki"/></h:form>	
 		<h3>Jeśli nie ma odpowiedniego autora możesz go dodać poniżej.</h3>
 		
 		<br/>
