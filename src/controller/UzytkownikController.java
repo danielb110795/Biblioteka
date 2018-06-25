@@ -38,6 +38,10 @@ public class UzytkownikController {
 	@Setter
 	private String errorMessageEmail = "";
 	
+	@Getter
+	@Setter
+	private String informacjaONowymHasle = "";
+	
 	private String login;
 	private String haslo;
 	private String email;
@@ -235,12 +239,49 @@ public class UzytkownikController {
 			return "uzytkownicy";
 	}
 	
+	public String zmianaHasla()
+	{	
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		String idCzyt = (String) session.getAttribute("idUzytkownika");
+		
+		Long idCzytelnika = Long.parseLong(idCzyt);
+		
+		
+		Czytelnik czytelnik = czytelnikDAO.findOne(idCzytelnika);
+		Uzytkownik uzytkownik = uzytkownikDAO.findOne(czytelnik.getUzytkownik().getId());
+		
+			uzytkownik.setLogin(uzytkownik.getLogin());	
+			
+			uzytkownik.setHaslo(haslo);
+					
+			uzytkownik.setRola("CZYTELNIK");
+			uzytkownik.setAktywowane(true);
+			uzytkownik.setZalogowany(true);
+			czytelnik.setImie(czytelnik.getImie());
+
+			czytelnik.setNazwisko(czytelnik.getNazwisko());
+			czytelnik.setEmail(czytelnik.getEmail());
+		
+			czytelnik.setPesel(czytelnik.getPesel());
+			czytelnik.setAdres(czytelnik.getAdres());
+
+			czytelnik.setKara(czytelnik.getKara());
+			czytelnik.setUzytkownik(uzytkownik);
+		
+			uzytkownikDAO.save(uzytkownik);
+			czytelnikDAO.save(czytelnik); 
+			
+			informacjaONowymHasle = "Haslo zmieniono pomyœlnie";
+			
+			return "zmiana_hasla";
+	} 
+	
 	public String usunUzytkownika(String id)
 	{
 		Long idCzytelnika = Long.parseLong(id);
 		czytelnikDAO.remove(idCzytelnika);
 		return "uzytkownicy_pracownik";
 	}
-	
-	
 }

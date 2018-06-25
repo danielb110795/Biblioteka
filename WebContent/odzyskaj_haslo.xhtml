@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+
+
+	<div id="bocznemenu"> 
+	<center><h2>MENU</h2></center>
+	<hr class='b'/>		
+				<a href="moje_konto.xhtml" id="przyciskBoczny">Logowanie</a>
+				<a href="nowe_konto.xhtml" id="przyciskBoczny">Załóż konto</a>
+				<a href="odzyskaj_haslo.xhtml" id="przyciskBoczny">Odzyskaj hasło</a>
+	</div>
+
+	<div id="srodek">
+		<div id="tekst2">
+			<h2>Odzyskiwanie hasła</h2>
+			<hr class='a' />
+		</div>
+		<br/>
+		<br/>
+		<div id="formularz">
+			<form action="OdzyskajHasloServlet" method="post">
+				
+				Podaj swój e-mail: 
+				<br/>
+				<input id="adres" type="email" name="email" value=""
+					placeholder="np. email@wp.pl" required="true" /> <br />
+
+				<input type="submit" value="Wyslij nowe hasło" />
+				<h:message for="haslo" errorStyle="color:red; display:block"/>
+				<h:outputText styleClass="error" value=" #{odzyskajHasloController.errorMessageEmail}"></h:outputText>
+			</form>
+		</div>
+
+	</div>
+
+
+	<a href="javascript:scroll(0,0);">W górę</a>
+</body>
+</html>
