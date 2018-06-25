@@ -1,11 +1,14 @@
 package controller;
 
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import lombok.Data;
+
+@RequestScoped
 @Named
-@Stateless
+@Data
 @LocalBean
 public class ComponentController {
 

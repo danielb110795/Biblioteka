@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -15,9 +15,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Stateless
-@LocalBean
+@RequestScoped
 @Named
+@Data
+@LocalBean
 public class AutoryzacjaController {
 
 	@Getter

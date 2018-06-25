@@ -3,7 +3,7 @@ package controller;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -13,7 +13,7 @@ import entity.Czytelnik;
 import entity.Uzytkownik;
 import lombok.Data;
 
-@Stateless
+@RequestScoped
 @Named
 @Data
 @LocalBean
