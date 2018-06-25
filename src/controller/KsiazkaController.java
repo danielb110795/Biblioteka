@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -262,8 +263,8 @@ public class KsiazkaController {
 		wydanie.setNazwa("Wydanie: "+nrWydania);
 		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
 		session.setAttribute("wydanie",wydanie);
-		//wydanieDAO.save(wydanie);
-
+		
+		session.setAttribute("podsumowanie", 1);
 		return "dodaj_egzemplarz";
 	}
 	
@@ -290,11 +291,12 @@ public class KsiazkaController {
 		errorMessagePodsumowanie = "";
 		Ksiazka ksiazka = new Ksiazka();
 		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
+		Biblioteka biblioteka = bibliotekaDAO.findOne((long)idPlacowki);
 		for(Ksiazka element : ksiazki)
 		{
-			if(element.getTytul().equals(tytul))
+			if(element.getTytul().equals(tytul) && element.getBiblioteka().equals(biblioteka))
 			{
-				errorMessageKsiazka = "Ksiazka o podanym tytule juz istnieje";
+				errorMessageKsiazka = "Ksiazka o podanym tytule juz istnieje w tej bibliotece";
 				return "ksiazki";
 			}
 		}
@@ -302,7 +304,7 @@ public class KsiazkaController {
 		ksiazka.setOpis(opis);
 		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
 		ksiazka.setZdjecie("zdjecie.jpg");
-		Biblioteka biblioteka = bibliotekaDAO.findOne((long)idPlacowki);
+		
 		ksiazka.setBiblioteka(biblioteka);
 		
 		
@@ -504,7 +506,6 @@ public class KsiazkaController {
 		
 		if(skad  == 0)
 		{
-			session.setAttribute("podsumowanie", 1);
 			return "podsumowanie_ksiazki";
 		}
 		else
@@ -664,5 +665,45 @@ public class KsiazkaController {
 		
 		Ksiazka ksiazka = ksiazkaDAO.findOne(idK);
 		return ksiazka;
+	}
+	public String usunKategorie()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		kategoriaDAO.remove((long)idKategoria);
+		return "kategoria";
+	}
+	public String usunAutora()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		autorDAO.remove((long)idAutora);
+		return "autor";
+	}
+	public String usunWydawnictwo() throws IOException
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		try {
+		wydawnictwoDAO.remove((long)idWydawnictwa);
+		}catch(Throwable e)
+		{
+			errorMessageWydawnictwo = "Wydawnictwo zawiera przypisane egzemplarze !";
+			return "wydawnictwo";
+		}
+		
+		return "wydawnictwo";
 	}
 }

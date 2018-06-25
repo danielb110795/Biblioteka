@@ -29,7 +29,7 @@
 				<br/>  
 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
+			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
 		</h:form>	
 		<h:form>
 		<h:commandButton value="Przejdź do etapu 4" action="dodaj_wydanie"/> </h:form>	

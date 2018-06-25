@@ -46,8 +46,16 @@
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(0)}"/>
 		</h:form>	
-		
-		
+		<br/><br/>
+		<h2>Usunięcie kategorii:</h2>
+		<h:form>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+			<h:commandButton value="Usun" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunKategorie()}"/> 
+			
+		</h:form>	
 	<br/> <br/> 
 	<h2>Lista kategorii:</h2>	
 		<table class ="aTable" style="width:30%">

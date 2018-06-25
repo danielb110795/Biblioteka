@@ -59,6 +59,15 @@
 		</h:form>	
 		
 			<br/> <br/> 
+			<h2>Usunięcie autora:</h2>
+		<h:form>
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+			<h:commandButton value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunAutora()}"/> 
+		</h:form>
+		<br/><br/>
 	<h2>Lista autorów:</h2>	
 		
 	<table class ="aTable" style="width:30%">

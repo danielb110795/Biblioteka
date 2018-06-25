@@ -45,7 +45,7 @@
 			<h:commandButton action="dodaj_egzemplarz" value="Dodaj egzemplarz"></h:commandButton>
 			<h:commandButton action="#{ksiazkaController.zapiszIDodajWydanie()}" value="Kolejne wydanie"></h:commandButton>
         	<h:commandButton action="#{ksiazkaController.dodajKsiazke()}" value="Zakończ"></h:commandButton>
-        	<h:commandButton action="ksiazki" value="Anuluj"></h:commandButton>
+        	<h:commandButton action="ksiazki" onclick="return confirm('Czy na pewno chcesz anulować? Stracisz wprowadzone dotąd dane')" value="Anuluj"></h:commandButton>
         </h:form>
 		</td>
 		</tr>

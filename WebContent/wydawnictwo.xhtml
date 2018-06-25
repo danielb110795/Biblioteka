@@ -31,7 +31,7 @@
 		
 		<br/>
 		<br/>
-		
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
 		<h2>Dodawanie nowego wydawnictwa:</h2>
 		<h:form>
 				Nazwa: 
@@ -40,12 +40,22 @@
 			    value="#{ksiazkaController.nazwaWydawnictwa}" required="true" requiredMessage="To pole jest wymagane">
                 </h:inputText>
                 <h:message for="nazwaWydawnictwa" errorStyle="color:red; display:block"/>
-                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(0)}"/>
 		</h:form>		
 		
 			<br/> <br/> 
+			<h2>Usunięcie wydawnictwa:</h2>
+		<h:form>
+				Wydawnictwo:   
+                <br/>              
+                <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
+					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+       			<br/>            
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}"/>
+		</h:form>	
+		<br/><br/>
 	<h2>Lista wydawnictw:</h2>	
 	
 	<table class ="aTable" style="width:30%">
