@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	
+	<div id="tekst2">
+		<h2>Operacje na książkach</h2>
+		<hr class='a' />
+		<br/>
+		
+		<table style="width:100%">
+		<tr>
+		<td style="width:25%"><a href="ksiazki.xhtml" id="przycisk5"> Dodaj książkę </a></td>
+		<td style="width:25%"><a href="kategoria.xhtml" id="przycisk5"> Dodaj kategorie </a></td>
+		<td style="width:25%"><a href="autor.xhtml" id="przycisk5"> Dodaj autora </a></td>
+		<td style="width:25%"><a href="wydawnictwo.xhtml" id="przycisk5"> Dodaj wydawnictwo </a></td>
+		</tr>
+		</table>
+		
+		<br/>
+		<br/>
+		
+		<h2>Dodawanie nowego wydawnictwa:</h2>
+		<h:form>
+				Nazwa: 
+				<br/> 
+			    <h:inputText id="nazwaWydawnictwa" styleClass="input-text" name="nazwaWydawnictwa" 
+			    value="#{ksiazkaController.nazwaWydawnictwa}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nazwaWydawnictwa" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
+                <br/>              
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(0)}"/>
+		</h:form>		
+		
+			<br/> <br/> 
+	<h2>Lista wydawnictw:</h2>	
+	
+	<table class ="aTable" style="width:30%">
+  		<tr>
+   			<th>Nazwa</th>
+  		</tr>
+  		
+		<ui:repeat var="wydawnictwo" value="#{ksiazkaController.pokazWydawnictwa()}">
+		<tr>
+			<td>#{wydawnictwo.nazwa}</td>
+		</tr>
+		</ui:repeat>	
+	</table>
+	<br/>
+	<br/>
+	<br/>
+	</div>
+	
+	</div>
+	
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

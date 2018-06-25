@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	
+	<div id="tekst2">
+		<h2>Operacje na książkach</h2>
+		<hr class='a' />
+		<br/>
+		
+		<table style="width:100%">
+		<tr>
+		<td style="width:25%"><a href="ksiazki.xhtml" id="przycisk5"> Dodaj książkę </a></td>
+		<td style="width:25%"><a href="kategoria.xhtml" id="przycisk5"> Dodaj kategorie </a></td>
+		<td style="width:25%"><a href="autor.xhtml" id="przycisk5"> Dodaj autora </a></td>
+		<td style="width:25%"><a href="wydawnictwo.xhtml" id="przycisk5"> Dodaj wydawnictwo </a></td>
+		</tr>
+		</table>
+		
+		<br/>
+		<br/>
+		
+		<h2>Dodawanie nowego autora:</h2>
+		<h:form>
+				Imię: 
+				<br/> 
+			    <h:inputText id="imie" styleClass="input-text" name="imie" 
+			    value="#{ksiazkaController.imie}" required="true" requiredMessage="To pole jest wymagane" 
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
+				</h:inputText>
+                <h:message for="imie" errorStyle="color:red; display:block"/>
+                <br/>      
+                
+                Nazwisko: 
+				<br/> 
+			    <h:inputText id="nazwisko" styleClass="input-text" name="nazwisko" 
+			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-40 znaków">
+				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż-]{2,40}" />
+				</h:inputText>
+                <h:message for="nazwisko" errorStyle="color:red; display:block"/>
+                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
+                <br/>
+                        
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(0)}"/>
+		</h:form>	
+		
+			<br/> <br/> 
+	<h2>Lista autorów:</h2>	
+		
+	<table class ="aTable" style="width:30%">
+  		<tr>
+   			<th>Imię</th>
+   			<th>Nazwisko</th>
+  		</tr>
+  		
+		<ui:repeat var="autor" value="#{ksiazkaController.pokazAutorow()}">
+		<tr>
+			<td>#{autor.imie}</td>
+			<td>#{autor.nazwisko}</td>
+		</tr>
+		</ui:repeat>	
+	</table>
+		<br/>
+	<br/>
+	<br/>
+	</div>
+
+	</div>
+	
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

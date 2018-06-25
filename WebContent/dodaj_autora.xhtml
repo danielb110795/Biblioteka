@@ -16,7 +16,30 @@
 	<div id="srodek">
 	
 	<div id="tekst2">
-		<h3>Dodawanie nowego autora:</h3>
+	
+		<h2>Dodawanie nowej książki (Etap 3):</h2>
+		<hr class='a' />
+		<br/>
+		
+		<h2>Autor dla książki:</h2>
+		<h:form>
+                <br/>
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+				<br/>
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
+			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
+		</h:form>	
+		<h:form>
+		<h:commandButton value="Pomiń" action="dodaj_wydanie"/> </h:form>	
+		<h3>Jeśli nie ma odpowiedniego autora możesz go dodać poniżej.</h3>
+		
+		<br/>
+		<br/>
+		<h2>Dodawanie nowego autora:</h2>
 		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
 		<h:form>
 				Imie: 
@@ -37,28 +60,8 @@
                         
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(1)}"/>
 		</h:form>		
+
 	</div>
-	
-	<br/>
-	
-	<div id="tekst2">
-		<h3>Autor dla książki:</h3>
-		<h:form>
-                <br/>
-                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/>  
-				<br/>
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
-			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
-		</h:form>	
-		<h:form><h:commandButton value="Pomiń" action="dodaj_wydanie"/> </h:form>	
-	</div>
-	
-	
-	
 	</div>
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	

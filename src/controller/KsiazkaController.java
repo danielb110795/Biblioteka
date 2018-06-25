@@ -124,8 +124,8 @@ public class KsiazkaController {
 		{
 			if(element.getNazwa().equals(nazwa))
 			{
-				errorMessageKategoria = "Ju¿ istnieje!!!";
-				return "ksiazki";
+				errorMessageKategoria = "Ta kategoria ju¿ istnieje";
+				return "kategoria";
 			}
 		}
 		
@@ -133,7 +133,7 @@ public class KsiazkaController {
 		kategoria.setNazwa(nazwa);
 		kategoriaDAO.save(kategoria);
 		if(skad == 0)
-			return "ksiazki";
+			return "kategoria";
 		else
 			return "dodaj_kategorie";
 	}
@@ -167,8 +167,8 @@ public class KsiazkaController {
 		{
 			if(element.getImie().equals(imie) && element.getNazwisko().equals(nazwisko))
 			{
-				errorMessageAutor = "Ju¿ istnieje";
-				return "ksiazki";
+				errorMessageAutor = "Taki autor ju¿ istnieje.";
+				return "autor";
 			}
 		}
 		Autor autor = new Autor();
@@ -177,7 +177,7 @@ public class KsiazkaController {
 		autor.setNazwisko(nazwisko);
 		autorDAO.save(autor);
 		if(skad == 0)
-			return "ksiazki";
+			return "autor";
 		else
 			return "dodaj_autora";
 	}
@@ -217,7 +217,7 @@ public class KsiazkaController {
 			{
 				errorMessageWydawnictwo = "To wydawnictwo ju¿ istnieje";
 				if(skad == 0)
-					return "ksiazki";
+					return "wydawnictwo";
 				else
 					return "dodaj_wydanie";
 			}
@@ -227,7 +227,7 @@ public class KsiazkaController {
 		wydawnictwoDAO.save(wydawnictwo);
 
 		if(skad == 0)
-			return "ksiazki";
+			return "wydawnictwo";
 		else
 			return "dodaj_wydanie";
 	}

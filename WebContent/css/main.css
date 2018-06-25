@@ -15,8 +15,8 @@ input
 	/*font: 10px Arial;*/
 	font-weight: bold;
 	float: bottom;
-	margin-left: 0.5%;
-	margin-right: 0.5%;
+	margin-top: 7px;
+	padding: 4px;
 	
 }
 input:hover {
@@ -278,7 +278,7 @@ hr.a
 
 hr.b
 {
-    height: 3px;
+    height: 5px;
     color: silver;
     background: silver;
     font-size: 0;
@@ -287,7 +287,7 @@ hr.b
 
 hr.c
 {
-    height: 2px;
+    height: 5px;
     width: 30%;
     color: silver;
     background: silver;
@@ -301,7 +301,11 @@ hr.c
 
 .aTable th{
 	border: 1px solid black;
-}
+	padding: 5px;
+	height: 30px;
+	font-size: 23px;
+	background: #FF9966;
+}	
 
 .aTable td{
 	border: 1px solid black;
