@@ -16,7 +16,11 @@
 	<div id="srodek">
 	
 	<div id="tekst2">
-		<h3>Dodawanie nowego egzemplarza:</h3>
+		<h2>Dodawanie nowej książki (Etap 5):</h2>
+		<hr class='a' />
+		<br/>
+		
+		<h2>Dodawanie nowego egzemplarza:</h2>
 		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageEgzemplarz}"></h:outputText>
 		<h:form>
 				
@@ -31,7 +35,7 @@
 			<h:commandButton value="Dodaj książke" action="#{ksiazkaController.saveEgzemplarz(0)}"/>
 			<h:commandButton value="Dodaj egzemplarz" action="#{ksiazkaController.saveEgzemplarz(1)}"/>
 		</h:form>		
-		<h:form><h:commandButton value="Pomiń" action="podsumowanie_ksiazki"/> </h:form>	
+		<h:form><h:commandButton value="Przejdź do podsumowania" action="podsumowanie_ksiazki"/> </h:form>	
 	</div>
 	
 	<br/>
