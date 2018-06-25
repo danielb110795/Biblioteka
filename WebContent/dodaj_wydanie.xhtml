@@ -16,6 +16,21 @@
 	<div id="srodek">
 	
 	<div id="tekst2">
+		<h3>Dodawanie nowego wydawnictwa:</h3>
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
+		<h:form>
+				Nazwa: 
+				<br/> 
+			    <h:inputText id="nazwaWydawnictwa" styleClass="input-text" name="nazwaWydawnictwa" 
+			    value="#{ksiazkaController.nazwaWydawnictwa}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="nazwaWydawnictwa" errorStyle="color:red; display:block"/>
+                <br/>              
+			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(1)}"/>
+		</h:form>		
+	</div>
+	
+	<div id="tekst2">
 		<h3>Dodawanie wydania:</h3>
 		<h:form>
 				

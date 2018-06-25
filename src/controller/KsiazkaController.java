@@ -203,7 +203,7 @@ public class KsiazkaController {
 		return autor;                
 	}
 	
-	public String saveWydawnictwo() {
+	public String saveWydawnictwo(int skad) {
 		errorMessageKategoria = "";
 		errorMessageAutor = "";
 		errorMessageWydawnictwo = "";
@@ -216,14 +216,20 @@ public class KsiazkaController {
 			if(element.getNazwa().equals(nazwaWydawnictwa))
 			{
 				errorMessageWydawnictwo = "To wydawnictwo ju¿ istnieje";
-				return "ksiazki";
+				if(skad == 0)
+					return "ksiazki";
+				else
+					return "dodaj_wydanie";
 			}
 		}
 		Wydawnictwo wydawnictwo = new Wydawnictwo();
 		wydawnictwo.setNazwa(nazwaWydawnictwa);
 		wydawnictwoDAO.save(wydawnictwo);
 
-		return "ksiazki";
+		if(skad == 0)
+			return "ksiazki";
+		else
+			return "dodaj_wydanie";
 	}
 	
 	
