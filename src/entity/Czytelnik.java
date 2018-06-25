@@ -1,11 +1,14 @@
 package entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import dao.Domain;
@@ -30,4 +33,7 @@ public class Czytelnik implements Domain {
 	@JoinColumn(name = "uzytkownik")
 	private Uzytkownik uzytkownik;
 	
+	@ManyToMany
+	@JoinColumn(name = "wypozyczenie_id")
+	private List <Wypozyczenie> wypozyczenia;
 }

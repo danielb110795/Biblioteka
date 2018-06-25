@@ -28,8 +28,5 @@ public class Wypozyczenie implements Domain {
 	private Date dataOddania; 
 	
 	@ManyToOne
-	private Czytelnik czytelnik; 
-	
-	@ManyToOne
 	private Egzemplarz egzemplarz; 
 }

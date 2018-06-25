@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuAdmin()}" />
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Czytelnicy</h2>
+		<hr class='a'/>
+		<div>
+		
+
+		<br/><br/>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Imie</th>
+   			<th>Nazwisko</th> 
+   			<th>Email</th> 
+  			<th>Pesel</th>
+  			<th>Adres</th>
+  			<th>Biblioteka</th>
+  			<th>Operacje</th>
+  		</tr>
+		
+		<ui:repeat var="czytelnik" value="#{uzytkownikController.pokazUzytkownikow()}">
+		
+		<tr>
+		<td>#{czytelnik.imie} </td>
+		<td>#{czytelnik.nazwisko} </td>
+		<td>#{czytelnik.email} </td>
+		<td>#{czytelnik.pesel} </td>
+		<td>#{czytelnik.adres} </td>	
+		<td> 
+		<h:outputText rendered="#{empty czytelnik.wypozyczenia}" value="Brak wypozyczonych ksiazek"></h:outputText> 
+		<h:outputText rendered="#{!empty czytelnik.wypozyczenia}" value="#{pracownik.wypozyczenia.size()}"></h:outputText> 
+		</td>
+		<td>
+		<h:form>  
+		<h:commandButton action="#{wypozyczeniaController.wypozycz(czytelnik.id)}" value="Wypożycz"></h:commandButton>
+		</h:form>
+		</td> 
+		</tr>
+		</ui:repeat>
+		</table>
+		
+		
+		</div>
+	</div>
+	</div>		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 

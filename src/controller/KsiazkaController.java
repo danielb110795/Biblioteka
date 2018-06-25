@@ -390,6 +390,33 @@ public class KsiazkaController {
 		return "dodaj_kategorie";
 	}
 	
+	public String usunAutoraZKsiazki()
+	{
+		errorMessageKategoria = "";
+		errorMessageAutor = "";
+		errorMessageWydawnictwo = "";
+		errorMessageEgzemplarz = "";
+		errorMessageKsiazka = "";
+		errorMessagePodsumowanie = "";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
+		List<Autor> autorzy = new LinkedList<Autor>();
+		Autor podanyAutor = getAutor(idAutora);
+		
+		if(ksiazka.getAutor() != null || ksiazka.getAutor().isEmpty())
+		{
+			autorzy = ksiazka.getAutor();
+		}
+		//int id;
+		//id = podanaKategoria.getId();
+		autorzy.remove(podanyAutor);
+		ksiazka.setAutor(autorzy);
+		session.setAttribute("ksiazka",ksiazka);
+		
+		return "dodaj_autora";
+	}
+	
 	public String dodajAutoraDoKsiazki(int skad)
 	{
 		errorMessageKategoria = "";
@@ -526,6 +553,7 @@ public class KsiazkaController {
 				return "dodaj_egzemplarz";
 			}
 		}
+		egzemplarz.setStatus("DOSTEPNY");
 		egzemplarze.add(egzemplarz);
 		ksiazka.setEgzemplarz(egzemplarze);
 		
@@ -554,6 +582,11 @@ public class KsiazkaController {
 	{
 		List<Kategoria> kategorie = pokazPodsumowanie().get(0).getKategoria();
 		return kategorie;
+	}
+	public List<Autor> pokazAutoraKsiazki()
+	{
+		List<Autor> autorzy = pokazPodsumowanie().get(0).getAutor();
+		return autorzy;
 	}
 	public String dodajKsiazke()
 	{
