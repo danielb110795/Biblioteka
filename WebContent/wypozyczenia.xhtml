@@ -31,7 +31,7 @@
   		<ui:repeat var="wypozyczenie" value="#{wypozyczeniaController.pokazWypozyczenia()}"> 
   		
 		<tr>
-		<ui:repeat var="ksiazka" value="#{wypozyczeniaController.pokazKsiazkiWypozyczenia()}"> 
+		<ui:repeat var="ksiazka" value="#{wypozyczeniaController.pokazKsiazkiWypozyczenia(wypozyczenie.egzemplarz.id)}"> 
 		<td>#{ksiazka.tytul} </td> 
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"> <p>#{autor.imie} #{autor.nazwisko}</p> </ui:repeat></td>
 		<td>#{ksiazka.biblioteka.nazwa} </td>
@@ -40,7 +40,6 @@
 		<td>
 		<h:form>  
         	<h:commandButton action="#{wypozyczeniaController.zwroc(wypozyczenie.egzemplarz.id)}" value="Zwróć"></h:commandButton>
-      		<h:commandButton action="#{wypozyczeniaController.zagubienie(wypozyczenie.egzemplarz.id)}" value="Zagubienie"></h:commandButton>
         </h:form>
 		</td>
 		</tr> 
