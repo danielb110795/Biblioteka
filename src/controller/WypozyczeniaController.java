@@ -23,7 +23,7 @@ import dao.WydawnictwoDAO;
 import dao.WypozyczenieDAO;
 import entity.Czytelnik;
 import entity.Egzemplarz;
-
+import entity.Ksiazka;
 import entity.Wypozyczenie;
 import lombok.Data;
 
@@ -130,7 +130,7 @@ public class WypozyczeniaController {
 		Long idE = Long.parseLong(id);
 		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
 		
-		egzemplarz.setStatus("DOSTEPNY");
+		egzemplarz.setStatus("RENOWACJA");
 		
 		egzemplarzDAO.save(egzemplarz);
 		return "spis_ksiazek";
@@ -140,9 +140,47 @@ public class WypozyczeniaController {
 		Long idE = Long.parseLong(id);
 		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
 		
-		egzemplarz.setStatus("RENOWACJA");
+		egzemplarz.setStatus("DOSTEPNY");
 		
 		egzemplarzDAO.save(egzemplarz);
 		return "spis_ksiazek";
+	}
+	public String przejdzDoWypozyczen(String id)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idC = Long.parseLong(id);
+		session.setAttribute("idCzytelnika", idC);
+		return "wypozyczenia";
+	}
+	public List<Wypozyczenie> pokazWypozyczenia()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idC = (long) session.getAttribute("idCzytelnika");
+		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
+		return czytelnik.getWypozyczenia();
+	}
+	public List<Ksiazka> pokazKsiazkiWypozyczenia()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idC = (long) session.getAttribute("idCzytelnika");
+		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
+		List<Wypozyczenie> wypozyczenia = czytelnik.getWypozyczenia();
+		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
+		List<Ksiazka> ksiazkiCzyt = new LinkedList<>();
+		for(Wypozyczenie elementWyp : wypozyczenia)
+		{
+			for(Ksiazka elementKsiazka : ksiazki)
+			{
+				List<Egzemplarz> egzemplarze = elementKsiazka.getEgzemplarz();
+				for(Egzemplarz egzemplarz : egzemplarze)
+				{
+					if(egzemplarz.getISBN().equals(elementWyp.getEgzemplarz().getISBN()))
+					{
+						ksiazkiCzyt.add(elementKsiazka);
+					}
+				}
+			}
+		}
+		return ksiazkiCzyt;
 	}
 }

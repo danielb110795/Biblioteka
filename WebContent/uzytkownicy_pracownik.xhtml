@@ -42,7 +42,7 @@
 		<td>#{czytelnik.adres} </td>
 		<td>
 		<h:form>  
-        	<h:commandButton action="#" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Wypożyczenia"></h:commandButton>
+        	<h:commandButton action="#{wypozyczeniaController.przejdzDoWypozyczen(czytelnik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Wypożyczenia"></h:commandButton>
         	<h:commandButton action="#{uzytkownikController.deaktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Deaktywuj"></h:commandButton>
         	<h:commandButton action="#{uzytkownikController.aktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == false}" value="Aktywuj"></h:commandButton> 
         	<h:commandButton action="#{uzytkownikController.pokazEdycje(czytelnik.id)}" value="Edytuj"></h:commandButton>

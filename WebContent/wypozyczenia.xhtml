@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:include src="#{componentController.getHead()}" />
+
+<body>
+	<ui:include src="#{componentController.getMainMenu()}" />
+	
+	<ui:include src="#{componentController.getMenuPracownik()}" />
+	
+	<div id="srodek">
+	<div id="tekst2">
+		<h2>Wypożyczenia</h2>
+		<hr class='a'/>
+		<br/>
+		<div>
+		
+		<table class ="aTable" style="width:100%">
+  		<tr>
+   			<th>Tytul</th>
+   			<th>Autorzy</th>
+   			<th>Placówka</th> 
+  			<th>ISBN</th>
+  			<th>Operacje</th>
+  		</tr>
+  		
+  		<ui:repeat var="czytelnik" value="#{wypozyczeniaController.pokazWypozyczenia()}"> 
+  		
+		<tr>
+		<ui:repeat var="ksiazka" value="#{wypozyczeniaController.pokazKsiazkiWypozyczenia()}"> 
+		<td>#{ksiazka.tytul} </td> 
+		<td><ui:repeat var="autor" value="#{ksiazka.autor}"> <p>#{autor.imie} #{autor.nazwisko}</p> </ui:repeat></td>
+		<td>#{ksiazka.biblioteka.nazwa} </td>
+		</ui:repeat>
+		<td>#{egzemplarz.ISBN} </td>
+		<td>
+		<h:form>  
+        	<h:commandButton action="#" value="Zwróć"></h:commandButton>
+      		<h:commandButton action="#" value="Zagubienie"></h:commandButton>
+        </h:form>
+		</td>
+		</tr>
+		</ui:repeat>
+		</table>
+		</div>
+	</div>
+	</div>		
+
+	<a href="javascript:scroll(0,0);">W górę</a> 	
+</body> 
+</html> 
