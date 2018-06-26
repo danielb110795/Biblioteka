@@ -88,6 +88,14 @@ public class KsiazkaController {
 	@Setter
 	private String usunWydawnictwaMessage = "";
 	
+	@Getter
+	@Setter
+	private String usunAutoraMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajAutoraMessage = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -169,10 +177,10 @@ public class KsiazkaController {
 			}
 		}
 		Autor autor = new Autor();
-		errorMessageAutor = "";
 		autor.setImie(imie);
 		autor.setNazwisko(nazwisko);
 		autorDAO.save(autor);
+		dodajAutoraMessage = "Dodano autora.";
 		if(skad == 0)
 			return "autor";
 		else
@@ -681,8 +689,15 @@ public class KsiazkaController {
 	}
 	
 	public String usunAutora()
-	{
-		autorDAO.remove((long)idAutora);
+	{	
+		try {
+			autorDAO.remove((long)idAutora);
+		}catch(Throwable e)
+		{
+			errorMessageAutor = "Autor jest przypisany do ksi¹¿ki!";
+			return "autor";
+		}
+		usunAutoraMessage = "Usuniêto autora.";
 		return "autor";
 	}
 	
@@ -693,10 +708,10 @@ public class KsiazkaController {
 			wydawnictwoDAO.remove((long)idWydawnictwa);
 		}catch(Throwable e)
 		{
-			errorMessageWydawnictwo = "Wydawnictwo zawiera przypisane egzemplarze !";
+			errorMessageWydawnictwo = "Wydawnictwo zawiera przypisane egzemplarze!";
 			return "wydawnictwo";
 		}
-		usunWydawnictwaMessage = "Usuniêto wydawnictwo";
+		usunWydawnictwaMessage = "Usuniêto wydawnictwo.";
 		return "wydawnictwo";
 	}
 }

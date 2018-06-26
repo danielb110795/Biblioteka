@@ -335,3 +335,9 @@ hr.c
 	background: #964B00;
 	color: white;
 }
+
+select[multiple], select[size] {
+    padding: 5px; 
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
