@@ -42,6 +42,27 @@ public class UzytkownikController {
 	@Setter
 	private String informacjaONowymHasle = "";
 	
+	@Getter
+	@Setter
+	private String usunUzytkownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String edytujUzytkownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String dezaktywujuzytkownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String aktywujuzytkownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajUzytkownikaMessage = "";
+	
+	
 	private String login;
 	private String haslo;
 	private String email;
@@ -91,6 +112,8 @@ public class UzytkownikController {
 		//uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
+		dodajUzytkownikaMessage = "Dodano u¿ytkownika " + czytelnik.getImie() + " " + czytelnik.getNazwisko() +".";
+		
 		if(zalogowanyUzytkownik.getRola().equals("PRACOWNIK"))
 			return "uzytkownicy_pracownik";
 		else
@@ -111,6 +134,8 @@ public class UzytkownikController {
 		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
+		Uzytkownik zalogowanyUzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		
 		String idCzyt = (String) session.getAttribute("idUzytkownika");
 		
 		Long idCzytelnika = Long.parseLong(idCzyt);
@@ -184,7 +209,12 @@ public class UzytkownikController {
 		uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
-		return "uzytkownicy_pracownik";
+		edytujUzytkownikaMessage = "Edytowano u¿ytkownika: " + czytelnik.getImie() + " " + czytelnik.getNazwisko() +".";
+		
+		if(zalogowanyUzytkownik.getRola().equals("PRACOWNIK"))
+			return "uzytkownicy_pracownik";
+		else
+			return "uzytkownicy";
 	} 
 	
 	public String pokazEdycje(String id)
@@ -218,6 +248,7 @@ public class UzytkownikController {
 		Uzytkownik uzytkownik = uzytkownikDAO.findOne(idUzytkownika);
 		uzytkownik.setAktywowane(true);
 		uzytkownikDAO.save(uzytkownik);
+		aktywujuzytkownikaMessage = "Aktywowano u¿ytkownika: " + uzytkownik.getLogin();
 		if(zalogowanyUzytkownik.getRola().equals("PRACOWNIK"))
 			return "uzytkownicy_pracownik";
 		else
@@ -233,6 +264,8 @@ public class UzytkownikController {
 		Uzytkownik uzytkownik = uzytkownikDAO.findOne(idUzytkownika);
 		uzytkownik.setAktywowane(false);
 		uzytkownikDAO.save(uzytkownik);
+		dezaktywujuzytkownikaMessage = "Deaktywowano u¿ytkownika: " + uzytkownik.getLogin();
+		
 		if(zalogowanyUzytkownik.getRola().equals("PRACOWNIK"))
 			return "uzytkownicy_pracownik";
 		else
@@ -262,8 +295,20 @@ public class UzytkownikController {
 	
 	public String usunUzytkownika(String id)
 	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		Uzytkownik uzytkownik = (Uzytkownik) session.getAttribute("uzytkownik");
+		
 		Long idCzytelnika = Long.parseLong(id);
+		Czytelnik czytelnik = czytelnikDAO.findOne(idCzytelnika);
+		
+		usunUzytkownikaMessage = "Usuniêto czytelnika: " + czytelnik.getImie() + " " + czytelnik.getNazwisko() +
+				".";
 		czytelnikDAO.remove(idCzytelnika);
-		return "uzytkownicy_pracownik";
+		
+		if (uzytkownik.getRola().equals("PRACOWNIK"))
+			return "uzytkownicy_pracownik";
+		else
+			return "uzytkownicy";
 	}
 }

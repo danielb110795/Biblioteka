@@ -20,6 +20,26 @@
 		<div>
 		
 		<br/>
+		<br/>
+		
+		<ui:fragment rendered="#{zamowienieController.usunZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.usunZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{zamowienieController.akceptujZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.akceptujZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{zamowienieController.odrzucZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.odrzucZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
 		
 		<table class ="aTable" style="width:100%">
   		<tr>

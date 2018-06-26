@@ -17,9 +17,41 @@
 		<h2>Czytelnicy</h2>
 		<hr class='a'/>
 		<br/>
+		<br/>
 		<div>
 		<a href="dodaj_uzytkownika.xhtml" id="przycisk2"> Dodaj czytelnika </a><br/><br/><br/>
 		<br/>
+		
+		<ui:fragment rendered="#{uzytkownikController.usunUzytkownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{uzytkownikController.usunUzytkownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{uzytkownikController.edytujUzytkownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{uzytkownikController.edytujUzytkownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{uzytkownikController.dodajUzytkownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{uzytkownikController.dodajUzytkownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{uzytkownikController.dezaktywujuzytkownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{uzytkownikController.dezaktywujuzytkownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{uzytkownikController.aktywujuzytkownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{uzytkownikController.aktywujuzytkownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
 		<table class ="aTable" style="width:100%">
   		<tr>
    			<th>Imie</th>
@@ -54,6 +86,9 @@
 		</table>
 		</div>
 	</div>
+		<br/>
+		<br/>
+		<br/>
 	</div>		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	
