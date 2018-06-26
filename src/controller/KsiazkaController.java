@@ -96,6 +96,14 @@ public class KsiazkaController {
 	@Setter
 	private String dodajAutoraMessage = "";
 	
+	@Getter
+	@Setter
+	private String usunKategoriaMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajKategorieMessage = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -143,6 +151,7 @@ public class KsiazkaController {
 		Kategoria kategoria = new Kategoria();
 		kategoria.setNazwa(nazwa);
 		kategoriaDAO.save(kategoria);
+		dodajKategorieMessage = "Dodano kategorie.";
 		if(skad == 0)
 			return "kategoria";
 		else
@@ -684,7 +693,15 @@ public class KsiazkaController {
 
 	public String usunKategorie()
 	{
-		kategoriaDAO.remove((long)idKategoria);
+		try {
+			kategoriaDAO.remove((long)idKategoria);
+		}catch(Throwable e)
+		{
+			errorMessageKategoria = "Kategoria jest przypisana do ksi¹¿ki!";
+			return "kategoria";
+		}
+		usunKategoriaMessage = "Usuniêto kategoriê.";
+
 		return "kategoria";
 	}
 	
