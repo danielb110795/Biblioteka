@@ -94,7 +94,6 @@ public class WypozyczeniaController {
 		return "spis_ksiazek";
 	}
 	
-	@Deprecated
 	public String zwroc(String id)
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -164,8 +163,11 @@ public class WypozyczeniaController {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Long idC = (long) session.getAttribute("idCzytelnika");
 		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
-		List<Wypozyczenie> wypozyczenia = czytelnik.getWypozyczenia();
+		List<Wypozyczenie> wypozyczenia = new LinkedList<>();
+		
+		wypozyczenia = czytelnik.getWypozyczenia();
 		List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
+
 		for(Wypozyczenie element : wypozyczenia)
 		{
 			if(element.getDataOddania() == null)
@@ -173,38 +175,29 @@ public class WypozyczeniaController {
 				wypozyczeniaAktualne.add(element);
 			}
 		}
+		
 		return wypozyczeniaAktualne;
 	}
-	public List<Ksiazka> pokazKsiazkiWypozyczenia()
+	public Ksiazka pokazKsiazkiWypozyczenia(String id)
 	{
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		Long idC = (long) session.getAttribute("idCzytelnika");
-		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
-		List<Wypozyczenie> wypozyczenia = czytelnik.getWypozyczenia();
-		List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
-		for(Wypozyczenie element : wypozyczenia)
-		{
-			if(element.getDataOddania() == null)
-			{
-				wypozyczeniaAktualne.add(element);
-			}
-		}
+		Ksiazka ksiazka = new Ksiazka();
+		Long idE = Long.parseLong(id);
+		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
 		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
-		List<Ksiazka> ksiazkiCzyt = new LinkedList<>();
-		for(Wypozyczenie elementWyp : wypozyczeniaAktualne)
+		
+		for(Ksiazka elementKsiazka : ksiazki)
 		{
-			for(Ksiazka elementKsiazka : ksiazki)
+			List<Egzemplarz> egzemplarze = elementKsiazka.getEgzemplarz();
+			for(Egzemplarz elementEgzemplarz : egzemplarze)
 			{
-				List<Egzemplarz> egzemplarze = elementKsiazka.getEgzemplarz();
-				for(Egzemplarz egzemplarz : egzemplarze)
+				if(egzemplarz.getId() == elementEgzemplarz.getId())
 				{
-					if(egzemplarz.getISBN().equals(elementWyp.getEgzemplarz().getISBN()))
-					{
-						ksiazkiCzyt.add(elementKsiazka);
-					}
+					ksiazka = elementKsiazka;
+					break;
 				}
 			}
 		}
-		return ksiazkiCzyt;
+	
+		return ksiazka;
 	}
 }
