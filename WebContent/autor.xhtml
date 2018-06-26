@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -32,6 +38,25 @@
 		<br/>
 		<br/>
 		
+		<ui:fragment rendered="#{ksiazkaController.dodajAutoraMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajAutoraMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.usunAutoraMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.usunAutoraMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageAutor != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageAutor}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Dodawanie nowego autora:</h2>
 		<h:form>
 				Imię: 
@@ -52,22 +77,13 @@
 				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż-]{2,40}" />
 				</h:inputText>
                 <h:message for="nazwisko" errorStyle="color:red; display:block"/>
-                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
                 <br/>
                         
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(0)}"/>
 		</h:form>	
 		
 			<br/> <br/> 
-			<h2>Usunięcie autora:</h2>
-		<h:form>
-                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/>  
-			<h:commandButton value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunAutora()}"/> 
-		</h:form>
-		<br/><br/>
+	
 	<h2>Lista autorów:</h2>	
 		
 	<table class ="aTable" style="width:30%">
@@ -83,6 +99,20 @@
 		</tr>
 		</ui:repeat>	
 	</table>
+	<br/><br/>
+	
+		<h2>Usunięcie autora:</h2>
+		<h:form>
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+			<h:commandButton value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć autora?')" action="#{ksiazkaController.usunAutora()}"/> 
+		</h:form>
+		
+		
+		
+		
 		<br/>
 	<br/>
 	<br/>

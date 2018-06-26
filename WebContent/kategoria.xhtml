@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+			<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -28,9 +34,28 @@
 		<td style="width:25%"><a href="wydawnictwo.xhtml" id="przycisk5"> Dodaj wydawnictwo </a></td>
 		</tr>
 		</table>
-	<br/>
-	<br/>
-	
+		<br/>
+		<br/>
+		
+		<ui:fragment rendered="#{ksiazkaController.dodajKategorieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajKategorieMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.usunKategoriaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.usunKategoriaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageKategoria != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageKategoria}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Dodawanie nowej kategorii:</h2>
 		<h:form>
 				Nazwa: 
@@ -42,20 +67,10 @@
 				</h:inputText>
 
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
-                <h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(0)}"/>
 		</h:form>	
-		<br/><br/>
-		<h2>Usunięcie kategorii:</h2>
-		<h:form>
-                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
-					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/>  
-			<h:commandButton value="Usun" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunKategorie()}"/> 
-			
-		</h:form>	
+		
 	<br/> <br/> 
 	<h2>Lista kategorii:</h2>	
 		<table class ="aTable" style="width:30%">
@@ -70,7 +85,16 @@
 		</ui:repeat>	
 	</table>
 	
-	
+	<br/><br/>
+		<h2>Usunięcie kategorii:</h2>
+		<h:form>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+			<h:commandButton value="Usun" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunKategorie()}"/> 
+			
+		</h:form>	
 	
 	<br/>
 	<br/>

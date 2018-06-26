@@ -80,6 +80,30 @@ public class KsiazkaController {
 	@Setter
 	private String errorMessagePodsumowanie = "";
 	
+	@Getter
+	@Setter
+	private String dodanieWydawnictwaMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunWydawnictwaMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunAutoraMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajAutoraMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunKategoriaMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajKategorieMessage = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -114,12 +138,6 @@ public class KsiazkaController {
 	private int idPlacowki;
 	
 	public String saveKategoria(int skad) {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		List<Kategoria> kategorie = kategoriaDAO.findAll();
 		for(Kategoria element : kategorie)
 		{
@@ -133,6 +151,7 @@ public class KsiazkaController {
 		Kategoria kategoria = new Kategoria();
 		kategoria.setNazwa(nazwa);
 		kategoriaDAO.save(kategoria);
+		dodajKategorieMessage = "Dodano kategorie.";
 		if(skad == 0)
 			return "kategoria";
 		else
@@ -157,12 +176,6 @@ public class KsiazkaController {
 	}
 	
 	public String saveAutor(int skad) {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		List<Autor> autorzy = autorDAO.findAll();
 		for(Autor element : autorzy)
 		{
@@ -173,10 +186,10 @@ public class KsiazkaController {
 			}
 		}
 		Autor autor = new Autor();
-		errorMessageAutor = "";
 		autor.setImie(imie);
 		autor.setNazwisko(nazwisko);
 		autorDAO.save(autor);
+		dodajAutoraMessage = "Dodano autora.";
 		if(skad == 0)
 			return "autor";
 		else
@@ -205,12 +218,6 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydawnictwo(int skad) {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		List<Wydawnictwo> wydawnictwa = wydawnictwoDAO.findAll();
 		for(Wydawnictwo element : wydawnictwa)
 		{
@@ -226,6 +233,8 @@ public class KsiazkaController {
 		Wydawnictwo wydawnictwo = new Wydawnictwo();
 		wydawnictwo.setNazwa(nazwaWydawnictwa);
 		wydawnictwoDAO.save(wydawnictwo);
+		
+		dodanieWydawnictwaMessage = "Wydawnictwo pomyœlnie dodane";
 
 		if(skad == 0)
 			return "wydawnictwo";
@@ -250,12 +259,6 @@ public class KsiazkaController {
 	}
 	
 	public String saveWydanie() {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Wydanie wydanie = new Wydanie();
 		wydanie.setRokWydania(rokWydania);
@@ -282,13 +285,6 @@ public class KsiazkaController {
 	}
 	
 	public String dodawanieKsiazki() {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		Ksiazka ksiazka = new Ksiazka();
 		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
 		Biblioteka biblioteka = bibliotekaDAO.findOne((long)idPlacowki);
@@ -318,12 +314,6 @@ public class KsiazkaController {
 	
 	public String dodajKategorieDoKsiazki(int skad)
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -364,12 +354,6 @@ public class KsiazkaController {
 	
 	public String usunKategorieZKsiazki()
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -392,12 +376,6 @@ public class KsiazkaController {
 	
 	public String usunAutoraZKsiazki()
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -419,12 +397,6 @@ public class KsiazkaController {
 	
 	public String dodajAutoraDoKsiazki(int skad)
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -503,12 +475,6 @@ public class KsiazkaController {
 	}
 	
 	public String saveEgzemplarz(int skad) {
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		Egzemplarz egzemplarz = new Egzemplarz();
 		if(ISBN.equals(""))
 		{
@@ -569,6 +535,7 @@ public class KsiazkaController {
 			return "dodaj_egzemplarz";
 		}
 	}
+	
 	public List<Ksiazka> pokazPodsumowanie()
 	{
 		List<Ksiazka> ksiazki = new LinkedList<>();
@@ -578,24 +545,21 @@ public class KsiazkaController {
 		ksiazki.add(ksiazka);
 		return ksiazki;
 	}
+	
 	public List<Kategoria> pokazKategorieKsiazki()
 	{
 		List<Kategoria> kategorie = pokazPodsumowanie().get(0).getKategoria();
 		return kategorie;
 	}
+	
 	public List<Autor> pokazAutoraKsiazki()
 	{
 		List<Autor> autorzy = pokazPodsumowanie().get(0).getAutor();
 		return autorzy;
 	}
+	
 	public String dodajKsiazke()
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -644,12 +608,6 @@ public class KsiazkaController {
 	
 	public String zapiszIDodajWydanie()
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
 		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
@@ -732,44 +690,45 @@ public class KsiazkaController {
 		Ksiazka ksiazka = ksiazkaDAO.findOne(idK);
 		return ksiazka;
 	}
+
 	public String usunKategorie()
 	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
-		kategoriaDAO.remove((long)idKategoria);
-		return "kategoria";
-	}
-	public String usunAutora()
-	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
-		autorDAO.remove((long)idAutora);
-		return "autor";
-	}
-	public String usunWydawnictwo() throws IOException
-	{
-		errorMessageKategoria = "";
-		errorMessageAutor = "";
-		errorMessageWydawnictwo = "";
-		errorMessageEgzemplarz = "";
-		errorMessageKsiazka = "";
-		errorMessagePodsumowanie = "";
 		try {
-		wydawnictwoDAO.remove((long)idWydawnictwa);
+			kategoriaDAO.remove((long)idKategoria);
 		}catch(Throwable e)
 		{
-			errorMessageWydawnictwo = "Wydawnictwo zawiera przypisane egzemplarze !";
+			errorMessageKategoria = "Kategoria jest przypisana do ksi¹¿ki!";
+			return "kategoria";
+		}
+		usunKategoriaMessage = "Usuniêto kategoriê.";
+
+		return "kategoria";
+	}
+	
+	public String usunAutora()
+	{	
+		try {
+			autorDAO.remove((long)idAutora);
+		}catch(Throwable e)
+		{
+			errorMessageAutor = "Autor jest przypisany do ksi¹¿ki!";
+			return "autor";
+		}
+		usunAutoraMessage = "Usuniêto autora.";
+		return "autor";
+	}
+	
+	public String usunWydawnictwo() throws IOException
+	{
+		try {
+			
+			wydawnictwoDAO.remove((long)idWydawnictwa);
+		}catch(Throwable e)
+		{
+			errorMessageWydawnictwo = "Wydawnictwo zawiera przypisane egzemplarze!";
 			return "wydawnictwo";
 		}
-		
+		usunWydawnictwaMessage = "Usuniêto wydawnictwo.";
 		return "wydawnictwo";
 	}
 }
