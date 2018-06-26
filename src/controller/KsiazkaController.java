@@ -19,13 +19,16 @@ import dao.KategoriaDAO;
 import dao.KsiazkaDAO;
 import dao.WydanieDAO;
 import dao.WydawnictwoDAO;
+import dao.ZamowienieDAO;
 import entity.Autor;
 import entity.Biblioteka;
 import entity.Egzemplarz;
 import entity.Kategoria;
 import entity.Ksiazka;
+import entity.Uzytkownik;
 import entity.Wydanie;
 import entity.Wydawnictwo;
+import entity.Zamowienie;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +58,9 @@ public class KsiazkaController {
 	
 	@EJB
 	private BibliotekaDAO bibliotekaDAO;
+	
+	@EJB
+	private ZamowienieDAO zamowienieDAO;
 	
 	@Getter
 	@Setter
@@ -288,7 +294,42 @@ public class KsiazkaController {
 		session.setAttribute("podsumowanie", 1);
 		return "dodaj_egzemplarz";
 	}
-	
+	public String dodajEgzemplarzDoIstniejacej(String id)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idK = Long.parseLong(id);
+		Ksiazka ksiazka = ksiazkaDAO.findOne(idK);
+		session.setAttribute("ksiazka", ksiazka);
+		return "dodaj_wydanie";
+	}
+	public String zakonczZamowienie(String id)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		Long idZam = Long.parseLong(id);
+		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
+		
+		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
+		for(Ksiazka ksiazka : ksiazki)
+		{
+			if(ksiazka.getTytul().equals(zamowienie.getTytul()))
+			{
+				zamowienie.setStatus("ZAKOÑCZONE");
+				zamowienieDAO.save(zamowienie);
+				return dodajEgzemplarzDoIstniejacej(""+ksiazka.getId()+"");
+			}
+		}
+		Ksiazka ksiazka2 = new Ksiazka();
+		ksiazka2.setTytul(zamowienie.getTytul());
+		ksiazka2.setBiblioteka(zamowienie.getBiblioteka());
+		ksiazka2.setOpis(zamowienie.getOpis());
+		ksiazka2.setZdjecie("zdjecie.jpg");
+		session.setAttribute("ksiazka", ksiazka2);
+		zamowienie.setStatus("ZAKOÑCZONE");
+		zamowienieDAO.save(zamowienie);
+		return "dodaj_kategorie";
+	}
 	public Wydanie getWydanie(int idWydania)
 	{
 		Wydanie wydanie = wydanieDAO.findOne((long)idWydania);	
