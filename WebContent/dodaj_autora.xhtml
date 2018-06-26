@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -20,7 +26,27 @@
 		<h2>Dodawanie nowej książki (Etap 3):</h2>
 		<hr class='a' />
 		<br/>
+		<br/>
 		
+		<ui:fragment rendered="#{ksiazkaController.dodajAutoraMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajAutoraMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageAutor != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageAutor}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.dodajKolejnegoAutoraMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajKolejnegoAutoraMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Autor dla książki:</h2>
 		<h:form>
                 <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
@@ -28,44 +54,35 @@
 				</h:selectOneMenu> 
 				<br/>  
 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajAutoraDoKsiazki(0)}"/> 
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i przejdz do podsumowania" action="#{ksiazkaController.dodajAutoraDoKsiazki(2)}"/>
 			<h:commandButton value="Dodaj kolejnego" action="#{ksiazkaController.dodajAutoraDoKsiazki(1)}"/> 
 		</h:form>	
 		<h:form>
 		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 4" action="dodaj_wydanie"/> 
-		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="podsumowanie_ksiazki"/></h:form>	
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/></h:form>	
 		<h3>Jeśli nie ma odpowiedniego autora możesz go dodać poniżej.</h3>
-		
-		<br/>
-		<br/>
-		<h2>Usunięcie autora:</h2>
-		
-		<h:form>
-                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutoraKsiazki()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunAutoraZKsiazki()}"/> 
-			
-		</h:form>	
+
 		<br/>
 		<br/>
 		<h2>Dodawanie nowego autora:</h2>
-		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageAutor}"></h:outputText>
 		<h:form>
 				Imie: 
 				<br/> 
 			    <h:inputText id="imie" styleClass="input-text" name="imie" 
-			    value="#{ksiazkaController.imie}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
+			    value="#{ksiazkaController.imie}" required="true" requiredMessage="To pole jest wymagane" 
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
+				</h:inputText>
                 <h:message for="imie" errorStyle="color:red; display:block"/>
                 <br/>      
                 
                 Nazwisko: 
 				<br/> 
 			    <h:inputText id="nazwisko" styleClass="input-text" name="nazwisko" 
-			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
+			    value="#{ksiazkaController.nazwisko}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-40 znaków">
+				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż-]{2,40}" />
+				</h:inputText>
                 <h:message for="nazwisko" errorStyle="color:red; display:block"/>
                 <br/>
                         

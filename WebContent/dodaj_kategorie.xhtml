@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -20,8 +26,28 @@
 		<h2>Dodawanie nowej książki (Etap 2):</h2>
 		<hr class='a' />
 		<br/>
+		<br/>
 		
+		<ui:fragment rendered="#{ksiazkaController.dodajKategorieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajKategorieMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageKategoria != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageKategoria}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.dodajKolejnaKategoriaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajKolejnaKategoriaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
 			
+		<br/>
+		
 		<h2>Kategoria dla książki:</h2>
 		
 		<h:form>
@@ -31,25 +57,16 @@
 				<br/>  
 
 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/>
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i przejd" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
+			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i przejdz do podsumowania" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
 			<h:commandButton value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
 			
 		</h:form>	
-		<h:form><h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
-		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Do podsumowania" action="podsumowanie_ksiazki"/> </h:form>
-		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageKategoria}"></h:outputText>		
+		<h:form>
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
+		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/>
+		</h:form>	
 		<h3>Jeśli nie ma odpowiedniej kategorii możesz ją dodać poniżej.</h3>
 		
-		<h2>Usunięcie kategorii:</h2>
-		
-		<h:form>
-                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
-					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorieKsiazki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-				<br/> 
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunKategorieZKsiazki()}"/> 
-			
-		</h:form>	
 		<br/>
 		<br/>
 		<h2>Dodawanie nowej kategorii:</h2>
@@ -57,8 +74,11 @@
 				Nazwa: 
 				<br/> 
 			    <h:inputText id="nazwa" styleClass="input-text" name="nazwa" 
-			    value="#{ksiazkaController.nazwa}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
+			    value="#{ksiazkaController.nazwa}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+				<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
+				</h:inputText>
+				
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
                 <br/>              
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(1)}"/>

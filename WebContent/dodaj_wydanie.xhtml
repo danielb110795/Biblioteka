@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -20,30 +26,53 @@
 		<h2>Dodawanie nowej książki (Etap 4):</h2>
 		<hr class='a' />
 		<br/>
+		<br/>
 		
+		<ui:fragment rendered="#{ksiazkaController.dodanieWydawnictwaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodanieWydawnictwaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageWydawnictwo != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageWydawnictwo}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Wydanie dla książki:</h2>
 		<h:form>		
 				Numer wydania: 
 				<br/> 
 			    <h:inputText id="nrWydania" styleClass="input-text" name="nrWydania" 
-			    value="#{ksiazkaController.nrWydania}" required="true" requiredMessage="To pole jest wymagane">
+			    value="#{ksiazkaController.nrWydania}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Wymagane znaki: 0-9, zakres 0-99.">
+			    <f:validateRegex pattern="[0-9]{0,2}" />
                 </h:inputText>
                 <h:message for="nrWydania" errorStyle="color:red; display:block"/>
                 <br/> 
+                
                 Miejsce wydania: 
 				<br/> 
 			    <h:inputText id="miejsceWydania" styleClass="input-text" name="miejsceWydania" 
-			    value="#{ksiazkaController.miejsceWydania}" required="true" requiredMessage="To pole jest wymagane">
-                </h:inputText>
+			    value="#{ksiazkaController.miejsceWydania}" required="true" requiredMessage="To pole jest wymagane"
+			    validatorMessage="Nie podawaj cyfr i znaków specjalnych, wymagane 2-30 znaków">
+					<f:validateRegex pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{2,30}" />
+					</h:inputText>
                 <h:message for="miejsceWydania" errorStyle="color:red; display:block"/>
                 <br/> 
+               
                 Rok wydania: 
 				<br/> 
 			    <h:inputText id="rokWydania" styleClass="input-text" name="rokWydania" 
-			    value="#{ksiazkaController.rokWydania}" required="true" requiredMessage="To pole jest wymagane">
+			    value="#{ksiazkaController.rokWydania}" required="true" requiredMessage="To pole jest wymagane" 
+			    validatorMessage="Wymagane znaki: 0-9.">
+			    <f:validateRegex pattern="[0-9]{1,4}" />
                 </h:inputText>
                 <h:message for="rokWydania" errorStyle="color:red; display:block"/>
                 <br/> 
+				
 				Wydawnictwo:   
                 <br/>              
                 <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
@@ -57,7 +86,6 @@
 		<br/>
 		<br/>
 		<h2>Dodawanie nowego wydawnictwa:</h2>
-		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
 		<h:form>
 				Nazwa: 
 				<br/> 
@@ -70,6 +98,10 @@
 		</h:form>		
 
 	</div>
+			
+		<br/>
+		<br/>
+		<br/>
 	</div>
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	

@@ -104,6 +104,18 @@ public class KsiazkaController {
 	@Setter
 	private String dodajKategorieMessage = "";
 	
+	@Getter
+	@Setter
+	private String dodajKolejnaKategoriaMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajKolejnegoAutoraMessage = "";
+	
+	@Getter
+	@Setter
+	private String dodajKolejnyEgzemplarzMessage = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -117,7 +129,7 @@ public class KsiazkaController {
 	//wydanie
 	private String rokWydania;
 	private int idWydawnictwa;
-	private int nrWydania;
+	private String nrWydania;
 	private String miejsceWydania;
 	
 	//ksiazka
@@ -144,7 +156,10 @@ public class KsiazkaController {
 			if(element.getNazwa().equals(nazwa))
 			{
 				errorMessageKategoria = "Ta kategoria ju¿ istnieje";
-				return "kategoria";
+				if(skad == 0)
+					return "kategoria";
+				else
+					return "dodaj_kategorie";
 			}
 		}
 		
@@ -182,7 +197,10 @@ public class KsiazkaController {
 			if(element.getImie().equals(imie) && element.getNazwisko().equals(nazwisko))
 			{
 				errorMessageAutor = "Taki autor ju¿ istnieje.";
-				return "autor";
+				if(skad == 0)
+					return "autor";
+				else
+					return "dodaj_autora";
 			}
 		}
 		Autor autor = new Autor();
@@ -223,7 +241,7 @@ public class KsiazkaController {
 		{
 			if(element.getNazwa().equals(nazwaWydawnictwa))
 			{
-				errorMessageWydawnictwo = "To wydawnictwo ju¿ istnieje";
+				errorMessageWydawnictwo = "To wydawnictwo ju¿ istnieje.";
 				if(skad == 0)
 					return "wydawnictwo";
 				else
@@ -234,7 +252,7 @@ public class KsiazkaController {
 		wydawnictwo.setNazwa(nazwaWydawnictwa);
 		wydawnictwoDAO.save(wydawnictwo);
 		
-		dodanieWydawnictwaMessage = "Wydawnictwo pomyœlnie dodane";
+		dodanieWydawnictwaMessage = "Wydawnictwo pomyœlnie dodane.";
 
 		if(skad == 0)
 			return "wydawnictwo";
@@ -263,7 +281,7 @@ public class KsiazkaController {
 		Wydanie wydanie = new Wydanie();
 		wydanie.setRokWydania(rokWydania);
 		wydanie.setMiejsceWydania(miejsceWydania);
-		wydanie.setNazwa("Wydanie: "+nrWydania);
+		wydanie.setNazwa("Wydanie: "+ nrWydania);
 		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
 		session.setAttribute("wydanie",wydanie);
 		
@@ -321,13 +339,15 @@ public class KsiazkaController {
 		Kategoria podanaKategoria = getKategoria(idKategoria);
 		if(podanaKategoria.getNazwa().equals(""))
 		{
-			errorMessageKategoria = "Nie poda³eœ kategori";
+			errorMessageKategoria = "Nie poda³eœ kategorii.";
 			if(skad == 0)
 				return "dodaj_autora";
 			if(skad == 2)
 				return "podsumowanie_ksiazki";
-			else
+			else {
+				dodajKolejnaKategoriaMessage = "Doda³eœ kategoriê, dodaj kolejn¹ lub przejdz do nastêpnego etapu.";
 				return "dodaj_kategorie";
+			}
 		}
 		if(ksiazka.getKategoria() != null)
 		{
@@ -336,7 +356,7 @@ public class KsiazkaController {
 			{
 				if(element.getNazwa().equals(podanaKategoria.getNazwa()))
 				{
-					errorMessageKategoria = "Podana kategoria zosta³a ju¿ dodana do tej ksi¹¿ki";
+					errorMessageKategoria = "Podana kategoria zosta³a ju¿ dodana do tej ksi¹¿ki. Dodaj inn¹ lub przejdz dalej.";
 					return "dodaj_kategorie";
 				}
 			}
@@ -348,8 +368,10 @@ public class KsiazkaController {
 			return "dodaj_autora";
 		if(skad == 2)
 			return "podsumowanie_ksiazki";
-		else
+		else {
+			dodajKolejnaKategoriaMessage = "Doda³eœ kategoriê, dodaj kolejn¹ lub przejdz do nastêpnego etapu.";
 			return "dodaj_kategorie";
+		}			
 	}
 	
 	public String usunKategorieZKsiazki()
@@ -404,13 +426,15 @@ public class KsiazkaController {
 		Autor podanyAutor = getAutor(idAutora);
 		if(podanyAutor.getImie().equals("") || podanyAutor.getNazwisko().equals(""))
 		{
-			errorMessageAutor = "Nie poda³eœ autora";
+			errorMessageAutor = "Nie poda³eœ autora.";
 			if(skad == 0)
 				return "dodaj_wydanie";
 			if(skad == 2)
 				return "podsumowanie_ksiazki";
-			else
+			else {
+				dodajKolejnegoAutoraMessage = "Doda³eœ autora, dodaj kolejnego lub przejdz do nastêpnego etapu.";
 				return "dodaj_autora";
+			}
 		}
 		if(ksiazka.getAutor() != null)
 		{
@@ -419,7 +443,7 @@ public class KsiazkaController {
 			{
 				if(element.getImie().equals(podanyAutor.getImie()) && element.getNazwisko().equals(podanyAutor.getNazwisko()))
 				{
-					errorMessageAutor = "Podany autor zosta³ ju¿ dodany do tej ksi¹¿ki";
+					errorMessageAutor = "Podany autor zosta³ ju¿ dodany do tej ksi¹¿ki. Wybierz innego lub przejdz dalej.";
 					return "dodaj_autora";
 				}
 			}
@@ -431,8 +455,10 @@ public class KsiazkaController {
 			return "dodaj_wydanie";
 		if(skad == 2)
 			return "podsumowanie_ksiazki";
-		else
+		else {
+			dodajKolejnegoAutoraMessage = "Doda³eœ autora, dodaj kolejnego lub przejdz do nastêpnego etapu.";
 			return "dodaj_autora";
+		}
 	}
 	
 	/*public String saveKsiazka() {
@@ -478,13 +504,13 @@ public class KsiazkaController {
 		Egzemplarz egzemplarz = new Egzemplarz();
 		if(ISBN.equals(""))
 		{
-			errorMessageEgzemplarz = "Poda³eœ puste pole!";
 			if(skad  == 0)
 			{
 				return "ksiazki";
 			}
 			else
 			{
+				dodajKolejnyEgzemplarzMessage = "Doda³eœ egzemplarz. Wpisz nowe ISBN i dodaj kolejny lub przejdz do posumowania.";
 				return "dodaj_egzemplarz";
 			}
 		}
@@ -505,7 +531,7 @@ public class KsiazkaController {
 			{
 				if(element.getISBN().equals(egzemplarz.getISBN()))
 				{
-					errorMessageEgzemplarz = "Podany egzemplarz zosta³ ju¿ dodany do ksi¹¿ki";
+					errorMessageEgzemplarz = "Egzemplarz o takim ISBN zosta³ ju¿ dodany. Wpisz nowy ISBN lub przejdz do podsumowania.";
 					return "dodaj_egzemplarz";
 				}
 			}
@@ -515,7 +541,7 @@ public class KsiazkaController {
 		{
 			if(element.getISBN().equals(ISBN))
 			{
-				errorMessageEgzemplarz = "Podany egzemplarz istnieje ju¿ w bazie";
+				errorMessageEgzemplarz = "Egzemplarz o takim ISBN istnieje ju¿ w bazie.";
 				return "dodaj_egzemplarz";
 			}
 		}
@@ -532,6 +558,7 @@ public class KsiazkaController {
 		}
 		else
 		{
+			dodajKolejnyEgzemplarzMessage = "Doda³eœ egzemplarz. Wpisz nowe ISBN i dodaj kolejny lub przejdz do posumowania.";
 			return "dodaj_egzemplarz";
 		}
 	}

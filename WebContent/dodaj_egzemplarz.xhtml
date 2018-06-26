@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
@@ -19,15 +25,30 @@
 		<h2>Dodawanie nowej książki (Etap 5):</h2>
 		<hr class='a' />
 		<br/>
+		<br/>
 		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageEgzemplarz != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageEgzemplarz}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.dodajKolejnyEgzemplarzMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajKolejnyEgzemplarzMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Dodawanie nowego egzemplarza:</h2>
-		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageEgzemplarz}"></h:outputText>
 		<h:form>
 				
 				ISBN: 
 				<br/> 
 			    <h:inputText id="ISBN" styleClass="input-text" name="ISBN" 
-			    value="#{ksiazkaController.ISBN}" required="true" requiredMessage="To pole jest wymagane">
+			    value="#{ksiazkaController.ISBN}" required="true" requiredMessage="To pole jest wymagane"			    
+			    validatorMessage="Wymagane znaki: 0-9, wymagane dokładnie 13 znaków.">
+			    <f:validateRegex pattern="[0-9]{13,13}" />
                 </h:inputText>
                 <h:message for="ISBN" errorStyle="color:red; display:block"/>
                 <br/> 
@@ -35,7 +56,7 @@
 			<h:commandButton value="Dodaj książke" action="#{ksiazkaController.saveEgzemplarz(0)}"/>
 			<h:commandButton value="Dodaj kolejny egzemplarz" action="#{ksiazkaController.saveEgzemplarz(1)}"/>
 		</h:form>		
-		<h:form><h:commandButton value="Pomiń" action="podsumowanie_ksiazki"/> </h:form>	
+		<h:form><h:commandButton value="Przejdz do podsumowania" action="podsumowanie_ksiazki"/> </h:form>	
 	</div>
 	
 	<br/>
