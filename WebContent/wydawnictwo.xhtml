@@ -31,7 +31,26 @@
 		
 		<br/>
 		<br/>
-		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessageWydawnictwo}"></h:outputText>
+		
+		<ui:fragment rendered="#{ksiazkaController.dodanieWydawnictwaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodanieWydawnictwaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.usunWydawnictwaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.usunWydawnictwaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageWydawnictwo != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageWydawnictwo}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
+		<br/>
 		<h2>Dodawanie nowego wydawnictwa:</h2>
 		<h:form>
 				Nazwa: 
@@ -68,7 +87,7 @@
 					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
        			<br/>            
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}"/>
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}" onclick="return confirm('Czy na pewno chcesz usunąć wydawnictwo?')"/>
 		</h:form>	
 	<br/>
 	<br/>
