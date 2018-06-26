@@ -9,7 +9,12 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import dao.CzytelnikDAO;
+import dao.EgzemplarzDAO;
+import dao.PracownikDAO;
+import dao.UzytkownikDAO;
 import entity.Czytelnik;
+import entity.Egzemplarz;
+import entity.Pracownik;
 import entity.Uzytkownik;
 import lombok.Data;
 
@@ -22,6 +27,15 @@ public class ProfilController {
 	@EJB
 	private CzytelnikDAO czytelnikDAO;
 	
+	@EJB
+	private EgzemplarzDAO egzemplarzDAO;
+	
+	@EJB
+	private PracownikDAO pracownikDAO;
+	
+	@EJB
+	private UzytkownikDAO uzytkownikDAO;
+	
 	private AutoryzacjaController autoController;
 	
 	private String imie = "";
@@ -32,6 +46,8 @@ public class ProfilController {
 	private String kara = "0";
 	private int aktWypozyczen = 0;
 	private int sumWypozyczen = 0;
+	private int iloscKsiazek = 0;
+	private int zarejestrowaniUzytkownicy = 0;
 	
 
 	/*public String przeanalizujProfil() {
@@ -63,7 +79,7 @@ public class ProfilController {
 	}*/
 	
 	
-	public String getImie() {
+	public String ustawProfilCzytelnika() {
 		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
@@ -89,21 +105,62 @@ public class ProfilController {
 	}
 	
 	
-	/*public String getNazwisko()
-	{	
+	public String ustawProfilPracownika() {
+		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
-		String nazwiskoCzyt = "";
-		Collection<Czytelnik> czytelnicy = czytelnikDAO.findAll();
 		
-		for (Czytelnik element : czytelnicy) {
+		if(uzytkownik == null)
+			return "moje_konto";
+		
+		Collection<Pracownik> pracownicy = pracownikDAO.findAll();
+		 
+		for (Pracownik element : pracownicy) {
 			if ((element.getUzytkownik().getId().equals(uzytkownik.getId()))) {	
-				nazwiskoCzyt = element.getNazwisko();
+				imie = element.getImie();
+				nazwisko = element.getNazwisko();
+				email = element.getEmail();
+				pesel = element.getPesel();
+				adres = element.getAdres();
+				
+				Collection<Egzemplarz> egzemplarze = egzemplarzDAO.findAll();
+				iloscKsiazek = egzemplarze.size();
+				
+				Collection<Uzytkownik> uzytkownicy = uzytkownikDAO.findAll();
+				zarejestrowaniUzytkownicy = uzytkownicy.size();
 			}
 		}
-		return nazwiskoCzyt;	
-	}*/
+		return imie;	
+	}
 	
+
 	
+		public String ustawProfilAdministratora() {
+		
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		
+		if(uzytkownik == null)
+			return "moje_konto";
+		
+		Collection<Pracownik> pracownicy = pracownikDAO.findAll();
+		 
+		for (Pracownik element : pracownicy) {
+			if ((element.getUzytkownik().getId().equals(uzytkownik.getId()))) {	
+				imie = element.getImie();
+				nazwisko = element.getNazwisko();
+				email = element.getEmail();
+				pesel = element.getPesel();
+				adres = element.getAdres();
+				
+				Collection<Egzemplarz> egzemplarze = egzemplarzDAO.findAll();
+				iloscKsiazek = egzemplarze.size();
+				
+				Collection<Uzytkownik> uzytkownicy = uzytkownikDAO.findAll();
+				zarejestrowaniUzytkownicy = uzytkownicy.size();
+			}
+		}
+		return imie;	
+	}
 	
 }

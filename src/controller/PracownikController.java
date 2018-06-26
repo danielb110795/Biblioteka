@@ -83,7 +83,7 @@ public class PracownikController {
 		
 		
 		
-		uzytkownikDAO.save(uzytkownik);
+		//uzytkownikDAO.save(uzytkownik);
 		pracownikDAO.save(pracownik);
 		
 		return "pracownicy";
