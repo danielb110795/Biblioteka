@@ -10,14 +10,13 @@
 
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
-
-	<div id="srodek">
 	
+	<div id="srodekcaly">
 	<div id="tekst2">
 		<h2>Szczegóły książki</h2>
-		<hr class='a' />
-		<br/>
+		<hr color='#FF9966' size='5'/>
 		<div>
+		<h:outputText styleClass="error" value=" #{ksiazkaController.errorMessagePodsumowanie}"></h:outputText>
 		<table class ="aTable" style="width:100%">
   		<tr>
   			<th>Zdjęcie</th>
@@ -27,7 +26,7 @@
   			<th>Placówka</th>
   		</tr>
   		
-		<ui:repeat var="ksiazka" value="#{ksiazkaController.znajdzKsiazke()}">
+		
 
 		<tr>
 		<td>#{ksiazka.zdjecie} </td>
@@ -36,40 +35,45 @@
 		<td><ui:repeat var="kategoria" value="#{ksiazka.kategoria}"><p>#{kategoria.nazwa}</p></ui:repeat></td>
 		<td>#{ksiazka.biblioteka.nazwa}</td>
 		</tr>
-
+		
+		</table>
+		</div>
+		
+		<div>
+		
+		<table class ="aTable" style="width:100%">
   		<tr>
-  			<th> </th>
   			<th>Wydanie</th>
    			<th>ISBN Egzemplarza</th>
    			<th>Operacje</th>
-   			<th> </th>
   		</tr>
   		<ui:repeat var="egzemplarz" value="#{ksiazka.egzemplarz}">
 		<tr>
-		<td> </td>
 		<td>
-		#{egzemplarz.wydanie.wydawnictwo.nazwa} #{egzemplarz.wydanie.nazwa} #{egzemplarz.wydanie.miejsceWydania} #{egzemplarz.wydanie.rokWydania}</td>
+		#{egzemplarz.wydanie.wydawnictwo.nazwa} #{egzemplarz.wydanie.nazwa} #{egzemplarz.wydanie.miejsceWydania} #{egzemplarz.wydanie.rokWydania}
+		</td>
 		<td>
 		#{egzemplarz.ISBN}
 		</td>
 		<td>
 		<h:form>  
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" value="Wypożycz" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
-			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" value="WYPOŻYCZONY"></h:outputText>
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.doRenowacji(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
-			<h:commandButton rendered="#{egzemplarz.status eq 'RENOWACJA'}" action="#{wypozyczeniaController.zRenowacji(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
+			<h:commandButton action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Wypożycz"></h:commandButton>
+		</h:form>
+		<h:form>  
+			<h:commandButton rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" value="Zwróć" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'WRENOWACJI'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
 			<h:commandButton rendered="2 == 3" action="dodaj_egzemplarz" value="Zarezerwuj"></h:commandButton>
+			<h:commandButton action="#" value="Usuń"></h:commandButton>
         </h:form>
-        </td>
-        <td> </td>
+		</td>
 		</tr>
-		
-		</ui:repeat>
-		</ui:repeat>
+		</ui:repeat> 
 		</table>
 		</div>
-
+		
 	</div>
-	</div>
+	</div>		
+	<a href="javascript:scroll(0,0);">W górę</a> 
 </body> 
 </html> 
