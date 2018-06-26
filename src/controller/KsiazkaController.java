@@ -306,7 +306,7 @@ public class KsiazkaController {
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
-		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
+		
 		Long idZam = Long.parseLong(id);
 		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		
