@@ -67,7 +67,8 @@ public class WypozyczeniaController {
 		session.setAttribute("egzemplarz", egzemplarz);
 		
 		return "wypozyczenie_uzytkownicy";
-	}
+	}  
+	
 	public String wypozycz(String id)
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);

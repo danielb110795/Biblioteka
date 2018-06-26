@@ -58,7 +58,7 @@
 		</td>
 		<td>
 		<h:form>  
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Wypożycz"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow('egzemplarz.id')}" value="Wypożycz"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'WRENOWACJI'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
@@ -67,7 +67,7 @@
         </h:form>
 		</td>
 		</tr>
-		</ui:repeat>
+		</ui:repeat> 
 		</table>
 		</div>
 		
