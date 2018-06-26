@@ -40,6 +40,10 @@ public class BibliotekaController {
 	@Setter
 	private String errorMessage = "";
 	
+	@Getter
+	@Setter
+	private String dodanoBibiotekeMessage = "";
+	
 	private String nazwa;
 	private String adres;
 	private String numerTel;
@@ -64,6 +68,8 @@ public class BibliotekaController {
 	
 	public String saveBiblioteka()
 	{
+		dodanoBibiotekeMessage = "";
+		
 		Biblioteka biblioteka = new Biblioteka();
 		
 		biblioteka.setNazwa(nazwa);
@@ -87,6 +93,7 @@ public class BibliotekaController {
 		biblioteka.setDzien(dni);
 		
 		bibliotekaDAO.save(biblioteka);
+		dodanoBibiotekeMessage = "Doda³eœ bibliotekê: " + nazwa;
 		
 		return "placowki.xhtml";
 	}

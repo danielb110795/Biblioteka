@@ -44,17 +44,6 @@
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(0)}"/>
 		</h:form>		
 		
-			<br/> <br/> 
-			<h2>Usunięcie wydawnictwa:</h2>
-		<h:form>
-				Wydawnictwo:   
-                <br/>              
-                <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
-					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
-				</h:selectOneMenu> 
-       			<br/>            
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}"/>
-		</h:form>	
 		<br/><br/>
 	<h2>Lista wydawnictw:</h2>	
 	
@@ -69,9 +58,23 @@
 		</tr>
 		</ui:repeat>	
 	</table>
+	
+				<br/> <br/> 
+			<h2>Usunięcie wydawnictwa:</h2>
+		<h:form>
+				Wydawnictwo:   
+                <br/>              
+                <h:selectOneMenu id="idWydawnictwa" value="#{ksiazkaController.idWydawnictwa}"> 
+					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+       			<br/>            
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}"/>
+		</h:form>	
 	<br/>
 	<br/>
 	<br/>
+	
+	
 	</div>
 	
 	</div>
