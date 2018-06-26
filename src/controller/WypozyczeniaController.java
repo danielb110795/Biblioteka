@@ -133,13 +133,13 @@ public class WypozyczeniaController {
 		
 		long roznica = zwrocRozniceSekund(dataWyp); //roznica w sekundach ile minelo czasu od wypozyczenai do oddania
 		
-		String kara = "0";
+		Long kara = (long) 0;
 		
 		if (roznica < 60) {
-			kara = "0";
+			kara = (long) 0;
 			karaMessage = "Ksi¹¿ke oddano na czas. Nie naliczono kary.";
 		} else {
-			kara = "10";
+			kara = roznica - (long)60;
 			karaMessage = "Naliczono op³atê!";
 		}
 		

@@ -43,7 +43,7 @@ public class ProfilController {
 	private String pesel = "";
 	private String email = "";
 	private String adres = "";
-	private String kara = "0";
+	private Long kara = (long)0;
 	private int aktWypozyczen = 0;
 	private int sumWypozyczen = 0;
 	private int iloscKsiazek = 0;

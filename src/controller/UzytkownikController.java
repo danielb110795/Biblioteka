@@ -89,7 +89,7 @@ public class UzytkownikController {
 		czytelnik.setEmail(email);
 		czytelnik.setPesel(pesel);
 		czytelnik.setAdres(adres);
-		czytelnik.setKara("0");
+		czytelnik.setKara((long)0);
 		czytelnik.setUzytkownik(uzytkownik);
 		
 		Collection<Czytelnik> czytelnicy = czytelnikDAO.findAll();
