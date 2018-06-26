@@ -54,11 +54,11 @@
 		</td>
 		<td>
 		<h:form>  
-			<h:commandButton rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" value="Zwróć" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
-			<h:commandButton rendered="#{egzemplarz.status eq 'WRENOWACJI'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" value="Wypożycz" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
+			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" value="WYPOŻYCZONY"></h:outputText>
+			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.doRenowacji(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'RENOWACJA'}" action="#{wypozyczeniaController.zRenowacji(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
 			<h:commandButton rendered="2 == 3" action="dodaj_egzemplarz" value="Zarezerwuj"></h:commandButton>
-			<h:commandButton action="#" onclick="return confirm('Czy na pewno chcesz anulować? Stracisz wprowadzone dotąd dane')" value="Usuń"></h:commandButton>
         </h:form>
         </td>
         <td> </td>

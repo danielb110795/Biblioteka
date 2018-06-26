@@ -23,7 +23,7 @@ import dao.WydawnictwoDAO;
 import dao.WypozyczenieDAO;
 import entity.Czytelnik;
 import entity.Egzemplarz;
-import entity.Ksiazka;
+
 import entity.Wypozyczenie;
 import lombok.Data;
 
@@ -72,25 +72,77 @@ public class WypozyczeniaController {
 	public String wypozycz(String id)
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		Long idU = Long.parseLong(id);
-		Czytelnik czytelnik = czytelnikDAO.findOne(idU);
+		Long idC = Long.parseLong(id);
+		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
 		Egzemplarz egzemplarz = (Egzemplarz) session.getAttribute("egzemplarz");
 		Wypozyczenie wypozyczenie = new Wypozyczenie();
 		egzemplarz.setStatus("WYPO¯YCZONY");
 		List<Wypozyczenie> wypozyczenia = new LinkedList<Wypozyczenie>();
+		//List<Wypozyczenie> wypozyczeniaCzyt = new LinkedList<Wypozyczenie>();
 		if(czytelnik.getWypozyczenia() != null || czytelnik.getWypozyczenia().isEmpty() == false)
 		{
-			wypozyczenia = wypozyczenieDAO.findAll();
+			wypozyczenia = czytelnik.getWypozyczenia();
 		}
 		wypozyczenie.setEgzemplarz(egzemplarz);
 		Date date = new Date();
 		wypozyczenie.setDataWypozyczenia(date);
 		wypozyczenia.add(wypozyczenie);
 		czytelnik.setWypozyczenia(wypozyczenia);
+		czytelnikDAO.save(czytelnik);
+		wypozyczenieDAO.save(wypozyczenie);
+		egzemplarzDAO.save(egzemplarz);
 		return "spis_ksiazek";
 	}
-	public String pokazTMP()
+	/*public String zwroc(String id)
 	{
-		return "ksiazki";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idC = Long.parseLong(id);
+		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
+		Egzemplarz egzemplarz = (Egzemplarz) session.getAttribute("egzemplarz");
+		Wypozyczenie wypozyczenie = new Wypozyczenie();
+		egzemplarz.setStatus("DOSTEPNY");
+		List<Wypozyczenie> wypozyczenia = new LinkedList<Wypozyczenie>();
+		if(czytelnik.getWypozyczenia() != null || czytelnik.getWypozyczenia().isEmpty() == false)
+		{
+			wypozyczenia = czytelnik.getWypozyczenia();
+			for(Wypozyczenie element : wypozyczenia)
+			{
+				if(element.getEgzemplarz().getISBN().equals(egzemplarz.getISBN()))
+				{
+					wypozyczenie = element;
+					break;
+				}
+			}
+		}
+		wypozyczenie.setEgzemplarz(egzemplarz);
+		Date date = new Date();
+		wypozyczenie.setDataWypozyczenia(date);
+		wypozyczenia.add(wypozyczenie);
+		czytelnik.setWypozyczenia(wypozyczenia);
+		czytelnikDAO.save(czytelnik);
+		wypozyczenieDAO.save(wypozyczenie);
+		egzemplarzDAO.save(egzemplarz);
+		
+		return "spis_ksiazek";
+	}*/
+	public String doRenowacji(String id)
+	{
+		Long idE = Long.parseLong(id);
+		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
+		
+		egzemplarz.setStatus("DOSTEPNY");
+		
+		egzemplarzDAO.save(egzemplarz);
+		return "spis_ksiazek";
+	}
+	public String zRenowacji(String id)
+	{
+		Long idE = Long.parseLong(id);
+		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
+		
+		egzemplarz.setStatus("RENOWACJA");
+		
+		egzemplarzDAO.save(egzemplarz);
+		return "spis_ksiazek";
 	}
 }
