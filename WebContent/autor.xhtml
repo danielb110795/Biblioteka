@@ -11,7 +11,13 @@
 <body>
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
-	<ui:include src="#{componentController.getMenuAdmin()}" />
+			<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMenuAdmin()}" />
+	</ui:fragment>
+	
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK'}">
+		<ui:include src="#{componentController.getMenuPracownik()}" />
+	</ui:fragment>
 	
 	<div id="srodek">
 	
