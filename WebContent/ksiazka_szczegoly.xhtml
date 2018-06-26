@@ -31,7 +31,7 @@
 		
 
 		<tr>
-		<td>#{ksiazkaController.znajdzKsiazke().zdjecie} </td>
+		<td>#{ksiazka.zdjecie} </td>
 		<td>#{ksiazka.tytul} </td>
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"><p>#{autor.imie} #{autor.nazwisko}</p></ui:repeat> </td>
 		<td><ui:repeat var="kategoria" value="#{ksiazka.kategoria}"><p>#{kategoria.nazwa}</p></ui:repeat></td>
@@ -58,7 +58,7 @@
 		</td>
 		<td>
 		<h:form>  
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow('egzemplarz.id')}" value="Wypożycz"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Wypożycz"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
 			<h:commandButton rendered="#{egzemplarz.status eq 'WRENOWACJI'}" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>

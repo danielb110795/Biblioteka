@@ -17,25 +17,30 @@
 		<h2>Twój profil</h2>
 		<hr class='a'/>
 		<div id="profil">
-		<table><tr><td>
+		<table>
+		<tr>
 		
-		
-		
+		<td>
+
 		<img src="avatar.png" alt="Nie udalo sie zaladowac obrazka avatar" width="150px" height="165px" border="2px"/> <br/><br/>
-		<b>Imie:</b> <h:outputLabel value=" #{profilController.przeanalizujProfil()}"></h:outputLabel> <br/>
-		<b>Nazwisko:</b> <h:outputLabel value=" #{profilController.nazwisko}"></h:outputLabel> <br/>
-		<b>Nr Karty:</b> <h:outputLabel value=" #{profilController.nrKarty}"></h:outputLabel><br/>
-		<b>Adres:</b> <h:outputLabel value=" #{profilController.adres}"></h:outputLabel><br/>
+		<b>Imię: </b> <h:outputLabel value="#{profilController.getImie()}"></h:outputLabel> <br/>
+		<b>Nazwisko: </b> <h:outputLabel value="#{profilController.nazwisko}"></h:outputLabel> <br/>
+		<b>Login: </b> <h:outputLabel value="#{uzytkownik.login}"></h:outputLabel><br/>
+		<b>E-mail: </b> <h:outputLabel value="#{profilController.email}"></h:outputLabel><br/>
+		
 		</td>
+	
 		<td>
 		<p id="profil2">Płatności:</p>
-		<p id="profil3"><h:outputLabel value=" #{profilController.kara}"></h:outputLabel></p>
+		<p id="profil3"><h:outputLabel value=" #{profilController.kara}"></h:outputLabel> </p>
+       
 		<p id="profil2">Ilość wypożyczonych książek:</p>
 		<p id="profil3"><h:outputLabel value=" #{profilController.sumWypozyczen}"></h:outputLabel></p>
 		<p id="profil2">Aktualnie wypożyczeń:</p>
 		<p id="profil3"><h:outputLabel value=" #{profilController.aktWypozyczen}"></h:outputLabel></p>
 		</td>
-		</tr></table>
+		</tr> 
+		</table>
 		</div>
 	</div>
 	</div>		

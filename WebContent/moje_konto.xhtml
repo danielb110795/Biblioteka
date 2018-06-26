@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:include src="#{componentController.getHead()}" />
 
@@ -31,7 +32,10 @@
 			<br/> 
 			<h:inputText id="login" styleClass="input-text" name="login" 
 			value="#{autoryzacjaController.autoryzacja.login}" required="true" 
-			requiredMessage="Musisz podać login"/> 
+			requiredMessage="Musisz podać login" validatorMessage="Login powinien zawierać tylko liczby i litery, wymaganane 4-10 znaków.">
+			<f:validateRegex pattern="[0-9A-Za-z]{4,10}" />
+			</h:inputText>	
+		
 			<h:message for="login" errorStyle="color:red; display:block"/>
 			<br/>  
 			
@@ -39,7 +43,10 @@
 			<br/> 
 			<h:inputSecret id="haslo" styleClass="input-text" name="haslo" 
 			value="#{autoryzacjaController.autoryzacja.haslo}" required="true" 
-			requiredMessage="Musisz podać hasło"/> 
+			requiredMessage="Musisz podać hasło" 
+			validatorMessage="Hasło musi zawierać dużą literę, małą literę oraz liczbę, wymagane 4-10 znaków">
+			<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,10})" />
+			</h:inputSecret>
 			<h:message for="haslo" errorStyle="color:red; display:block"/>
 			<h:outputText styleClass="error" value=" #{autoryzacjaController.errorMessage}"></h:outputText><br/>
 			<br/>  

@@ -88,7 +88,7 @@ public class UzytkownikController {
 			}
 		}
 		
-		uzytkownikDAO.save(uzytkownik);
+		//uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
 		if(zalogowanyUzytkownik.getRola().equals("PRACOWNIK"))
