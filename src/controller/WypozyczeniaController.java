@@ -93,12 +93,16 @@ public class WypozyczeniaController {
 		egzemplarzDAO.save(egzemplarz);
 		return "spis_ksiazek";
 	}
-	/*public String zwroc(String id)
+	
+	@Deprecated
+	public String zwroc(String id)
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		Long idC = Long.parseLong(id);
+		Long idE = Long.parseLong(id);
+		Long idC = (long)session.getAttribute("idCzytelnika");
+		
 		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
-		Egzemplarz egzemplarz = (Egzemplarz) session.getAttribute("egzemplarz");
+		Egzemplarz egzemplarz = egzemplarzDAO.findOne(idE);
 		Wypozyczenie wypozyczenie = new Wypozyczenie();
 		egzemplarz.setStatus("DOSTEPNY");
 		List<Wypozyczenie> wypozyczenia = new LinkedList<Wypozyczenie>();
@@ -115,16 +119,19 @@ public class WypozyczeniaController {
 			}
 		}
 		wypozyczenie.setEgzemplarz(egzemplarz);
-		Date date = new Date();
-		wypozyczenie.setDataWypozyczenia(date);
-		wypozyczenia.add(wypozyczenie);
-		czytelnik.setWypozyczenia(wypozyczenia);
+		Date data = new Date();
+		wypozyczenie.setDataOddania(data);
+		//Date dataWyp = wypozyczenie.getDataWypozyczenia();
+		
+		long kara = 0;
+		
+		czytelnik.setKara(""+kara);
 		czytelnikDAO.save(czytelnik);
 		wypozyczenieDAO.save(wypozyczenie);
 		egzemplarzDAO.save(egzemplarz);
 		
-		return "spis_ksiazek";
-	}*/
+		return "wypozyczenia";
+	}
 	public String doRenowacji(String id)
 	{
 		Long idE = Long.parseLong(id);
@@ -157,7 +164,16 @@ public class WypozyczeniaController {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		Long idC = (long) session.getAttribute("idCzytelnika");
 		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
-		return czytelnik.getWypozyczenia();
+		List<Wypozyczenie> wypozyczenia = czytelnik.getWypozyczenia();
+		List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
+		for(Wypozyczenie element : wypozyczenia)
+		{
+			if(element.getDataOddania() == null)
+			{
+				wypozyczeniaAktualne.add(element);
+			}
+		}
+		return wypozyczeniaAktualne;
 	}
 	public List<Ksiazka> pokazKsiazkiWypozyczenia()
 	{
@@ -165,9 +181,17 @@ public class WypozyczeniaController {
 		Long idC = (long) session.getAttribute("idCzytelnika");
 		Czytelnik czytelnik = czytelnikDAO.findOne(idC);
 		List<Wypozyczenie> wypozyczenia = czytelnik.getWypozyczenia();
+		List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
+		for(Wypozyczenie element : wypozyczenia)
+		{
+			if(element.getDataOddania() == null)
+			{
+				wypozyczeniaAktualne.add(element);
+			}
+		}
 		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
 		List<Ksiazka> ksiazkiCzyt = new LinkedList<>();
-		for(Wypozyczenie elementWyp : wypozyczenia)
+		for(Wypozyczenie elementWyp : wypozyczeniaAktualne)
 		{
 			for(Ksiazka elementKsiazka : ksiazki)
 			{
