@@ -19,8 +19,21 @@
 		<hr class='a'/>
 		<div>
 		<br/>
+		<br/>
 		<a href="dodaj_pracownika.xhtml" id="przycisk2"> Dodaj pracownika </a><br/><br/><br/>
 		<br/>
+		
+		<ui:fragment rendered="#{pracownikController.edycjaPracownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{pracownikController.edycjaPracownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{pracownikController.usunPracownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{pracownikController.usunPracownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
 		
 		<table class ="aTable" style="width:100%">
   		<tr>

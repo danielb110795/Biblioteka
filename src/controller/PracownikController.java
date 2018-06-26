@@ -46,6 +46,14 @@ public class PracownikController {
 	@Setter
 	private String errorMessageEmail = "";
 	
+	@Getter
+	@Setter
+	private String edycjaPracownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunPracownikaMessage = "";
+	
 	public String dodajPracownika()
 	{
 		Pracownik pracownik = new Pracownik();
@@ -138,7 +146,14 @@ public class PracownikController {
 		else
 			uzytkownik.setHaslo(haslo);
 		
-		uzytkownik.setRola("PRACOWNIK");
+		
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			uzytkownik.setRola("PRACOWNIK");
+		else
+			uzytkownik.setRola("ADMINISTRATOR");
+		
+		
+		
 		
 		uzytkownik.setAktywowane(true);
 		uzytkownik.setZalogowany(true);
@@ -173,6 +188,7 @@ public class PracownikController {
 		uzytkownikDAO.save(uzytkownik);
 		pracownikDAO.save(pracownik); 
 		
+		edycjaPracownikaMessage = "Edytowano pracownika: " + imie + " " + nazwisko;
 		return "pracownicy";
 	}
 	
@@ -200,6 +216,9 @@ public class PracownikController {
 	public String usunPracownika(String id)
 	{
 		Long idPracownika = Long.parseLong(id);
+		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
+			
+		usunPracownikaMessage = "Usuniêto pracownika " + pracownik.getImie() + " " + pracownik.getNazwisko() +".";
 		pracownikDAO.remove(idPracownika);
 		return "pracownicy";
 	}

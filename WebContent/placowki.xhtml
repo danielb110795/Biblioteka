@@ -18,10 +18,26 @@
 		<hr class='a'/>
 		<div>
 		<br/>
+		<br/>
 		<a href="dodaj_placowke.xhtml" id="przycisk2"> Dodaj placówkę </a><br/><br/><br/>
 		</div>
 		<br/>
-		<h2><h:outputText styleClass="error" value=" #{bibliotekaController.dodanoBibiotekeMessage}"></h:outputText></h2><br/><br/>
+		<ui:fragment rendered="#{bibliotekaController.dodanoBibiotekeMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{bibliotekaController.dodanoBibiotekeMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		<ui:fragment rendered="#{bibliotekaController.edycjaPlacowkiMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{bibliotekaController.edycjaPlacowkiMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		<ui:fragment rendered="#{bibliotekaController.usunPlacowkeMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{bibliotekaController.usunPlacowkeMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
 		<table class ="aTable" style="width:100%">
   		<tr>
    			<th>Nazwa</th>
@@ -51,7 +67,10 @@
 		</ui:repeat>
 			
 		</table>	
-	</div>		
+	</div>	
+	<br/>	
+	<br/>
+	<br/>
 	</div>		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	

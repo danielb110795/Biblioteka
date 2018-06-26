@@ -44,6 +44,23 @@ public class BibliotekaController {
 	@Setter
 	private String dodanoBibiotekeMessage = "";
 	
+	@Getter
+	@Setter
+	private String przypisaniePracownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String wypisaniePracownikaMessage = "";
+	
+	@Getter
+	@Setter
+	private String edycjaPlacowkiMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunPlacowkeMessage = "";
+	
+	
 	private String nazwa;
 	private String adres;
 	private String numerTel;
@@ -68,8 +85,6 @@ public class BibliotekaController {
 	
 	public String saveBiblioteka()
 	{
-		dodanoBibiotekeMessage = "";
-		
 		Biblioteka biblioteka = new Biblioteka();
 		
 		biblioteka.setNazwa(nazwa);
@@ -93,7 +108,7 @@ public class BibliotekaController {
 		biblioteka.setDzien(dni);
 		
 		bibliotekaDAO.save(biblioteka);
-		dodanoBibiotekeMessage = "Doda³eœ bibliotekê: " + nazwa;
+		dodanoBibiotekeMessage = "Doda³eœ bibliotekê: " + nazwa + ".";
 		
 		return "placowki.xhtml";
 	}
@@ -123,13 +138,18 @@ public class BibliotekaController {
 	public String usunPlacowke(String id) 
 	{
 		Long idPlacowki = Long.parseLong(id);
+		
+		placowka = bibliotekaDAO.findOne((long)idPlacowki);	
+		
 		try {
 			bibliotekaDAO.remove(idPlacowki);
 		}catch(Throwable e)
 		{
 			return "blad_usun_placowke"; 
-		}
+		} 
 		
+		
+		usunPlacowkeMessage = "Usuniêto placówkê: " + placowka.getNazwa() +".";
 		return "placowki";                
 	}
 	
@@ -160,8 +180,10 @@ public class BibliotekaController {
 		Biblioteka biblioteka = bibliotekaDAO.findOne(idPlac);
 		pracownik.setBiblioteka(biblioteka);
 		pracownikDAO.save(pracownik);
+		przypisaniePracownikaMessage = "Przypisa³eœ pracownika " + pracownik.getImie() + " " + 
+				pracownik.getNazwisko() +  " do biblioteki: " + biblioteka.getNazwa()+".";
 		
-		return "placowki";
+		return "przypisanie_pracownika";
 	}
 	
 	public String wypiszZBiblioteki(String id)
@@ -171,8 +193,10 @@ public class BibliotekaController {
 		Pracownik pracownik = pracownikDAO.findOne(idPracownika);
 		pracownik.setBiblioteka(null);
 		pracownikDAO.save(pracownik);
+		wypisaniePracownikaMessage = "Wypisa³eœ pracownika " + pracownik.getImie() + " " + 
+				pracownik.getNazwisko() + " z biblioteki.";
 		
-		return "placowki";
+		return "placowka_szczegoly";
 	}
 	
 	public List<Pracownik> znajdzPracownikow()
@@ -303,7 +327,7 @@ public class BibliotekaController {
 			
 		
 		bibliotekaDAO.save(biblioteka);
-		 
+		edycjaPlacowkiMessage = "Edytowano placówkê: " + nazwa +".";
 		
 		return "placowki";              
 	}

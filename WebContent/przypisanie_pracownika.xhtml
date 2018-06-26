@@ -18,9 +18,14 @@
 		<h2>Nieprzypisani pracownicy</h2>
 		<hr class='a'/>
 		<div>
-		
-
+	
 		<br/><br/>
+		<ui:fragment rendered="#{bibliotekaController.przypisaniePracownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{bibliotekaController.przypisaniePracownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
 		
 		<table class ="aTable" style="width:100%">
   		<tr>

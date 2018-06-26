@@ -20,7 +20,12 @@
 		
 		<br/><br/>
 		
-	
+			<ui:fragment rendered="#{bibliotekaController.wypisaniePracownikaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{bibliotekaController.wypisaniePracownikaMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
 		<table class ="aTable" style="width:100%">
   		<tr>
    			<th>Imie</th>
