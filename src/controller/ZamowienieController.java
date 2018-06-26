@@ -16,6 +16,8 @@ import entity.Pracownik;
 import entity.Uzytkownik;
 import entity.Zamowienie;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @RequestScoped
 @Named
@@ -27,6 +29,26 @@ public class ZamowienieController {
 	
 	@EJB
 	PracownikDAO pracownikDAO;
+	
+	@Getter
+	@Setter
+	private String akceptujZamowienieMessage = "";
+	
+	@Getter
+	@Setter
+	private String zakonczZamowienieMessage = "";
+	
+	@Getter
+	@Setter
+	private String odrzucZamowienieMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunZamowienieMessage = "";
+	
+	@Getter
+	@Setter
+	private String zlozZamowienieMessage = "";
 	
 	private String tytul;
 	private String wydanie;
@@ -59,6 +81,9 @@ public class ZamowienieController {
 		zamowienie.setStatus("Z£O¯ONE");
 		
 		zamowienieDAO.save(zamowienie);
+		
+		zlozZamowienieMessage = "Z³o¿ono zamówienie.";
+		
 		return "zamowienia_pracownik";
 	}
 	
@@ -77,6 +102,9 @@ public class ZamowienieController {
 
 		Uzytkownik uzytkownik =  (Uzytkownik) session.getAttribute("uzytkownik");
 		Long idZam = Long.parseLong(id);
+		
+		usunZamowienieMessage = "Usunieto zamówienie.";
+		
 		zamowienieDAO.remove(idZam);
 		if(uzytkownik.getRola().equals("PRACOWNIK"))
 			return "zamowienia_pracownik.xhtml";
@@ -92,6 +120,9 @@ public class ZamowienieController {
 		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ZAKOÑCZONE");
 		zamowienieDAO.save(zamowienie);
+		
+		usunZamowienieMessage = "Zakoñczono zamówienie.";
+		
 		if(uzytkownik.getRola().equals("PRACOWNIK"))
 			return "zamowienia_pracownik.xhtml";
 		else
@@ -106,6 +137,9 @@ public class ZamowienieController {
 		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ZAAKCEPTOWANE");
 		zamowienieDAO.save(zamowienie);
+		
+		akceptujZamowienieMessage = "Akceptowano zamówienie. Tytu³: " + zamowienie.getTytul() +".";
+		
 		if(uzytkownik.getRola().equals("PRACOWNIK"))
 			return "zamowienia_pracownik.xhtml";
 		else
@@ -120,6 +154,9 @@ public class ZamowienieController {
 		Zamowienie zamowienie = zamowienieDAO.findOne(idZam);
 		zamowienie.setStatus("ODRZUCONE");
 		zamowienieDAO.save(zamowienie);
+		
+		odrzucZamowienieMessage = "Odrzucono zamówienie. Tytu³: " + zamowienie.getTytul() +".";
+		
 		if(uzytkownik.getRola().equals("PRACOWNIK"))
 			return "zamowienia_pracownik.xhtml";
 		else

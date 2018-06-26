@@ -18,11 +18,32 @@
 		<h2>Zamówienia</h2>
 		<hr class='a'/>
 		<br/>
+		<br/>
 		<div>
 		
 		<a href="zloz_zamowienie.xhtml" id="przycisk2"> Złóż zamówienie </a> <br/> <br/> <br/> 
 		
 		<br/>
+		
+		<ui:fragment rendered="#{zamowienieController.usunZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.usunZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{zamowienieController.zakonczZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.zakonczZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		<ui:fragment rendered="#{zamowienieController.zlozZamowienieMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{zamowienieController.zlozZamowienieMessage}"></h:outputText></h3><br/><br/>
+  	 		</div>
+		</ui:fragment>
+		
+		
 		
 		<table class ="aTable" style="width:100%">
   		<tr>
@@ -52,7 +73,7 @@
 		</td>
 		</tr>
 	</ui:repeat>
-</table>
+	</table>
 		
 		</div>
 	</div>
