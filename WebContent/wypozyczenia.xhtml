@@ -17,6 +17,14 @@
 		<h2>Wypożyczenia</h2>
 		<hr class='a'/>
 		<br/>
+		<br/>
+		
+		<ui:fragment rendered="#{wypozyczeniaController.karaMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{wypozyczeniaController.karaMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		<br/>
 		<div>
 		
 		<table class ="aTable" style="width:100%">

@@ -133,17 +133,19 @@ public class WypozyczeniaController {
 		
 		long roznica = zwrocRozniceSekund(dataWyp); //roznica w sekundach ile minelo czasu od wypozyczenai do oddania
 		
-		Long kara = (long) 0;
+		Long karaPoprzednia = czytelnik.getKara();
 		
 		if (roznica < 60) {
-			kara = (long) 0;
 			karaMessage = "Ksi¹¿ke oddano na czas. Nie naliczono kary.";
+			czytelnik.setKara(karaPoprzednia);
 		} else {
-			kara = roznica - (long)60;
-			karaMessage = "Naliczono op³atê!";
+			Long karaNowa = karaPoprzednia + (roznica - (long)60);
+			czytelnik.setKara(karaNowa);
+			karaMessage = "Naliczono op³atê! Poinformuj i tym czytelnika. Kara za oddan¹ ksi¹¿ke wynosi: " 
+					+ (roznica - (long)60) + ". Kara ogólna: " + karaNowa;
 		}
 		
-		czytelnik.setKara(kara);
+		
 		czytelnikDAO.save(czytelnik);
 		wypozyczenieDAO.save(wypozyczenie);
 		egzemplarzDAO.save(egzemplarz);
