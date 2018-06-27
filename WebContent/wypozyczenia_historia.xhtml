@@ -25,7 +25,8 @@
    			<th>Autorzy</th>
    			<th>Placówka</th> 
   			<th>ISBN</th>
-  			<th>Operacje</th>
+  			<th>Data wypożyczenia</th>
+  			<th>Data oddania</th>
   		</tr>
   		
   		<ui:repeat var="wypozyczenie" value="#{wypozyczeniaController.pokazHistorieWypozyczen()}"> 
@@ -37,11 +38,8 @@
 		<td>#{ksiazka.biblioteka.nazwa} </td>
 		</ui:repeat>
 		<td>#{wypozyczenie.egzemplarz.ISBN} </td>
-		<td>
-		<h:form>  
-        	<h:commandButton action="#{wypozyczeniaController.zwroc(wypozyczenie.egzemplarz.id)}" value="Zwróć"></h:commandButton>
-        </h:form>
-		</td>
+		<td>#{wypozyczenie.dataWypozyczenia}</td>
+		<td>#{wypozyczenie.dataOddania}</td>
 		</tr> 
 		</ui:repeat>
 		</table>

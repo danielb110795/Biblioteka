@@ -28,7 +28,6 @@
    			<th>Email</th> 
   			<th>Pesel</th>
   			<th>Adres</th>
-  			<th>Biblioteka</th>
   			<th>Operacje</th>
   		</tr>
 		
@@ -40,10 +39,6 @@
 		<td>#{czytelnik.email} </td>
 		<td>#{czytelnik.pesel} </td>
 		<td>#{czytelnik.adres} </td>	
-		<td> 
-		<h:outputText rendered="#{empty czytelnik.wypozyczenia}" value="Brak wypozyczonych ksiazek"></h:outputText> 
-		<h:outputText rendered="#{!empty czytelnik.wypozyczenia}" value="#{pracownik.wypozyczenia.size()}"></h:outputText> 
-		</td>
 		<td>
 		<h:form>  
 		<h:commandButton action="#{wypozyczeniaController.wypozycz(czytelnik.id)}" value="Wypożycz"></h:commandButton>

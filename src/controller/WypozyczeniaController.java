@@ -147,7 +147,6 @@ public class WypozyczeniaController {
 					+ (roznica - (long)60) + ". Kara ogólna: " + karaNowa;
 		}
 		
-		
 		czytelnikDAO.save(czytelnik);
 		wypozyczenieDAO.save(wypozyczenie);
 		egzemplarzDAO.save(egzemplarz);
