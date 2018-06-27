@@ -8,6 +8,10 @@
 <ui:include src="#{componentController.getHead()}" />
 
 <body>
+
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}">
+
+	
 	<ui:include src="#{componentController.getMainMenu()}" />
 	
 	<ui:include src="#{componentController.getMenuAdmin()}" />
@@ -74,5 +78,15 @@
 	</div>		
 
 	<a href="javascript:scroll(0,0);">W górę</a> 	
+	</ui:fragment>
+	<ui:fragment rendered="#{autoryzacjaController.sprawdzKtoZalogowany() != 'ADMINISTRATOR'}">
+		<ui:include src="#{componentController.getMainMenu()}" />
+		<div id="srodekcaly">
+			<div id="tekst2">
+			<br/> <br/>
+			<center><h1>Nie masz praw aby wejść na tą stronę!</h1></center>
+			</div>
+		</div>
+	</ui:fragment>
 </body> 
 </html> 
