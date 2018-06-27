@@ -95,9 +95,10 @@ public class WypozyczeniaController {
 		wypozyczenie.setDataWypozyczenia(date);
 		wypozyczenia.add(wypozyczenie);
 		czytelnik.setWypozyczenia(wypozyczenia);
+		
+		//egzemplarzDAO.save(egzemplarz);
+		//wypozyczenieDAO.save(wypozyczenie);
 		czytelnikDAO.save(czytelnik);
-		wypozyczenieDAO.save(wypozyczenie);
-		egzemplarzDAO.save(egzemplarz);
 		return "spis_ksiazek";
 	}
 	
@@ -117,7 +118,7 @@ public class WypozyczeniaController {
 			wypozyczenia = czytelnik.getWypozyczenia();
 			for(Wypozyczenie element : wypozyczenia)
 			{
-				if(element.getEgzemplarz().getISBN().equals(egzemplarz.getISBN()))
+				if(element.getEgzemplarz().getISBN().equals(egzemplarz.getISBN()) && element.getDataOddania() == null)
 				{
 					wypozyczenie = element;
 					break;

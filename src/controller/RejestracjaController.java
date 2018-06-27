@@ -78,7 +78,7 @@ public class RejestracjaController {
 			}
 		}
 		
-		uzytkownikDAO.save(uzytkownik);
+		//uzytkownikDAO.save(uzytkownik);
 		czytelnikDAO.save(czytelnik); 
 		
 		return "info";

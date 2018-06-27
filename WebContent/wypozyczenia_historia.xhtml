@@ -30,7 +30,7 @@
   		
   		<ui:repeat var="wypozyczenie" value="#{wypozyczeniaController.pokazHistorieWypozyczen()}"> 
   		
-		<tr>
+		<tr> 
 		<ui:repeat var="ksiazka" value="#{wypozyczeniaController.pokazKsiazkiWypozyczenia(wypozyczenie.egzemplarz.id)}"> 
 		<td>#{ksiazka.tytul} </td> 
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"> <p>#{autor.imie} #{autor.nazwisko}</p> </ui:repeat></td>

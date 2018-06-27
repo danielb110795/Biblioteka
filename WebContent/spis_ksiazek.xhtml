@@ -19,8 +19,12 @@
 		
 		<form method="post" enctype="text/plain">
 		<div id="formularz">
-			Szukaj książki: <input name="login" /> 
-			<input type="submit" value="Szukaj" />
+			Szukaj książki: <h:form><h:inputText id="szukaj" styleClass="input-text" name="szukaj" 
+			    value="#{ksiazkaController.szukanie}" required="true" requiredMessage="To pole jest wymagane">
+                </h:inputText>
+                <h:message for="szukaj" errorStyle="color:red; display:block"/>
+                <h:commandButton value="Szukaj" action="#{ksiazkaController.ustawSzukanie(szukaj)}"/> 
+		</h:form>
 		</div>
 		<br/><br/><br/>
 		</form>	
@@ -35,7 +39,7 @@
   			<th>Operacje</th>
   		</tr>
   		
-		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki()}">
+		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki(null)}">
 
 		<tr>
 		<td>#{ksiazka.zdjecie} </td>

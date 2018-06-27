@@ -155,6 +155,14 @@ public class KsiazkaController {
 	//private int liczbaEgzemplarzy;
 	private int idPlacowki;
 	
+	private String szukanie;
+	
+	public String ustawSzukanie()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.setAttribute("szukanie", szukanie);
+		return "spis_ksiazek";
+	}
 	public String saveKategoria(int skad) {
 		List<Kategoria> kategorie = kategoriaDAO.findAll();
 		for(Kategoria element : kategorie)
@@ -534,10 +542,25 @@ public class KsiazkaController {
 		return ksiazka;                
 	}
 	
-	public List<Ksiazka> pokazKsiazki()
+	public List<Ksiazka> pokazKsiazki(String zapytanie)
 	{
+		//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		//String zapytanie = (String) session.getAttribute("szukanie");
+		//session.removeAttribute("szukanie");
 		List<Ksiazka> ksiazki = new LinkedList<>();
 		ksiazki = ksiazkaDAO.findAll();	
+		if(zapytanie != null)
+		{
+			List<Ksiazka> ksiazkiFiltr = new LinkedList<>();
+			for(Ksiazka element : ksiazki)
+			{
+				if(element.getTytul().toUpperCase().contains(zapytanie.toUpperCase()))
+				{
+					ksiazkiFiltr.add(element);
+				}
+			}
+			return ksiazkiFiltr;
+		}
 		return ksiazki;
 	}
 	
