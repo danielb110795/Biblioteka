@@ -61,9 +61,9 @@
 		<td>#{zamowienie.status}</td>
 		<td>
         <h:form>
-       		<h:commandButton action="#{zamowienieController.akceptuj(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Akceptuj" ></h:commandButton>
-       		<h:commandButton action="#{zamowienieController.odrzuc(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Odrzuć" ></h:commandButton>
-       		<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAKOŃCZONE'}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
+       		<center><h:commandButton style="width:80px" action="#{zamowienieController.akceptuj(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Akceptuj" ></h:commandButton></center>
+       		<center><h:commandButton style="width:80px" action="#{zamowienieController.odrzuc(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZŁOŻONE'}" value="Odrzuć" ></h:commandButton></center>
+       		<center><h:commandButton style="width:80px" action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAKOŃCZONE'}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton></center>
        	</h:form>
 		</td>
 		</tr>

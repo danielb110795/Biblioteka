@@ -74,11 +74,11 @@
 		<td>#{czytelnik.adres} </td>
 		<td>
 		<h:form>  
-        	<h:commandButton action="#{wypozyczeniaController.przejdzDoWypozyczen(czytelnik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Wypożyczenia"></h:commandButton>
-        	<h:commandButton action="#{uzytkownikController.deaktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Deaktywuj"></h:commandButton>
-        	<h:commandButton action="#{uzytkownikController.aktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == false}" value="Aktywuj"></h:commandButton>
-        	<h:commandButton action="#{uzytkownikController.pokazEdycje(czytelnik.id)}" value="Edytuj"></h:commandButton>
-        	<h:commandButton action="#{uzytkownikController.usunUzytkownika(czytelnik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton>
+        	<center><h:commandButton style="width:120px" action="#{wypozyczeniaController.przejdzDoWypozyczen(czytelnik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Wypożyczenia"></h:commandButton></center>
+        	<center><h:commandButton style="width:120px" action="#{uzytkownikController.deaktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == true}" value="Deaktywuj"></h:commandButton></center>
+        	<center><h:commandButton style="width:120px" action="#{uzytkownikController.aktywujUzytkownika(czytelnik.uzytkownik.id)}" rendered="#{czytelnik.uzytkownik.aktywowane == false}" value="Aktywuj"></h:commandButton></center>
+        	<center><h:commandButton style="width:120px" action="#{uzytkownikController.pokazEdycje(czytelnik.id)}" value="Edytuj"></h:commandButton></center>
+        	<center><h:commandButton style="width:120px" action="#{uzytkownikController.usunUzytkownika(czytelnik.id)}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń"></h:commandButton></center>
         </h:form>
 		</td>
 		</tr>

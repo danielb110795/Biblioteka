@@ -79,7 +79,7 @@
 					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
        			<br/> 
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
 		</h:form>		
 		<h3>Jeśli nie ma odpowiedniego wydawnictwa możesz je dodać poniżej.</h3>
 		
@@ -94,7 +94,7 @@
                 </h:inputText>
                 <h:message for="nazwaWydawnictwa" errorStyle="color:red; display:block"/>
                 <br/>              
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(1)}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(1)}"/>
 		</h:form>		
 
 	</div>

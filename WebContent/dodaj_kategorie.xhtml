@@ -63,14 +63,14 @@
 				</h:selectOneMenu> 
 				<br/>  
 
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/>
-			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i przejdz do podsumowania" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
-			<h:commandButton value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
+			<h:commandButton style="width:190px" rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Dodaj i przejdź dalej" action="#{ksiazkaController.dodajKategorieDoKsiazki(0)}"/>
+			<h:commandButton style="width:190px" rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Dodaj i podsumuj" action="#{ksiazkaController.dodajKategorieDoKsiazki(2)}"/> 
+			<h:commandButton style="width:190px" value="Dodaj kolejną" action="#{ksiazkaController.dodajKategorieDoKsiazki(1)}"/> 
 			
 		</h:form>	
 		<h:form>
-		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
-		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/>
+		<h:commandButton style="width:190px" rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
+		<h:commandButton style="width:190px" rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj" action="podsumowanie_ksiazki"/>
 		</h:form>	
 		<h2>Usunięcie kategorii:</h2>	
 			
@@ -80,7 +80,7 @@
 					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorieKsiazki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 	
 				<br/> 	
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunKategorieZKsiazki()}"/> 				
+			<h:commandButton style="width:70px" value="Usuń" action="#{ksiazkaController.usunKategorieZKsiazki()}"/> 				
  		</h:form>		 		
 
 		
@@ -100,7 +100,7 @@
 				
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
                 <br/>              
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(1)}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveKategoria(1)}"/>
 		</h:form>		
 	</div>
 	</div>

@@ -66,8 +66,8 @@
 	
 		<td>
         <h:form>
-        	<h:commandButton action="#{ksiazkaController.zakonczZamowienie(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAAKCEPTOWANE'}" value="Zakończ"/>
-        	<h:commandButton action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ODRZUCONE'}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń" />
+        	<center><h:commandButton style="width:80px" action="#{ksiazkaController.zakonczZamowienie(zamowienie.id)}" rendered="#{zamowienie.status eq 'ZAAKCEPTOWANE'}" value="Zakończ"/></center>
+        	<center><h:commandButton style="width:80px" action="#{zamowienieController.usun(zamowienie.id)}" rendered="#{zamowienie.status eq 'ODRZUCONE'}" onclick="return confirm('Czy na pewno chcesz usunąć?')" value="Usuń" /></center>
         </h:form>
 
 		</td>

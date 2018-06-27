@@ -79,7 +79,7 @@
                 <h:message for="nazwisko" errorStyle="color:red; display:block"/>
                 <br/>
                         
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(0)}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveAutor(0)}"/>
 		</h:form>	
 		
 			<br/> <br/> 
@@ -107,7 +107,7 @@
 					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutorow()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
 				<br/>  
-			<h:commandButton value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć autora?')" action="#{ksiazkaController.usunAutora()}"/> 
+			<h:commandButton style="width:70px" value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć autora?')" action="#{ksiazkaController.usunAutora()}"/> 
 		</h:form>
 		
 		

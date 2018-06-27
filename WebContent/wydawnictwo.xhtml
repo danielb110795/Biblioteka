@@ -66,7 +66,7 @@
                 </h:inputText>
                 <h:message for="nazwaWydawnictwa" errorStyle="color:red; display:block"/>
                 <br/>              
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(0)}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveWydawnictwo(0)}"/>
 		</h:form>		
 		
 		<br/><br/>
@@ -93,7 +93,7 @@
 					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
        			<br/>            
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}" onclick="return confirm('Czy na pewno chcesz usunąć wydawnictwo?')"/>
+			<h:commandButton style="width:70px" value="Usuń" action="#{ksiazkaController.usunWydawnictwo()}" onclick="return confirm('Czy na pewno chcesz usunąć wydawnictwo?')"/>
 		</h:form>	
 	<br/>
 	<br/>

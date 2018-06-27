@@ -18,10 +18,21 @@
 		<div>
 		<br/>
 		<br/>
-		<div id="formularz">
-		Szukaj książki:
+		<h3>Opcje wyszukiwania ksiażek</h3>
 		
+		<div id="formularz">
 		<table>
+		<tr>
+		<td style="width:20%">
+		Wyszukanie po tytule:
+		</td>
+		<td style="width:20%">
+		Wyszukanie po kategorii:
+		</td>
+		<td style="width:20%">
+		Wyszukanie po placówce:
+		</td>
+		</tr>
 		<tr>
 		<td style="width:20%">
 				 <h:form><h:inputText id="szukaj" styleClass="input-text" name="szukaj" 
@@ -30,23 +41,28 @@
                 <h:commandButton value="Szukaj" action="#{ksiazkaController.ustawSzukanie()}"></h:commandButton> 
 		</h:form>
 		</td>
+
+	
+
 		<td style="width:20%">
 		<h:form>
                 <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
 					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
 				<br/>  
-			<h:commandButton value="Pokaż" action="#{ksiazkaController.ustawKategorie()}"/> 
+			<h:commandButton value="Szukaj" action="#{ksiazkaController.ustawKategorie()}"/> 
 			
 		</h:form>
 		</td>
+	
+
 		<td style="width:20%">
 		<h:form>
 		<h:selectOneMenu id="idPlacowki" value="#{ksiazkaController.idPlacowki}"> 
 					<f:selectItems name="idPlacowki" value="#{bibliotekaController.pokazPlacowki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
 				<br/> 
-				<h:commandButton value="Pokaż" action="#{ksiazkaController.ustawPlacowke()}"/> 
+				<h:commandButton value="Szukaj" action="#{ksiazkaController.ustawPlacowke()}"/> 
 		</h:form> 
 		</td>
 		</tr>
@@ -78,8 +94,8 @@
 		</td>
 		<td>
 		<h:form>  
-        	<h:commandButton action="#{ksiazkaController.pokazSzczegoly(ksiazka.id)}" value="Pokaż"></h:commandButton>
-        	<h:commandButton action="#{ksiazkaController.dodajEgzemplarzDoIstniejacej(ksiazka.id)}" value="Dodaj egzemplarz"></h:commandButton>
+        	<center><h:commandButton style="width:150px" action="#{ksiazkaController.pokazSzczegoly(ksiazka.id)}" value="Pokaż"></h:commandButton></center>
+        	<center><h:commandButton style="width:150px" rendered="#{autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK' or autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR'}" action="#{ksiazkaController.dodajEgzemplarzDoIstniejacej(ksiazka.id)}" value="Dodaj egzemplarz"></h:commandButton></center>
         </h:form>
 		</td>
 		</tr>

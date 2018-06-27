@@ -45,14 +45,6 @@ public class CrudDAO<ID extends Serializable, EntityClass> {
 				.createQuery("SELECT tmp from " + entityClass.getName() + " tmp" + perpareQuery(query), entityClass)
 				.getResultList();
 	}
-	
-	/*public List<EntityClass> findByQuery(EntityClass query, Page page) {
-		return entityManager
-				.createQuery("SELECT tmp from " + entityClass.getName() + " tmp" + perpareQuery(query), entityClass)
-				.setFirstResult(page.getFirst())
-				.setMaxResults(page.getMax())
-				.getResultList();
-	}*/
 
 	private String perpareQuery(EntityClass query) {
 		StringBuffer queryBuffer = new StringBuffer();

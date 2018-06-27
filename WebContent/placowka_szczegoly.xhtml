@@ -48,8 +48,8 @@
 		<td>#{pracownik.adres} </td>	
 		<td>
 		<h:form>  
-        	<h:commandButton action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Edytuj"></h:commandButton>
-        	<h:commandButton action="#{bibliotekaController.wypiszZBiblioteki(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz wypisać pracownika z placówki?')" value="Wypisz"></h:commandButton>
+        	<center><h:commandButton style="width:70px" action="#{pracownikController.pokazEdycje(pracownik.id)}" value="Edytuj"></h:commandButton></center>
+        	<center><h:commandButton style="width:70px" action="#{bibliotekaController.wypiszZBiblioteki(pracownik.id)}" onclick="return confirm('Czy na pewno chcesz wypisać pracownika z placówki?')" value="Wypisz"></h:commandButton></center>
         </h:form>
 		</td>
 		</tr>

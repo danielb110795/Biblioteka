@@ -68,7 +68,7 @@
 
                 <h:message for="nazwa" errorStyle="color:red; display:block"/>
                 <br/>              
-			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveKategoria(0)}"/>
+			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveKategoria(0)}"/>
 		</h:form>	
 		
 	<br/> <br/> 
@@ -92,7 +92,7 @@
 					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
 				<br/>  
-			<h:commandButton value="Usun" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunKategorie()}"/> 
+			<h:commandButton style="width:70px" value="Usuń" onclick="return confirm('Czy na pewno chcesz usunąć?')" action="#{ksiazkaController.usunKategorie()}"/> 
 			
 		</h:form>	
 	
