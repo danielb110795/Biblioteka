@@ -97,8 +97,8 @@ public class WypozyczeniaController {
 		wypozyczenia.add(wypozyczenie);
 		czytelnik.setWypozyczenia(wypozyczenia);
 		
-		//egzemplarzDAO.save(egzemplarz);
-		//wypozyczenieDAO.save(wypozyczenie);
+		egzemplarzDAO.save(egzemplarz);
+		wypozyczenieDAO.save(wypozyczenie);
 		czytelnikDAO.save(czytelnik);
 		return "spis_ksiazek";
 	}

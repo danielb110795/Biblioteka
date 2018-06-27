@@ -38,30 +38,40 @@
 		</tr>
 
   		<tr>
-  			<th> </th>
+  			<th>Wydawnictwo</th>
   			<th>Wydanie</th>
    			<th>ISBN Egzemplarza</th>
-   			<th>Operacje</th>
-   			<th> </th>
+   			<th>Wypożyczanie</th>
+   			<th>Renowacja</th>
   		</tr>
   		<ui:repeat var="egzemplarz" value="#{ksiazka.egzemplarz}">
 		<tr>
-		<td> </td>
+		<td>#{egzemplarz.wydanie.wydawnictwo.nazwa} </td>
 		<td>
-		#{egzemplarz.wydanie.wydawnictwo.nazwa} #{egzemplarz.wydanie.nazwa} #{egzemplarz.wydanie.miejsceWydania} #{egzemplarz.wydanie.rokWydania}</td>
+		#{egzemplarz.wydanie.nazwa} #{egzemplarz.wydanie.miejsceWydania} #{egzemplarz.wydanie.rokWydania}</td>
 		<td>
 		#{egzemplarz.ISBN}
 		</td>
 		<td>
+		<center>
 		<h:form>  
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" value="Wypożycz" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status == 'DOSTEPNY' and (autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR' or autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK')}" value="Wypożycz" action="#{wypozyczeniaController.pokazUzytkownikow(egzemplarz.id)}"></h:commandButton>
 			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'WYPOŻYCZONY'}" value="WYPOŻYCZONY"></h:outputText>
-			<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY'}" action="#{wypozyczeniaController.doRenowacji(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
-			<h:commandButton rendered="#{egzemplarz.status eq 'RENOWACJA'}" action="#{wypozyczeniaController.zRenowacji(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
+			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'DOSTEPNY' and (autoryzacjaController.sprawdzKtoZalogowany() != 'ADMINISTRATOR' and autoryzacjaController.sprawdzKtoZalogowany() != 'PRACOWNIK')}" value="DOSTĘPNY"></h:outputText>
+        </h:form>
+        </center>
+        </td>
+        <td>
+        <center>
+        <h:form>
+        	<h:commandButton rendered="#{egzemplarz.status eq 'DOSTEPNY' and (autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR' or autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK')}" action="#{wypozyczeniaController.doRenowacji(egzemplarz.id)}" value="Do renowacji"></h:commandButton>
+			<h:commandButton rendered="#{egzemplarz.status eq 'RENOWACJA' and (autoryzacjaController.sprawdzKtoZalogowany() == 'ADMINISTRATOR' or autoryzacjaController.sprawdzKtoZalogowany() == 'PRACOWNIK')}" action="#{wypozyczeniaController.zRenowacji(egzemplarz.id)}" value="Zwróć z renowacji"></h:commandButton>
+			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'RENOWACJA'}" value="W RENOWACJI"></h:outputText>
+			<h:outputText styleClass="error" rendered="#{egzemplarz.status eq 'DOSTEPNY' and (autoryzacjaController.sprawdzKtoZalogowany() != 'ADMINISTRATOR' and autoryzacjaController.sprawdzKtoZalogowany() != 'PRACOWNIK')}" value="DOSTĘPNY"></h:outputText>
 			<h:commandButton rendered="2 == 3" action="dodaj_egzemplarz" value="Zarezerwuj"></h:commandButton>
         </h:form>
-        </td>
-        <td> </td>
+        </center>
+         </td>
 		</tr>
 		
 		</ui:repeat>

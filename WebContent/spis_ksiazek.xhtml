@@ -16,18 +16,43 @@
 		<h2>Placówki</h2>
 		<hr color='#FF9966' size='5'/>
 		<div>
-		
-		<form method="post" enctype="text/plain">
+		<br/>
+		<br/>
 		<div id="formularz">
-			Szukaj książki: <h:form><h:inputText id="szukaj" styleClass="input-text" name="szukaj" 
-			    value="#{ksiazkaController.szukanie}" required="true" requiredMessage="To pole jest wymagane">
+		Szukaj książki:
+		
+		<table>
+		<tr>
+		<td style="width:20%">
+				 <h:form><h:inputText id="szukaj" styleClass="input-text" name="szukaj" 
+			    value="#{ksiazkaController.szukanie}">
                 </h:inputText>
-                <h:message for="szukaj" errorStyle="color:red; display:block"/>
-                <h:commandButton value="Szukaj" action="#{ksiazkaController.ustawSzukanie(szukaj)}"/> 
+                <h:commandButton value="Szukaj" action="#{ksiazkaController.ustawSzukanie()}"></h:commandButton> 
 		</h:form>
+		</td>
+		<td style="width:20%">
+		<h:form>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorie()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/>  
+			<h:commandButton value="Pokaż" action="#{ksiazkaController.ustawKategorie()}"/> 
+			
+		</h:form>
+		</td>
+		<td style="width:20%">
+		<h:form>
+		<h:selectOneMenu id="idPlacowki" value="#{ksiazkaController.idPlacowki}"> 
+					<f:selectItems name="idPlacowki" value="#{bibliotekaController.pokazPlacowki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+				<br/> 
+				<h:commandButton value="Pokaż" action="#{ksiazkaController.ustawPlacowke()}"/> 
+		</h:form> 
+		</td>
+		</tr>
+		</table>
 		</div>
-		<br/><br/><br/>
-		</form>	
+		<br/><br/><br/>	
 		<table class ="aTable" style="width:100%">
   		<tr>
   			<th>Zdjęcie</th>
@@ -39,7 +64,7 @@
   			<th>Operacje</th>
   		</tr>
   		
-		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki(null)}">
+		<ui:repeat var="ksiazka" value="#{ksiazkaController.pokazKsiazki()}">
 
 		<tr>
 		<td>#{ksiazka.zdjecie} </td>
