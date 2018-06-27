@@ -65,6 +65,17 @@
 		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
 		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/>
 		</h:form>	
+		<h2>Usunięcie kategorii:</h2>	
+			
+ 		<h:form>	 		<h:form>
+                <h:selectOneMenu id="idKategoria" value="#{ksiazkaController.idKategoria}"> 			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 0}" value="Przejdź do etapu 3" action="dodaj_autora"/>
+					<f:selectItems name="idKategoria" value="#{ksiazkaController.pokazKategorieKsiazki()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>			<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/>
+				</h:selectOneMenu> 	
+				<br/> 	
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunKategorieZKsiazki()}"/> 	
+				
+ 		</h:form>		 		</h:form>	
+		
 		<h3>Jeśli nie ma odpowiedniej kategorii możesz ją dodać poniżej.</h3>
 		
 		<br/>

@@ -25,6 +25,7 @@ import dao.WypozyczenieDAO;
 import entity.Czytelnik;
 import entity.Egzemplarz;
 import entity.Ksiazka;
+import entity.Uzytkownik;
 import entity.Wypozyczenie;
 import lombok.Data;
 import lombok.Getter;
@@ -153,6 +154,64 @@ public class WypozyczeniaController {
 		
 		return "wypozyczenia";
 	}
+	public List<Wypozyczenie> pokazHistorieWypozyczen()
+		{
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			Uzytkownik uzytkownik = (Uzytkownik) session.getAttribute("uzytkownik");
+			List<Czytelnik> czytelnicy = czytelnikDAO.findAll();
+			Czytelnik czytelnik = new Czytelnik();
+			for(Czytelnik element : czytelnicy)
+			{
+				if(element.getUzytkownik().getId() == uzytkownik.getId())
+				{
+					czytelnik = element;
+				}
+			}
+			
+			List<Wypozyczenie> wypozyczenia = new LinkedList<>();
+			
+			wypozyczenia = czytelnik.getWypozyczenia();
+			List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
+	
+			for(Wypozyczenie element : wypozyczenia)
+			{
+				if(element.getDataOddania() != null)
+				{
+					wypozyczeniaAktualne.add(element);
+				}
+			}
+			
+			return wypozyczeniaAktualne;
+		}
+		public List<Wypozyczenie> pokazWypozyczeniaCzytelnikowi()
+		{
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			Uzytkownik uzytkownik = (Uzytkownik) session.getAttribute("uzytkownik");
+			List<Czytelnik> czytelnicy = czytelnikDAO.findAll();
+			Czytelnik czytelnik = new Czytelnik();
+			for(Czytelnik element : czytelnicy)
+			{
+				if(element.getUzytkownik().getId() == uzytkownik.getId())
+				{
+					czytelnik = element;
+				}
+			}
+			
+			List<Wypozyczenie> wypozyczenia = new LinkedList<>();
+			
+			wypozyczenia = czytelnik.getWypozyczenia();
+			List<Wypozyczenie> wypozyczeniaAktualne = new LinkedList<>();
+	
+			for(Wypozyczenie element : wypozyczenia)
+			{
+				if(element.getDataOddania() == null)
+				{
+					wypozyczeniaAktualne.add(element);
+				}
+			}
+			
+			return wypozyczeniaAktualne;
+		}
 	
 	public long zwrocRozniceSekund (Date datWyp) {
 		
