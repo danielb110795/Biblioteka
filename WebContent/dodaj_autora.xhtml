@@ -28,6 +28,13 @@
 		<br/>
 		<br/>
 		
+		
+		<ui:fragment rendered="#{ksiazkaController.usunAutoraZDodawanejKsiazkiMessage != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.usunAutoraZDodawanejKsiazkiMessage}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
 		<ui:fragment rendered="#{ksiazkaController.dodajAutoraMessage != ''}">
    			<div>
       			<h3><h:outputText styleClass="error" value="#{ksiazkaController.dodajAutoraMessage}"></h:outputText></h3>
@@ -62,6 +69,18 @@
 		<h:commandButton rendered="#{ksiazkaController.czyZPodsumowania() == 1}" value="Nic nie dodawaj i przejdz do podsumowania" action="podsumowanie_ksiazki"/></h:form>	
 		<h3>Jeśli nie ma odpowiedniego autora możesz go dodać poniżej.</h3>
 
+		<br/>	
+		<br/>	
+		<h2>Usunięcie autora:</h2>	
+			
+		<h:form>	
+                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 	
+					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutoraKsiazki()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>	
+				</h:selectOneMenu> 	
+				<br/> 	
+			<h:commandButton value="Usuń" action="#{ksiazkaController.usunAutoraZKsiazki()}"/> 	
+				
+		</h:form>		
 		<br/>
 		<br/>
 		<h2>Dodawanie nowego autora:</h2>
@@ -88,18 +107,7 @@
                         
 			<h:commandButton value="Dodaj" action="#{ksiazkaController.saveAutor(1)}"/>
 		</h:form>	
-		<br/>	
-		<br/>	
-		<h2>Usunięcie autora:</h2>	
-			
-		<h:form>	
-                <h:selectOneMenu id="idAutora" value="#{ksiazkaController.idAutora}"> 	
-					<f:selectItems name="idAutora" value="#{ksiazkaController.pokazAutoraKsiazki()}" var="tmp" itemLabel="#{tmp.nazwisko} #{tmp.imie}" itemValue="#{tmp.id}"/>	
-				</h:selectOneMenu> 	
-				<br/> 	
-			<h:commandButton value="Usuń" action="#{ksiazkaController.usunAutoraZKsiazki()}"/> 	
-				
-		</h:form>		
+
 
 	</div>
 	<br/><br/><br/>

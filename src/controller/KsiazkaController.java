@@ -122,6 +122,14 @@ public class KsiazkaController {
 	@Setter
 	private String dodajKolejnyEgzemplarzMessage = "";
 	
+	@Getter
+	@Setter
+	private String usunKategorieZDodawanejKsiazkiMessage = "";
+	
+	@Getter
+	@Setter
+	private String usunAutoraZDodawanejKsiazkiMessage = "";
+	
 	//kategoria
 	private String nazwa;
 	
@@ -433,11 +441,12 @@ public class KsiazkaController {
 		
 		if(ksiazka.getKategoria() != null)
 		{
-			kategorie = ksiazka.getKategoria();
-			
+			kategorie = ksiazka.getKategoria();		
 		}
+		
 		//int id;
 		//id = podanaKategoria.getId();
+		usunKategorieZDodawanejKsiazkiMessage = "Usuniêto kategorie z ksia¿ki.";
 		kategorie.remove(podanaKategoria);
 		ksiazka.setKategoria(kategorie);
 		session.setAttribute("ksiazka",ksiazka);
@@ -459,6 +468,7 @@ public class KsiazkaController {
 		}
 		//int id;
 		//id = podanaKategoria.getId();
+		usunAutoraZDodawanejKsiazkiMessage = "Usuniêto autora z ksi¹¿ki.";
 		autorzy.remove(podanyAutor);
 		ksiazka.setAutor(autorzy);
 		session.setAttribute("ksiazka",ksiazka);
