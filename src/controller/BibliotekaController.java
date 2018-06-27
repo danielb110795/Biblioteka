@@ -83,6 +83,14 @@ public class BibliotekaController {
 	private Biblioteka placowka;
 	private Long id;
 	
+    public void setBibliotekaDAO(BibliotekaDAO bibliotekaDAO) {
+    	this.bibliotekaDAO = bibliotekaDAO;
+    }
+    
+    public void setDzienDAO(DzienDAO dzienDAO) {
+    	this.dzienDAO = dzienDAO;
+    }
+    
 	public String saveBiblioteka()
 	{
 		Biblioteka biblioteka = new Biblioteka();
