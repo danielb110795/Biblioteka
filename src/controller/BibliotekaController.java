@@ -310,6 +310,7 @@ public class BibliotekaController {
 			biblioteka.setUrlDoMapyGoogle(urlDoMapyGoogle);
 		
 		List<Dzien> dni = new LinkedList<>();
+		
 		Dzien poniedzialek = dzienDAO.save(Dzien.builder().nazwa("Poniedzia³ek").czasOtwarcia(pnOtwarcie).czasZamkniecia(pnZamkniecie).build());
 		Dzien wtorek = dzienDAO.save(Dzien.builder().nazwa("Wtorek").czasOtwarcia(wtOtwarcie).czasZamkniecia(wtZamkniecie).build());
 		Dzien sroda = dzienDAO.save(Dzien.builder().nazwa("Œroda").czasOtwarcia(srOtwarcie).czasZamkniecia(srZamkniecie).build());

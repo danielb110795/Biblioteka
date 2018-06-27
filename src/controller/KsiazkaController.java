@@ -10,6 +10,7 @@ import javax.ejb.LocalBean;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.net.ssl.SSLSession;
 import javax.servlet.http.HttpSession;
 
 import dao.AutorDAO;
@@ -161,6 +162,20 @@ public class KsiazkaController {
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.setAttribute("szukanie", szukanie);
+		return "spis_ksiazek";
+	}
+	public String ustawKategorie()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Kategoria kategoria = getKategoria(idKategoria);
+		session.setAttribute("szukanieKat", kategoria);
+		return "spis_ksiazek";
+	}
+	public String ustawPlacowke()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Biblioteka placowka = bibliotekaDAO.findOne((long)idPlacowki);
+		session.setAttribute("szukaniePlac", placowka);
 		return "spis_ksiazek";
 	}
 	public String saveKategoria(int skad) {
@@ -542,13 +557,45 @@ public class KsiazkaController {
 		return ksiazka;                
 	}
 	
-	public List<Ksiazka> pokazKsiazki(String zapytanie)
+	public List<Ksiazka> pokazKsiazki()
 	{
-		//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		//String zapytanie = (String) session.getAttribute("szukanie");
-		//session.removeAttribute("szukanie");
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		String zapytanie = (String) session.getAttribute("szukanie");
+		Kategoria kategoria = (Kategoria) session.getAttribute("szukanieKat");
+		Biblioteka placowka = (Biblioteka) session.getAttribute("szukaniePlac");
+		session.removeAttribute("szukanie");
+		session.removeAttribute("szukanieKat");
+		session.removeAttribute("szukaniePlac");
 		List<Ksiazka> ksiazki = new LinkedList<>();
 		ksiazki = ksiazkaDAO.findAll();	
+		if(placowka != null)
+		{
+			List<Ksiazka> ksiazkiPlac = new LinkedList<>();
+			for(Ksiazka element : ksiazki)
+			{
+				if(element.getBiblioteka().getId() == placowka.getId())
+				{
+					ksiazkiPlac.add(element);
+				}	
+			}
+			return ksiazkiPlac;
+		}
+		if(kategoria != null)
+		{
+			List<Ksiazka> ksiazkiKat = new LinkedList<>();
+			for(Ksiazka element : ksiazki)
+			{
+				List<Kategoria> kategorie = element.getKategoria();
+				for(Kategoria elementKat : kategorie)
+				{
+					if(elementKat.getNazwa() == kategoria.getNazwa())
+					{
+						ksiazkiKat.add(element);
+					}
+				}
+			}
+			return ksiazkiKat;
+		}
 		if(zapytanie != null)
 		{
 			List<Ksiazka> ksiazkiFiltr = new LinkedList<>();
