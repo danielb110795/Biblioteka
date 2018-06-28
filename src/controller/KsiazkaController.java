@@ -348,9 +348,6 @@ public class KsiazkaController {
 		if(ksiazka.getEgzemplarz() != null || (ksiazka.getEgzemplarz().isEmpty() == true))
 				egzemplarze = ksiazka.getEgzemplarz();
 		
-		//egzemplarz.setWydanie(wydanie);
-		//egzemplarz.setStatus("DOSTEPNY");
-		
 		Long ilosc = iloscEgzemplarzy;
 		for(long i = 0;i < ilosc;i++)
 		{
@@ -374,6 +371,22 @@ public class KsiazkaController {
 		session.setAttribute("ksiazka", ksiazka);
 		return "dodaj_wydanie";
 	}
+	public String dodajEgzemplarzDoIstniejacejZam(String id)
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Long idK = Long.parseLong(id);
+		Egzemplarz egzemplarz = (Egzemplarz) session.getAttribute("egzemplarz");
+		List<Egzemplarz> egzemplarze = new LinkedList<>();
+		Long ilosc = (Long) session.getAttribute("iloscEgz");
+		for(long i = 0;i < ilosc;i++) {
+			egzemplarz.setNumerEgz(i);
+			egzemplarze.add(egzemplarz);
+		}
+		Ksiazka ksiazka = ksiazkaDAO.findOne(idK);
+		ksiazka.setEgzemplarz(egzemplarze);
+		session.setAttribute("ksiazka", ksiazka);
+		return "podsumowanie_ksiazki";
+	}
 	public String zakonczZamowienie(String id)
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -385,11 +398,26 @@ public class KsiazkaController {
 		List<Ksiazka> ksiazki = ksiazkaDAO.findAll();
 		for(Ksiazka ksiazka : ksiazki)
 		{
-			if(ksiazka.getTytul().equals(zamowienie.getTytul()))
+			if(ksiazka.getTytul().equals(zamowienie.getTytul()) && ksiazka.getBiblioteka().getId() == zamowienie.getBiblioteka().getId())
 			{
+				Wydanie wydanie = new Wydanie();
+				wydanie.setISBN(zamowienie.getISBN());
+				wydanie.setMiejsceWydania(zamowienie.getMiejsceWydania());
+				wydanie.setRokWydania(zamowienie.getRokWydania());
+				wydanie.setWydawnictwo(zamowienie.getWydawnictwo());
+				wydanie.setNazwa("Wydanie: "+zamowienie.getNrWydania());
+				Egzemplarz egzemplarz = new Egzemplarz();
+				List<Egzemplarz> egzemplarze = new LinkedList<>();
+				
+				egzemplarz.setStatus("DOSTEPNY");
+				egzemplarz.setWydanie(wydanie);
+					
+				egzemplarze.add(egzemplarz);
+				session.setAttribute("iloscEgz", zamowienie.getIlosc());
+				session.setAttribute("egzemplarz", egzemplarz);
 				zamowienie.setStatus("ZAKOÑCZONE");
 				zamowienieDAO.save(zamowienie);
-				return dodajEgzemplarzDoIstniejacej(""+ksiazka.getId()+"");
+				return dodajEgzemplarzDoIstniejacejZam(""+ksiazka.getId()+"");
 			}
 		}
 		Ksiazka ksiazka2 = new Ksiazka();
@@ -397,10 +425,26 @@ public class KsiazkaController {
 		ksiazka2.setBiblioteka(zamowienie.getBiblioteka());
 		ksiazka2.setOpis(zamowienie.getOpis());
 		ksiazka2.setZdjecie("zdjecie.jpg");
+		Wydanie wydanie = new Wydanie();
+		wydanie.setISBN(zamowienie.getISBN());
+		wydanie.setMiejsceWydania(zamowienie.getMiejsceWydania());
+		wydanie.setRokWydania(zamowienie.getRokWydania());
+		wydanie.setWydawnictwo(zamowienie.getWydawnictwo());
+		wydanie.setNazwa("Wydanie: "+zamowienie.getNrWydania());
+		Egzemplarz egzemplarz = new Egzemplarz();
+		List<Egzemplarz> egzemplarze = new LinkedList<>();
+		for(long i = 0;i < zamowienie.getIlosc();i++)
+		{
+			egzemplarz.setStatus("DOSTEPNY");
+			egzemplarz.setWydanie(wydanie);
+			egzemplarz.setNumerEgz(i);
+			egzemplarze.add(egzemplarz);
+		}
+		ksiazka2.setEgzemplarz(egzemplarze);
 		session.setAttribute("ksiazka", ksiazka2);
 		zamowienie.setStatus("ZAKOÑCZONE");
 		zamowienieDAO.save(zamowienie);
-		return "dodaj_kategorie";
+		return "podsumowanie_ksiazki";
 	}
 	public Wydanie getWydanie(int idWydania)
 	{
