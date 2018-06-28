@@ -37,7 +37,7 @@
 		<td><ui:repeat var="autor" value="#{ksiazka.autor}"> <p>#{autor.imie} #{autor.nazwisko}</p> </ui:repeat></td>
 		<td>#{ksiazka.biblioteka.nazwa} </td>
 		</ui:repeat>
-		<td>#{wypozyczenie.egzemplarz.ISBN} </td>
+		<td>#{wypozyczenie.egzemplarz.wydanie.ISBN} </td>
 		<td>#{wypozyczenie.dataWypozyczenia}</td>
 		<td>#{wypozyczenie.dataOddania}</td>
 		</tr> 

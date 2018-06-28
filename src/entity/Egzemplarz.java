@@ -17,6 +17,7 @@ public class Egzemplarz implements Domain{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private Long numerEgz; 
 	private String status; //wypozyczony, zarezerwowany, dostepny
 	
 		

@@ -344,12 +344,20 @@ public class KsiazkaController {
 				return "dodaj_wydanie";
 			}
 		}
-		List<Egzemplarz> egzemplarze = ksiazka.getEgzemplarz();
-		Egzemplarz egzemplarz = new Egzemplarz();
-		egzemplarz.setWydanie(wydanie);
-		egzemplarz.setStatus("DOSTEPNY");
-		for(long i = 0;i < iloscEgzemplarzy;i++)
+		List<Egzemplarz> egzemplarze = new LinkedList<>();
+		if(ksiazka.getEgzemplarz() != null || (ksiazka.getEgzemplarz().isEmpty() == true))
+				egzemplarze = ksiazka.getEgzemplarz();
+		
+		//egzemplarz.setWydanie(wydanie);
+		//egzemplarz.setStatus("DOSTEPNY");
+		
+		Long ilosc = iloscEgzemplarzy;
+		for(long i = 0;i < ilosc;i++)
 		{
+			Egzemplarz egzemplarz = new Egzemplarz();
+			egzemplarz.setWydanie(wydanie);
+			egzemplarz.setStatus("DOSTEPNY");
+			egzemplarz.setNumerEgz(i);
 			egzemplarze.add(egzemplarz);
 		}
 		ksiazka.setEgzemplarz(egzemplarze);

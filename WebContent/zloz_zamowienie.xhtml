@@ -33,12 +33,30 @@
                 <h:message for="tytul" errorStyle="color:red; display:block"/>
                 <br/>
                 
-				Wydanie: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+                Opis: <h:inputText  id="opis" name="opis" styleClass="input-text" value="#{zamowienieController.opis}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="opis" errorStyle="color:red; display:block"/>
+                <br/>
+                
+				Numer wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <br/>
+                
+                Rok wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
                 </h:inputText>
                 <h:message for="wydanie" errorStyle="color:red; display:block"/>
                 <br/>
 				
+				Miejsce wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
+                </h:inputText>
+                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <br/>
+                
 				Ilość: <h:inputText  id="ilosc" name="ilosc" styleClass="input-text" value="#{zamowienieController.ilosc}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, max liczba 99">
 			    <f:validateRegex pattern="[0-9]{1,2}" />
@@ -46,11 +64,7 @@
                 <h:message for="ilosc" errorStyle="color:red; display:block"/>
                 <br/>
                 
-				Opis: <h:inputText  id="opis" name="opis" styleClass="input-text" value="#{zamowienieController.opis}" required="true" 
-				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
-                </h:inputText>
-                <h:message for="opis" errorStyle="color:red; display:block"/>
-                <br/>
+				
                 
 			<h:commandButton style="width:150px" value="Złóż zamówienie" action="#{zamowienieController.zlozZamowienie()}"/>
 		</h:form>

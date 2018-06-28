@@ -40,6 +40,12 @@
   	 		</div>
 		</ui:fragment>
 		
+		<ui:fragment rendered="#{ksiazkaController.errorMessageEgzemplarz != ''}">
+   			<div>
+      			<h3><h:outputText styleClass="error" value="#{ksiazkaController.errorMessageEgzemplarz}"></h:outputText></h3>
+  	 		</div>
+		</ui:fragment>
+		
 		<br/>
 		<h2>Wydanie dla książki:</h2>
 		<h:form>		
