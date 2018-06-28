@@ -18,9 +18,12 @@ public class Zamowienie implements Domain {
 	private Long id;
 	 
 	private String tytul; 
-	private String wydanie;
-	private String ilosc;
 	private String opis;
+	private String wydawnictwo; 
+	private String miejsceWydania;
+	private String rokWydania;
+	private String ISBN;
+	private Long ilosc;
 	private String status;
 	 
 	@ManyToOne

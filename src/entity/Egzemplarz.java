@@ -18,7 +18,7 @@ public class Egzemplarz implements Domain{
 	private Long id;
 	
 	private String status; //wypozyczony, zarezerwowany, dostepny
-	private String ISBN;
+	
 		
 	@ManyToOne
 	private Wydanie wydanie; 

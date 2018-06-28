@@ -21,7 +21,8 @@ public class Wydanie implements Domain {
 	private String nazwa; 
 	private String miejsceWydania;
 	private String rokWydania;
-
+	private String ISBN;
+	
 	@ManyToOne
 	private Wydawnictwo wydawnictwo; 
 }
