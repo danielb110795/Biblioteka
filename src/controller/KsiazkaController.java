@@ -467,7 +467,7 @@ public class KsiazkaController {
 				return "ksiazki";
 			}
 		}
-		ksiazka.setTytul(tytul);
+		ksiazka.setTytul(tytul); 
 		ksiazka.setOpis(opis);
 		ksiazka.setStan("Niezniszczona"); //raczej niepotrzebne
 		ksiazka.setZdjecie("zdjecie.jpg");
