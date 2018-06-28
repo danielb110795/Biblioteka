@@ -335,15 +335,6 @@ public class KsiazkaController {
 		wydanie.setNazwa("Wydanie: "+ nrWydania);
 		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
 		wydanie.setISBN(ISBN);
-		List<Wydanie> dostepneWydania = wydanieDAO.findAll();
-		for(Wydanie element : dostepneWydania)
-		{
-			if(element.getISBN().equals(ISBN))
-			{
-				errorMessageEgzemplarz = "Egzemplarz o takim ISBN istnieje ju¿ w bazie.";
-				return "dodaj_wydanie";
-			}
-		}
 		List<Egzemplarz> egzemplarze = new LinkedList<>();
 		if(ksiazka.getEgzemplarz() != null && (ksiazka.getEgzemplarz().isEmpty() == false))
 				egzemplarze = ksiazka.getEgzemplarz();
