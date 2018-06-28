@@ -311,4 +311,26 @@ public class UzytkownikController {
 		else
 			return "uzytkownicy";
 	}
+	
+	public String activeUser(Uzytkownik uzytkownik)
+	{
+		uzytkownik.setAktywowane(true);
+		uzytkownikDAO.save(uzytkownik);
+		aktywujuzytkownikaMessage = "Aktywowano u¿ytkownika: " + uzytkownik.getLogin();
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "uzytkownicy_pracownik";
+		else
+			return "uzytkownicy";
+	}
+	
+	public String deactiveUser(Uzytkownik uzytkownik)
+	{
+		uzytkownik.setAktywowane(false);
+		uzytkownikDAO.save(uzytkownik);
+		aktywujuzytkownikaMessage = "Aktywowano u¿ytkownika: " + uzytkownik.getLogin();
+		if(uzytkownik.getRola().equals("PRACOWNIK"))
+			return "uzytkownicy_pracownik";
+		else
+			return "uzytkownicy";
+	}
 }
