@@ -62,6 +62,22 @@ public class AutoryzacjaController {
 		private String haslo;
 	}
 
+	public String ktoZalogowany(Uzytkownik uzytkownik) {
+		if (uzytkownik == null)
+			return "NIEZALOGOWANY";
+		
+		if (uzytkownik.getRola().equals("ADMINISTRATOR"))
+			return "ADMINISTRATOR";
+		
+		if (uzytkownik.getRola().equals("PRACOWNIK"))
+			return "PRACOWNIK";
+		
+		if (uzytkownik.getRola().equals("CZYTELNIK"))
+			return "CZYTELNIK";
+		
+		return "BLAD";
+	}
+	
 	public String zaloguj() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		if(autoryzacja.getLogin().isEmpty() || autoryzacja.getHaslo().isEmpty())
