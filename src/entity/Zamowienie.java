@@ -19,7 +19,6 @@ public class Zamowienie implements Domain {
 	 
 	private String tytul; 
 	private String opis;
-	private String wydawnictwo; 
 	private String miejsceWydania;
 	private String rokWydania;
 	private String ISBN;
@@ -28,4 +27,7 @@ public class Zamowienie implements Domain {
 	 
 	@ManyToOne
 	private Biblioteka biblioteka; 
+	
+	@ManyToOne
+	private Wydawnictwo wydawnictwo;
 }

@@ -163,6 +163,7 @@ public class KsiazkaController {
 	private int idWydania;
 	//private int liczbaEgzemplarzy;
 	private int idPlacowki;
+	private Long iloscEgzemplarzy;
 	
 	private String szukanie;
 	
@@ -327,15 +328,35 @@ public class KsiazkaController {
 	
 	public String saveWydanie() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
 		Wydanie wydanie = new Wydanie();
 		wydanie.setRokWydania(rokWydania);
 		wydanie.setMiejsceWydania(miejsceWydania);
 		wydanie.setNazwa("Wydanie: "+ nrWydania);
 		wydanie.setWydawnictwo(getWydanictwo(idWydawnictwa));
+		wydanie.setISBN(ISBN);
+		List<Wydanie> dostepneWydania = wydanieDAO.findAll();
+		for(Wydanie element : dostepneWydania)
+		{
+			if(element.getISBN().equals(ISBN))
+			{
+				errorMessageEgzemplarz = "Egzemplarz o takim ISBN istnieje ju¿ w bazie.";
+				return "dodaj_wydanie";
+			}
+		}
+		List<Egzemplarz> egzemplarze = ksiazka.getEgzemplarz();
+		Egzemplarz egzemplarz = new Egzemplarz();
+		egzemplarz.setWydanie(wydanie);
+		egzemplarz.setStatus("DOSTEPNY");
+		for(long i = 0;i < iloscEgzemplarzy;i++)
+		{
+			egzemplarze.add(egzemplarz);
+		}
+		ksiazka.setEgzemplarz(egzemplarze);
 		session.setAttribute("wydanie",wydanie);
-		
+		session.setAttribute("ksiazka", ksiazka);
 		session.setAttribute("podsumowanie", 1);
-		return "dodaj_egzemplarz";
+		return "podsumowanie_ksiazki";
 	}
 	public String dodajEgzemplarzDoIstniejacej(String id)
 	{
@@ -633,68 +654,7 @@ public class KsiazkaController {
 		return ksiazki;
 	}
 	
-	public String saveEgzemplarz(int skad) {
-		Egzemplarz egzemplarz = new Egzemplarz();
-		if(ISBN.equals(""))
-		{
-			if(skad  == 0)
-			{
-				return "ksiazki";
-			}
-			else
-			{
-				dodajKolejnyEgzemplarzMessage = "Doda³eœ egzemplarz. Wpisz nowe ISBN i dodaj kolejny lub przejdz do posumowania.";
-				return "dodaj_egzemplarz";
-			}
-		}
-		egzemplarz.setStatus("Dostêpna");
-		egzemplarz.setISBN(ISBN);
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-		Wydanie wydanie = (Wydanie) session.getAttribute("wydanie");
-		
-		egzemplarz.setWydanie(wydanie);
-		
-		Ksiazka ksiazka = (Ksiazka) session.getAttribute("ksiazka");
-		List<Egzemplarz> egzemplarze = new LinkedList<>();
-		if(ksiazka.getEgzemplarz() != null)
-		{
-			egzemplarze = ksiazka.getEgzemplarz();
-			for(Egzemplarz element : egzemplarze)
-			{
-				if(element.getISBN().equals(egzemplarz.getISBN()))
-				{
-					errorMessageEgzemplarz = "Egzemplarz o takim ISBN zosta³ ju¿ dodany. Wpisz nowy ISBN lub przejdz do podsumowania.";
-					return "dodaj_egzemplarz";
-				}
-			}
-		}
-		List<Egzemplarz> dostepneEgzemplarze = egzemplarzDAO.findAll();
-		for(Egzemplarz element : dostepneEgzemplarze)
-		{
-			if(element.getISBN().equals(ISBN))
-			{
-				errorMessageEgzemplarz = "Egzemplarz o takim ISBN istnieje ju¿ w bazie.";
-				return "dodaj_egzemplarz";
-			}
-		}
-		egzemplarz.setStatus("DOSTEPNY");
-		egzemplarze.add(egzemplarz);
-		ksiazka.setEgzemplarz(egzemplarze);
-		
-
-		session.setAttribute("ksiazka", ksiazka);
-		
-		if(skad  == 0)
-		{
-			return "podsumowanie_ksiazki";
-		}
-		else
-		{
-			dodajKolejnyEgzemplarzMessage = "Doda³eœ egzemplarz. Wpisz nowe ISBN i dodaj kolejny lub przejdz do posumowania.";
-			return "dodaj_egzemplarz";
-		}
-	}
+	
 	
 	public List<Ksiazka> pokazPodsumowanie()
 	{

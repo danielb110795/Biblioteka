@@ -11,9 +11,11 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import dao.PracownikDAO;
+import dao.WydawnictwoDAO;
 import dao.ZamowienieDAO;
 import entity.Pracownik;
 import entity.Uzytkownik;
+import entity.Wydawnictwo;
 import entity.Zamowienie;
 import lombok.Data;
 import lombok.Getter;
@@ -29,6 +31,9 @@ public class ZamowienieController {
 	
 	@EJB
 	PracownikDAO pracownikDAO;
+	
+	@EJB
+	WydawnictwoDAO wydawnictwoDAO;
 	
 	@Getter
 	@Setter
@@ -53,8 +58,11 @@ public class ZamowienieController {
 	private String tytul;
 	private String wydanie;
 	private String opis;
-	private String ilosc;
-	
+	private Long ilosc;
+	private String miejsceWydania;
+	private String ISBN;
+	private String rokWydania;
+	private Long idWydawnictwa;
 	
 	public String zlozZamowienie()
 	{
@@ -74,9 +82,14 @@ public class ZamowienieController {
 		
 		Zamowienie zamowienie = new Zamowienie();
 		zamowienie.setTytul(tytul);
-		zamowienie.setWydanie(wydanie);
+		zamowienie.setISBN(ISBN);
+		zamowienie.setMiejsceWydania(miejsceWydania);
 		zamowienie.setIlosc(ilosc);
 		zamowienie.setOpis(opis);
+		zamowienie.setRokWydania(rokWydania);
+		Wydawnictwo wydawnictwo = wydawnictwoDAO.findOne(idWydawnictwa);
+		zamowienie.setWydawnictwo(wydawnictwo);
+		zamowienie.setWydawnictwo(wydawnictwo);
 		zamowienie.setBiblioteka(tenPracownik.getBiblioteka());
 		zamowienie.setStatus("Z£O¯ONE");
 		

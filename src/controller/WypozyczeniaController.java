@@ -119,7 +119,7 @@ public class WypozyczeniaController {
 			wypozyczenia = czytelnik.getWypozyczenia();
 			for(Wypozyczenie element : wypozyczenia)
 			{
-				if(element.getEgzemplarz().getISBN().equals(egzemplarz.getISBN()) && element.getDataOddania() == null)
+				if((element.getEgzemplarz().getId() == egzemplarz.getId()) && element.getDataOddania() == null)
 				{
 					wypozyczenie = element;
 					break;
