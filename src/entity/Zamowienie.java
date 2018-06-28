@@ -24,6 +24,7 @@ public class Zamowienie implements Domain {
 	private String ISBN;
 	private Long ilosc;
 	private String status;
+	private Long nrWydania; 
 	 
 	@ManyToOne
 	private Biblioteka biblioteka; 

@@ -63,6 +63,7 @@ public class ZamowienieController {
 	private String ISBN;
 	private String rokWydania;
 	private Long idWydawnictwa;
+	private Long nrWydania;
 	
 	public String zlozZamowienie()
 	{
@@ -86,6 +87,7 @@ public class ZamowienieController {
 		zamowienie.setMiejsceWydania(miejsceWydania);
 		zamowienie.setIlosc(ilosc);
 		zamowienie.setOpis(opis);
+		zamowienie.setNrWydania(nrWydania);
 		zamowienie.setRokWydania(rokWydania);
 		Wydawnictwo wydawnictwo = wydawnictwoDAO.findOne(idWydawnictwa);
 		zamowienie.setWydawnictwo(wydawnictwo);

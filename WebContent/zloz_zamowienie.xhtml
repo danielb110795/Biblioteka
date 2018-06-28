@@ -39,33 +39,48 @@
                 <h:message for="opis" errorStyle="color:red; display:block"/>
                 <br/>
                 
-				Numer wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+				Numer wydania: <h:inputText  id="nrWydania" name="nrWydania" styleClass="input-text" value="#{zamowienieController.nrWydania}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
                 </h:inputText>
-                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <h:message for="nrWydania" errorStyle="color:red; display:block"/>
                 <br/>
                 
-                Rok wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+                Rok wydania: <h:inputText  id="rokWydania" name="rokWydania" styleClass="input-text" value="#{zamowienieController.rokWydania}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
                 </h:inputText>
-                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <h:message for="rokWydania" errorStyle="color:red; display:block"/>
                 <br/>
 				
-				Miejsce wydania: <h:inputText  id="wydanie" name="wydanie" styleClass="input-text" value="#{zamowienieController.wydanie}" required="true" 
+				Miejsce wydania: <h:inputText  id="miejsceWydania" name="wydanie" styleClass="input-text" value="#{zamowienieController.miejsceWydania}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, podaj 9 znaków.">
                 </h:inputText>
-                <h:message for="wydanie" errorStyle="color:red; display:block"/>
+                <h:message for="miejsceWydania" errorStyle="color:red; display:block"/>
                 <br/>
+               
+                Wydawnictwo:   
+                <br/>              
+                <h:selectOneMenu id="idWydawnictwa" value="#{zamowienieController.idWydawnictwa}"> 
+					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
+				</h:selectOneMenu> 
+       			<br/> 
+       			
+       			ISBN: 
+				<br/> 
+			    <h:inputText id="ISBN" styleClass="input-text" name="ISBN" 
+			    value="#{zamowienieController.ISBN}" required="true" requiredMessage="To pole jest wymagane"			    
+			    validatorMessage="Wymagane znaki: 0-9, wymagane dokładnie 13 znaków.">
+			    <f:validateRegex pattern="[0-9]{13,13}" />
+                </h:inputText>
+                <h:message for="ISBN" errorStyle="color:red; display:block"/>
+                <br/> 
                 
-				Ilość: <h:inputText  id="ilosc" name="ilosc" styleClass="input-text" value="#{zamowienieController.ilosc}" required="true" 
+                Ilość egzemplarzy: <h:inputText  id="ilosc" name="ilosc" styleClass="input-text" value="#{zamowienieController.ilosc}" required="true" 
 				requiredMessage="To pole jest wymagane" validatorMessage="Wymagane znaki: 0-9, max liczba 99">
 			    <f:validateRegex pattern="[0-9]{1,2}" />
                 </h:inputText>
                 <h:message for="ilosc" errorStyle="color:red; display:block"/>
                 <br/>
-                
 				
-                
 			<h:commandButton style="width:150px" value="Złóż zamówienie" action="#{zamowienieController.zlozZamowienie()}"/>
 		</h:form>
 		
