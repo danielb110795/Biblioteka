@@ -167,6 +167,10 @@ public class KsiazkaController {
 	
 	private String szukanie;
 	
+	public void setNazwa(String nazwa){
+	    this.nazwa = nazwa;
+	}
+	
     public void setKategoriaDAO(KategoriaDAO kategoriaDAO) {
     	this.kategoriaDAO = kategoriaDAO;
     }
