@@ -14,7 +14,7 @@ public class TestSaveBiblioteka {
     private BibliotekaController bibliotekaController = new BibliotekaController();
    
     @Test
-    public void tmp() { 
+    public void testSaveBiblioteka() { 
         BibliotekaDAO mockBibliotekaDAO = mock(BibliotekaDAO.class);
         DzienDAO mockDzienDAO = mock(DzienDAO.class);
          
@@ -29,5 +29,5 @@ public class TestSaveBiblioteka {
         verify(mockDzienDAO, times(6)).save(any());
         verify(mockBibliotekaDAO, times(1)).save(any());
     }
-
+    
 }

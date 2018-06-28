@@ -166,6 +166,18 @@ public class KsiazkaController {
 	
 	private String szukanie;
 	
+    public void setKategoriaDAO(KategoriaDAO kategoriaDAO) {
+    	this.kategoriaDAO = kategoriaDAO;
+    }
+    
+    public void setWydawnictwoDAO(WydawnictwoDAO wydawnictwoDAO) {
+    	this.wydawnictwoDAO = wydawnictwoDAO;
+    }
+    
+    public void setAutorDAO(AutorDAO autorDAO) {
+    	this.autorDAO = autorDAO;
+    }
+    
 	public String ustawSzukanie()
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
