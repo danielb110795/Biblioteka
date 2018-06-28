@@ -46,7 +46,7 @@
    			<th>Tytuł</th>
    			<th>Ilość</th> 
   			<th>Wydanie</th>
-  			<th>Opis</th>
+  			<th>ISBN</th>
   			<th>Status</th>
   			<th>Operacje</th>
   		</tr>
@@ -56,8 +56,8 @@
 		<tr>
 		<td>#{zamowienie.tytul}</td>
 		<td>#{zamowienie.ilosc}</td>
-		<td>#{zamowienie.wydanie}</td>
-		<td>#{zamowienie.opis}</td>
+		<td>#{zamowienie.wydawnictwo.nazwa} #{zamowienie.miejsceWydania} #{zamowienie.rokWydania}</td>
+		<td>#{zamowienie.ISBN}</td>
 		<td>#{zamowienie.status}</td>
 		<td>
         <h:form>

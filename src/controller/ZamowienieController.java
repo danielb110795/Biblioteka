@@ -58,12 +58,12 @@ public class ZamowienieController {
 	private String tytul;
 	private String wydanie;
 	private String opis;
-	private Long ilosc;
+	private String ilosc;
 	private String miejsceWydania;
 	private String ISBN;
 	private String rokWydania;
 	private Long idWydawnictwa;
-	private Long nrWydania;
+	private String nrWydania;
 	
 	public String zlozZamowienie()
 	{
@@ -85,9 +85,11 @@ public class ZamowienieController {
 		zamowienie.setTytul(tytul);
 		zamowienie.setISBN(ISBN);
 		zamowienie.setMiejsceWydania(miejsceWydania);
-		zamowienie.setIlosc(ilosc);
+		Long ilosc2 = Long.parseLong(ilosc);
+		zamowienie.setIlosc(ilosc2);
 		zamowienie.setOpis(opis);
-		zamowienie.setNrWydania(nrWydania);
+		Long nrWydania2 = Long.parseLong(nrWydania);
+		zamowienie.setNrWydania(nrWydania2);
 		zamowienie.setRokWydania(rokWydania);
 		Wydawnictwo wydawnictwo = wydawnictwoDAO.findOne(idWydawnictwa);
 		zamowienie.setWydawnictwo(wydawnictwo);
