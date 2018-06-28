@@ -91,9 +91,9 @@
                 Ilość egzemplarzy: 
 				<br/> 
 			    <h:inputText id="ilosc" styleClass="input-text" name="ilosc" 
-			    value="#{ksiazkaController.iloscEgzemplarzy}" required="true" requiredMessage="To pole jest wymagane"/>			    
+			    value="#{ksiazkaController.iloscEgzemplarzy}" required="true" requiredMessage="To pole jest wymagane">			    
                 </h:inputText>
-                <h:message for="ISBN" errorStyle="color:red; display:block"/>
+                <h:message for="ilosc" errorStyle="color:red; display:block"/>
                 <br/> 
 			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
 		</h:form>		
