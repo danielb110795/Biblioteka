@@ -79,6 +79,22 @@
 					<f:selectItems name="idWydawnictwa" value="#{ksiazkaController.pokazWydawnictwa()}" var="tmp" itemLabel="#{tmp.nazwa}" itemValue="#{tmp.id}"/>
 				</h:selectOneMenu> 
        			<br/> 
+       			ISBN: 
+				<br/> 
+			    <h:inputText id="ISBN" styleClass="input-text" name="ISBN" 
+			    value="#{ksiazkaController.ISBN}" required="true" requiredMessage="To pole jest wymagane"			    
+			    validatorMessage="Wymagane znaki: 0-9, wymagane dokładnie 13 znaków.">
+			    <f:validateRegex pattern="[0-9]{13,13}" />
+                </h:inputText>
+                <h:message for="ISBN" errorStyle="color:red; display:block"/>
+                <br/> 
+                Ilość egzemplarzy: 
+				<br/> 
+			    <h:inputText id="ilosc" styleClass="input-text" name="ilosc" 
+			    value="#{ksiazkaController.iloscEgzemplarzy}" required="true" requiredMessage="To pole jest wymagane"/>			    
+                </h:inputText>
+                <h:message for="ISBN" errorStyle="color:red; display:block"/>
+                <br/> 
 			<h:commandButton style="width:70px" value="Dodaj" action="#{ksiazkaController.saveWydanie()}"/>
 		</h:form>		
 		<h3>Jeśli nie ma odpowiedniego wydawnictwa możesz je dodać poniżej.</h3>
