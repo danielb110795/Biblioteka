@@ -1,4 +1,4 @@
-package test;
+package test.dao;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +9,9 @@ import entity.Dzien;
 
 import static org.mockito.Mockito.*;
 
-public class ExampleTest {
+public class TestSaveBiblioteka {
     
-    private BibliotekaController controller = new BibliotekaController();
+    private BibliotekaController bibliotekaController = new BibliotekaController();
    
     @Test
     public void tmp() { 
@@ -21,10 +21,10 @@ public class ExampleTest {
         when(mockBibliotekaDAO.save(any())).thenReturn(null);
         when(mockDzienDAO.save(any())).thenReturn(new Dzien());
        
-        controller.setBibliotekaDAO(mockBibliotekaDAO);
-        controller.setDzienDAO(mockDzienDAO);
+        bibliotekaController.setBibliotekaDAO(mockBibliotekaDAO);
+        bibliotekaController.setDzienDAO(mockDzienDAO);
         
-        controller.saveBiblioteka();      
+        bibliotekaController.saveBiblioteka();      
 
         verify(mockDzienDAO, times(6)).save(any());
         verify(mockBibliotekaDAO, times(1)).save(any());
