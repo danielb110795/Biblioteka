@@ -1,4 +1,4 @@
-Snake
+Book library
 ---------------------------------------------
 Book library, javaEE application.
 
